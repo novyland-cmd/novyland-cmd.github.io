@@ -1,72 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="fr">
 <head>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="description" content="NovyTools rassemble des outils simples et rapides pour accompagner vos parties de jeux de société.">
-   <title>NovyTools – Outils pour jeux de société</title>
-   <link rel="stylesheet" href="styles.css">
-   <script src="script.js" defer></script>
-</head>
-<body>
-   <header class="site-header">
-      <button type="button" id="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu des applications" aria-expanded="false" aria-controls="applications-menu">☰</button>
-      <a class="brand" href="index.html">
-         <span class="brand-mark" aria-hidden="true">✦</span>
-         <span class="brand-copy"><strong>NovyTools</strong><span>Des outils simples pour vos soirées jeux</span></span>
-      </a>
-   </header>
-
-   <div id="menu-overlay" class="menu-overlay" hidden></div>
-   <aside id="applications-menu" class="side-menu" aria-label="Menu principal" hidden tabindex="-1">
-      <div class="menu-head">
-         <strong>Navigation</strong>
-         <button id="menu-close" class="menu-close" type="button" aria-label="Fermer le menu">×</button>
-      </div>
-      <nav class="menu-nav">
-         <a class="nav-link" href="index.html">Accueil</a>
-         <p class="menu-section-title">Applications</p>
-         <a class="nav-link" href="applications/premier-joueur/index.html">Premier Joueur</a>
-         <a class="nav-link" href="applications/minuteur/index.html">Minuteur de jeu</a>
-         <span class="nav-disabled" aria-disabled="true">Compteur de points · Bientôt</span>
-         <p class="menu-section-title">Informations</p>
-         <a class="nav-link" href="pages/about.html">À propos</a>
-         <a class="nav-link" href="pages/privacy.html">Politique de confidentialité</a>
-         <a class="nav-link" href="pages/legal.html">Mentions légales</a>
-      </nav>
-   </aside>
-
-   <main class="page-main">
-      <section class="hero">
-         <p class="eyebrow">La boîte à outils des joueurs</p>
-         <h1>Des outils simples pour vos soirées jeux.</h1>
-         <p>NovyTools rassemble des mini-applications rapides, accessibles et pensées pour fonctionner aussi bien autour d’une table que sur mobile.</p>
-      </section>
-
-      <section class="apps-grid" aria-label="Applications disponibles">
-         <article class="app-card">
-            <div class="app-icon" aria-hidden="true">🎲</div>
-            <h2>Premier Joueur</h2>
-            <p>Choisissez de manière amusante qui commencera la partie grâce à des conditions aléatoires et des catégories thématiques.</p>
-            <a class="button-link" href="applications/premier-joueur/index.html">Démarrer l’application</a>
-         </article>
-
-         <article class="app-card">
-            <div class="app-icon" aria-hidden="true">⏱️</div>
-            <h2>Minuteur</h2>
-            <p>Préparez le suivi du temps consacré à la mise en place, aux explications, aux tours et à la partie complète.</p>
-            <a class="button-link" href="applications/minuteur/index.html">Ouvrir le minuteur</a>
-         </article>
-      </section>
-   </main>
-
-   <footer class="site-footer">
-      <p>© 2026 NovyTools – Projet en développement</p>
-      <nav class="footer-nav" aria-label="Navigation secondaire">
-         <a href="pages/about.html">À propos</a>
-         <a href="pages/privacy.html">Politique de confidentialité</a>
-         <a href="pages/legal.html">Mentions légales</a>
-      </nav>
-   </footer>
-</body>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="NovyTools rassemble des outils simples et rapides pour accompagner vos parties de jeux de société." name="description"/>
+<title>NovyTools – Outils pour jeux de société</title>
+<link href="styles.css" rel="stylesheet"/>
+<script defer="" src="script.js"></script>
+<link href="../assets/css/navigation.css" rel="stylesheet"/></head>
+<body><div data-brand="NovyTools" data-context="novytools" data-page="novytools-home" data-site-navigation="" data-subtitle="Des outils simples pour vos soirées jeux"><a class="novy-nav-fallback" href="../index.html">Accueil NovyLand</a></div>
+<main class="page-main">
+<section class="hero">
+<p class="eyebrow">La boîte à outils des joueurs</p>
+<h1>Des outils simples pour vos soirées jeux.</h1>
+<p>NovyTools rassemble des mini-applications rapides, accessibles et pensées pour fonctionner aussi bien autour d’une table que sur mobile.</p>
+</section>
+<section aria-label="Applications disponibles" class="apps-grid">
+<article class="app-card">
+<div aria-hidden="true" class="app-icon">🎲</div>
+<h2>Premier Joueur</h2>
+<p>Choisissez de manière amusante qui commencera la partie grâce à des conditions aléatoires et des catégories thématiques.</p>
+<a class="button-link" href="applications/premier-joueur/index.html">Démarrer l’application</a>
+</article>
+<article class="app-card">
+<div aria-hidden="true" class="app-icon">⏱️</div>
+<h2>Minuteur</h2>
+<p>Préparez le suivi du temps consacré à la mise en place, aux explications, aux tours et à la partie complète.</p>
+<a class="button-link" href="applications/minuteur/index.html">Ouvrir le minuteur</a>
+</article>
+</section>
+</main>
+<footer class="site-footer">
+<p>© 2026 NovyTools – Projet en développement</p>
+<nav aria-label="Navigation secondaire" class="footer-nav"><a href="../index.html">Accueil NovyLand</a><a href="index.html">Accueil NovyTools</a><a href="pages/about.html">À propos</a><a href="pages/privacy.html">Politique de confidentialité</a><a href="pages/legal.html">Mentions légales</a></nav>
+</footer>
+<script src="../assets/js/navigation.js" type="module"></script></body>
 </html>

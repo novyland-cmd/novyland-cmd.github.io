@@ -150,3 +150,21 @@ main {
         padding-block: 4rem;
     }
 }
+.site-footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .75rem 1.1rem;
+    margin-top: .75rem;
+}
+
+.site-footer-links a {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.site-footer-links a:hover,
+.site-footer-links a:focus-visible { text-decoration: underline; }
+
+.games-hero { min-height: calc(100vh - 190px); }
