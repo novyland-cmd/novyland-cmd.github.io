@@ -1,0 +1,152 @@
+:root {
+    --background-color: #f5f1e8;
+    --surface-color: #ffffff;
+    --text-color: #27231f;
+    --muted-color: #6e665d;
+    --primary-color: #276749;
+    --primary-hover-color: #1f513b;
+    --border-color: #ddd5c8;
+    --maximum-width: 1100px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    color: var(--text-color);
+    background: var(--background-color);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--primary-color);
+}
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem max(1.5rem, calc((100% - var(--maximum-width)) / 2));
+    background: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+nav a {
+    color: var(--text-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: var(--primary-color);
+}
+
+main {
+    width: min(100% - 2rem, var(--maximum-width));
+    margin-inline: auto;
+}
+
+.hero {
+    min-height: 60vh;
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    padding-block: 5rem;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: clamp(3rem, 10vw, 6rem);
+    line-height: 1;
+}
+
+.hero p {
+    max-width: 700px;
+    font-size: 1.15rem;
+    color: var(--muted-color);
+}
+
+.eyebrow {
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.85rem 1.25rem;
+    color: #ffffff;
+    background: var(--primary-color);
+    border-radius: 0.6rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.button:hover,
+.button:focus-visible {
+    background: var(--primary-hover-color);
+}
+
+.content-section {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+}
+
+.content-section h2 {
+    margin-top: 0;
+}
+
+.site-footer {
+    margin-top: 4rem;
+    padding: 2rem 1rem;
+    color: var(--muted-color);
+    text-align: center;
+}
+
+@media (max-width: 650px) {
+    .site-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .hero {
+        min-height: auto;
+        padding-block: 4rem;
+    }
+}
