@@ -121,7 +121,17 @@ function buildNavigation(mount) {
       className: "novy-header__brand",
       attributes: { href: resolveDestination("index.html"), "aria-label": "Retour à l’accueil NovyLand" }
    });
-   brand.append(createElement("span", { className: "novy-header__mark", text: "✦", attributes: { "aria-hidden": "true" } }));
+   const logo = createElement("img", {
+      className: "novy-header__logo",
+      attributes: {
+         src: resolveDestination("images/meeple.png"),
+         alt: "",
+         width: "40",
+         height: "40",
+         "aria-hidden": "true"
+      }
+   });
+   brand.append(logo);
    const copy = createElement("span", { className: "novy-header__copy" });
    copy.append(createElement("strong", { text: brandTitle }));
    copy.append(createElement("span", { text: brandSubtitle }));
