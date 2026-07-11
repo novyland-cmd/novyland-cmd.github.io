@@ -1,0 +1,543 @@
+/* ==========================================================
+   NovyTools - Premier Joueur
+   Styles principaux
+========================================================== */
+
+:root {
+  --primary: #2f5d50;
+  --primary-dark: #24483e;
+  --accent: #f0c36a;
+
+  --background: #f5f6f8;
+  --surface: #ffffff;
+  --surface-soft: #fafafa;
+  --text: #222;
+  --text-light: #666;
+
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .08);
+  --transition: .25s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #fafafa 0%, #f3f5f7 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================
+   Header
+========================================================== */
+
+.site-header {
+  text-align: center;
+  padding: 2rem 1rem 1.5rem;
+  background: white;
+  border-bottom: 1px solid #ececec;
+}
+
+.brand-badge {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto .75rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  background: rgba(240, 195, 106, .28);
+  font-size: 1.25rem;
+}
+
+.site-header h1 {
+  font-size: 2.2rem;
+  color: var(--primary);
+  letter-spacing: .5px;
+}
+
+.subtitle {
+  margin-top: .35rem;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+/* ==========================================================
+   Contenu
+========================================================== */
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.hero-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  text-align: center;
+}
+
+.eyebrow {
+  margin-bottom: .5rem;
+  color: var(--text-light);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.card h2 {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================
+   Image et condition
+========================================================== */
+
+.condition-visual {
+  min-height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.condition-image {
+  display: block;
+  width: min(42vw, 210px);
+  max-height: 210px;
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+.condition-image[hidden] {
+  display: none;
+}
+
+.condition-image.is-changing {
+  animation: fadeCondition .35s ease;
+}
+
+.condition-text,
+#condition-text {
+  min-height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--surface-soft);
+  border-radius: 16px;
+  border: 2px solid #ececec;
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+.condition-text.is-changing,
+#condition-text.is-changing {
+  animation: fadeCondition .35s ease;
+}
+
+/* ==========================================================
+   Catégories en pastilles
+========================================================== */
+
+.category-control {
+  width: 100%;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.category-control h3 {
+  margin-bottom: .75rem;
+  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .65rem;
+}
+
+.category-chip {
+  min-height: 44px;
+  padding: .65rem 1rem;
+  border: 2px solid #dfe5e2;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--primary);
+  font: inherit;
+  font-size: .95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  touch-action: manipulation;
+}
+
+.category-chip:hover {
+  border-color: var(--primary);
+  background: rgba(47, 93, 80, .06);
+  transform: translateY(-1px);
+}
+
+.category-chip.active,
+.category-chip[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(47, 93, 80, .18);
+}
+
+.category-chip:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(47, 93, 80, .18);
+}
+
+.category-chip:active {
+  transform: scale(.97);
+}
+
+/* ==========================================================
+   Bouton principal
+========================================================== */
+
+.primary-button {
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: 999px;
+  background: var(--primary);
+  color: white;
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.primary-button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.primary-button:active,
+.primary-button.is-pressed {
+  transform: scale(.97);
+}
+
+.primary-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(47, 93, 80, .20);
+}
+
+/* ==========================================================
+   À propos
+========================================================== */
+
+.about-section {
+  width: 100%;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ececec;
+  text-align: left;
+}
+
+.about-section h3 {
+  margin-bottom: .75rem;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.about-section p {
+  color: var(--text-light);
+  line-height: 1.6;
+  font-size: .95rem;
+}
+
+
+/* ==========================================================
+   Emplacements publicitaires futurs
+========================================================== */
+
+.ad-container {
+  width: min(100% - 2rem, 760px);
+  min-height: 90px;
+  margin: 1rem auto;
+  padding: .75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(47, 93, 80, .22);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .55);
+  color: rgba(34, 34, 34, .42);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-align: center;
+}
+
+.ad-top {
+  min-height: 90px;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.ad-bottom {
+  min-height: 90px;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.ad-inline {
+  width: 100%;
+  min-height: 120px;
+  margin: 2rem 0;
+  background: rgba(250, 250, 250, .8);
+}
+
+.ad-container span {
+  opacity: .82;
+}
+
+/* ==========================================================
+   Footer
+========================================================== */
+
+.site-footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #888;
+  font-size: .9rem;
+}
+
+/* ==========================================================
+   Animations
+========================================================== */
+
+@keyframes fadeCondition {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ==========================================================
+   Pages informatives
+========================================================== */
+
+.page-content {
+  align-items: flex-start;
+}
+
+.info-card {
+  max-width: 760px;
+  text-align: left;
+}
+
+.info-card h2 {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.info-section {
+  margin-top: 1.5rem;
+}
+
+.info-section h3 {
+  margin-bottom: .65rem;
+  color: var(--primary);
+  font-size: 1.15rem;
+}
+
+.info-section p {
+  color: var(--text-light);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.info-section p + p {
+  margin-top: .75rem;
+}
+
+.placeholder-note {
+  padding: .85rem 1rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  background: rgba(240, 195, 106, .16);
+  color: var(--text);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  margin-top: 2rem;
+  padding: .75rem 1.2rem;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.back-link:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.back-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(47, 93, 80, .20);
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .85rem 1.1rem;
+  margin-top: .85rem;
+}
+
+.footer-nav a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   Mobile
+========================================================== */
+
+@media (max-width: 600px) {
+  .site-header {
+    padding: 1.5rem 1rem 1.2rem;
+  }
+
+  .site-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .main-content {
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+
+  .card h2 {
+    font-size: 1.55rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .condition-visual {
+    min-height: 138px;
+    margin-bottom: .85rem;
+  }
+
+  .condition-image {
+    width: min(58vw, 180px);
+    max-height: 180px;
+  }
+
+  .condition-text,
+  #condition-text {
+    min-height: 132px;
+    padding: 1.25rem;
+    font-size: 1.1rem;
+  }
+
+  .category-control {
+    margin: 1.25rem 0;
+  }
+
+  .category-chips {
+    gap: .55rem;
+  }
+
+  .category-chip {
+    flex: 1 1 auto;
+    min-height: 48px;
+    padding: .7rem .9rem;
+    font-size: .95rem;
+  }
+
+  .primary-button {
+    height: 60px;
+    font-size: 1.1rem;
+  }
+  .info-card {
+    padding: 1.25rem;
+  }
+
+  .info-card h2 {
+    font-size: 1.45rem;
+  }
+
+  .info-section {
+    margin-top: 1.25rem;
+  }
+
+  .info-section p {
+    font-size: .97rem;
+  }
+
+  .footer-nav {
+    flex-direction: column;
+    gap: .65rem;
+  }
+
+
+  .ad-container {
+    width: calc(100% - 2rem);
+    min-height: 80px;
+    margin: .75rem auto;
+    font-size: .76rem;
+  }
+
+  .ad-inline {
+    width: 100%;
+    min-height: 100px;
+    margin: 1.5rem 0;
+  }
+
+}
+/* Ajustements après intégration à la plateforme NovyTools */
+body{display:flex;flex-direction:column}.site-header{min-height:72px;text-align:left;padding:.8rem clamp(1rem,3vw,2rem)}.main-content{padding:2rem 1rem}.site-footer{margin-top:auto}.app-home-link{display:inline-flex;margin-bottom:1rem;color:var(--primary);font-weight:700;text-decoration:none}.app-home-link:hover{text-decoration:underline}

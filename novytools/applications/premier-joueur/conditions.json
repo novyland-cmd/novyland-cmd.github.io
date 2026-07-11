@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "category": "nourriture",
+    "text": "Le dernier joueur à avoir mangé une pomme commence.",
+    "image": "meeple-pomme.png"
+  },
+  {
+    "id": 2,
+    "category": "nourriture",
+    "text": "Le joueur qui préfère le chocolat commence.",
+    "image": "meeple-tasse.png"
+  },
+  {
+    "id": 3,
+    "category": "nourriture",
+    "text": "Celui qui a bu de l’eau le plus récemment commence.",
+    "image": "meeple-tasse.png"
+  },
+  {
+    "id": 4,
+    "category": "observation",
+    "text": "Le joueur qui voit le plus d’objets rouges commence.",
+    "image": "meeple-jumelles.png"
+  },
+  {
+    "id": 5,
+    "category": "observation",
+    "text": "Le premier joueur capable de nommer trois objets ronds commence.",
+    "image": "meeple-carte.png"
+  },
+  {
+    "id": 6,
+    "category": "observation",
+    "text": "Le joueur assis le plus près d’une fenêtre commence.",
+    "image": "meeple-jumelles.png"
+  },
+  {
+    "id": 7,
+    "category": "vêtements",
+    "text": "Le joueur qui porte le plus de bleu commence.",
+    "image": "meeple-tshirt.png"
+  },
+  {
+    "id": 8,
+    "category": "vêtements",
+    "text": "Le joueur ayant les chaussettes les plus colorées commence.",
+    "image": "meeple-chaussures.png"
+  },
+  {
+    "id": 9,
+    "category": "vêtements",
+    "text": "Celui qui porte un vêtement avec une fermeture éclair commence.",
+    "image": "meeple-tshirt.png"
+  },
+  {
+    "id": 10,
+    "category": "habitudes",
+    "text": "Le dernier joueur à avoir rangé un jeu commence.",
+    "image": "meeple-carte.png"
+  },
+  {
+    "id": 11,
+    "category": "habitudes",
+    "text": "Le joueur qui se lève habituellement le plus tôt commence.",
+    "image": "meeple-chef.png"
+  },
+  {
+    "id": 12,
+    "category": "jeux",
+    "text": "Le joueur qui a gagné la dernière partie commence.",
+    "image": "meeple-couronne.png"
+  },
+  {
+    "id": 13,
+    "category": "jeux",
+    "text": "Le joueur qui a lancé un dé le plus récemment commence.",
+    "image": "meeple-carte.png"
+  },
+  {
+    "id": 14,
+    "category": "jeux",
+    "text": "Celui qui possède le plus de jeux de société commence.",
+    "image": "meeple-livre.png"
+  },
+  {
+    "id": 17,
+    "category": "famille",
+    "text": "Le joueur qui a parlé à un membre de sa famille le plus récemment commence.",
+    "image": "meeple-telephone.png"
+  },
+  {
+    "id": 18,
+    "category": "famille",
+    "text": "Le joueur dont le prénom contient le plus de lettres commence.",
+    "image": "meeple-livre.png"
+  },
+  {
+    "id": 19,
+    "category": "enfants",
+    "text": "Le plus jeune joueur commence.",
+    "image": "meeple-chef.png"
+  },
+  {
+    "id": 20,
+    "category": "enfants",
+    "text": "Le joueur qui peut nommer un animal en premier commence.",
+    "image": "meeple-jumelles.png"
+  }
+]

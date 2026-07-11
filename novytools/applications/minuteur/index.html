@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="Minuteur de jeu NovyTools pour mesurer simplement la durée d'une activité pendant une partie de jeu de société.">
+   <title>Minuteur de jeu – NovyTools</title>
+   <link rel="stylesheet" href="styles.css">
+   <script type="module" src="script.js"></script>
+</head>
+<body>
+   <header class="site-header">
+      <button type="button" id="menu-toggle" class="menu-toggle" aria-label="Ouvrir le menu des applications" aria-expanded="false" aria-controls="applications-menu">☰</button>
+      <a class="brand" href="../../index.html">
+         <span class="brand-mark" aria-hidden="true">✦</span>
+         <span class="brand-copy"><strong>NovyTools</strong><span>Minuteur</span></span>
+      </a>
+   </header>
+
+   <div id="menu-overlay" class="menu-overlay" hidden></div>
+   <aside id="applications-menu" class="side-menu" aria-label="Menu principal" hidden tabindex="-1">
+      <div class="menu-head">
+         <strong>Navigation</strong>
+         <button id="menu-close" class="menu-close" type="button" aria-label="Fermer le menu">×</button>
+      </div>
+      <nav class="menu-nav">
+         <a class="nav-link" href="../../index.html">Accueil NovyTools</a>
+         <p class="menu-section-title">Applications</p>
+         <a class="nav-link" href="../premier-joueur/index.html">Premier Joueur</a>
+         <a class="nav-link" href="index.html" aria-current="page">Minuteur de jeu</a>
+         <span class="nav-disabled" aria-disabled="true">Compteur de points · Bientôt</span>
+         <p class="menu-section-title">Informations</p>
+         <a class="nav-link" href="../../pages/about.html">À propos</a>
+         <a class="nav-link" href="../../pages/privacy.html">Politique de confidentialité</a>
+         <a class="nav-link" href="../../pages/legal.html">Mentions légales</a>
+      </nav>
+   </aside>
+
+   <main class="page-main">
+      <section class="app-intro" aria-labelledby="app-title">
+         <p class="eyebrow">Outil de mesure NovyTools</p>
+         <h1 id="app-title">Minuteur de jeu</h1>
+         <p class="app-subtitle">Mesurez la durée d’une activité de jeu, de la mise en place jusqu’au dernier tour.</p>
+      </section>
+
+      <section class="timer-card" aria-labelledby="timer-title">
+         <div class="timer-card-heading">
+            <div class="app-icon" aria-hidden="true">⏱️</div>
+            <div>
+               <h2 id="timer-title">Temps écoulé</h2>
+               <p>Le minuteur démarre à zéro et conserve le temps déjà mesuré lorsqu’il est mis en pause.</p>
+            </div>
+         </div>
+
+         <div class="timer-display-group">
+            <span class="timer-label" id="timer-label">Heures, minutes et secondes</span>
+            <output id="timer-display" class="timer-display" aria-labelledby="timer-label">00:00:00</output>
+         </div>
+
+         <div class="timer-controls" aria-label="Commandes du minuteur">
+            <button id="timer-start" class="timer-button timer-button-primary" type="button">Démarrer</button>
+            <button id="timer-pause" class="timer-button timer-button-secondary" type="button">Pause</button>
+            <button id="timer-reset" class="timer-button timer-button-neutral" type="button">Réinitialiser</button>
+         </div>
+
+         <a class="button-link" href="../../index.html">Retour à NovyTools</a>
+      </section>
+   </main>
+
+   <footer class="site-footer">
+      <p>© <span id="current-year">2026</span> NovyTools – Minuteur</p>
+      <nav class="footer-nav" aria-label="Navigation secondaire">
+         <a href="../../pages/about.html">À propos</a>
+         <a href="../../pages/privacy.html">Politique de confidentialité</a>
+         <a href="../../pages/legal.html">Mentions légales</a>
+      </nav>
+   </footer>
+</body>
+</html>
