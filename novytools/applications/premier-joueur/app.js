@@ -10,18 +10,28 @@ const IMAGE_FOLDER = 'images/';
 // Liste explicite des fichiers PNG réellement disponibles dans le projet.
 // Mets cette liste à jour chaque fois qu'une nouvelle image est ajoutée au dossier images/.
 const availableImages = [
-  'meeple-couronne.png',
+  'meeple-brosse.png',
   'meeple-carte.png',
-  'meeple-jumelles.png',
-  'meeple-megaphone.png',
+  'meeple-chaussures.png',
   'meeple-chef.png',
-  'meeple-livre.png',
+  'meeple-cheval.png',
+  'meeple-cheveux.png',
   'meeple-cles.png',
+  'meeple-couronne.png',
+  'meeple-de.png',
+  'meeple-famille.png',
+  'meeple-gateau.png',
+  'meeple-jeu.png',
+  'meeple-jeux.png',
+  'meeple-jumelles.png',
+  'meeple-livre.png',
+  'meeple-megaphone.png',
+  'meeple-montre.png',
+  'meeple-piment.png',
   'meeple-pomme.png',
   'meeple-tasse.png',
   'meeple-telephone.png',
-  'meeple-tshirt.png',
-  'meeple-chaussures.png'
+  'meeple-tshirt.png'
 ];
 
 // Banque de conditions chargée depuis le fichier JSON.
