@@ -150,15 +150,19 @@ h2, h3 { line-height: 1.2; }
 .card-link:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(26,45,39,.13); }
 .app-icon,
 .card-icon {
-  width: 3.65rem;
-  height: 3.65rem;
-  display: grid;
-  place-items: center;
-  flex: 0 0 3.65rem;
-  border-radius: 1rem;
-  background: color-mix(in srgb, var(--color-accent) 30%, white);
-  font-size: 1.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
 }
+
+.card-icon-image {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
 .card-image { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--radius-medium); background: var(--color-surface-soft); }
 .card-meta { display: flex; flex-wrap: wrap; gap: .5rem; color: var(--color-text-muted); font-size: .92rem; }
 .badge { display: inline-flex; align-items: center; min-height: 1.8rem; padding: .25rem .65rem; border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-surface-soft); color: var(--color-text-muted); font-size: .82rem; font-weight: 750; }
