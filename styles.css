@@ -69,3 +69,109 @@
   color: var(--color-text-muted);
   font-size: .92rem;
 }
+
+/* Liens externes de NovyLand Games */
+.external-links-section {
+  max-width: var(--reading-width);
+  margin: 0 auto 1rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-medium);
+}
+
+.info-card .external-links-section {
+  margin: 1.5rem 0;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+.external-links-heading {
+  margin-bottom: 1rem;
+}
+
+.external-links-heading .section-title {
+  margin-bottom: 0;
+}
+
+.external-links-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.external-link-card {
+  min-width: 0;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  padding: 1.25rem;
+  color: var(--color-text);
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-small);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease, border-color var(--transition-duration) ease;
+}
+
+.external-link-card:visited {
+  color: var(--color-text);
+}
+
+.external-link-card:hover {
+  color: var(--color-text);
+  border-color: color-mix(in srgb, var(--color-primary) 38%, var(--color-border));
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-2px);
+}
+
+.external-link-card:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+.external-link-card:active {
+  transform: translateY(1px) scale(.99);
+}
+
+.external-link-card h3 {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+}
+
+.external-link-card p {
+  flex: 1;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.external-link-label {
+  color: var(--color-primary);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 40rem) {
+  .external-links-section {
+    padding: 1.25rem;
+  }
+
+  .info-card .external-links-section {
+    padding: 0;
+  }
+
+  .external-links-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .external-link-card {
+    min-height: 0;
+  }
+}
+
