@@ -1,117 +1,150 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Minuteur de jeu NovyTools pour mesurer simplement la durée d'une activité pendant une partie de jeu de société." name="description"/>
-<title>Minuteur de jeu – NovyTools</title>
-<link href="../../../assets/css/theme.css" rel="stylesheet"/>
-<link href="../../../assets/css/advertising.css" rel="stylesheet"/>
-<link href="styles.css" rel="stylesheet"/>
-<script src="script.js" type="module"></script>
-<link href="../../../assets/css/navigation.css" rel="stylesheet"/>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta
+        content="Minuteur de jeu NovyTools pour mesurer simplement la durée d'une activité pendant une partie de jeu de société."
+        name="description" />
+    <title>Minuteur de jeu – NovyTools</title>
+    <link href="../../../assets/css/theme.css" rel="stylesheet" />
+    <link href="../../../assets/css/advertising.css" rel="stylesheet" />
+    <link href="styles.css" rel="stylesheet" />
+    <script src="script.js" type="module"></script>
+    <link href="../../../assets/css/navigation.css" rel="stylesheet" />
 </head>
+
 <body>
-<div data-brand="NovyTools" data-context="novytools" data-page="timer" data-site-navigation="" data-subtitle="Minuteur de jeu"><a class="novy-nav-fallback" href="../../../index.html">Accueil NovyLand</a></div>
-<div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-top" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div>
-<main class="page-main">
-<section aria-labelledby="app-title" class="app-intro" id="app-intro">
-<p class="eyebrow">Outil de mesure NovyTools</p>
-<h1 id="app-title">Minuteur de jeu</h1>
-<p class="app-subtitle">Mesurez la durée d’une activité de jeu, de la mise en place jusqu’au calcul des points.</p>
-</section>
+    <div data-brand="NovyTools" data-context="novytools" data-page="timer" data-site-navigation=""
+        data-subtitle="Minuteur de jeu"><a class="novy-nav-fallback" href="../../../index.html">Accueil NovyLand</a>
+    </div>
+    <div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true"
+        data-ad-slot="page-top" data-ad-status="placeholder" role="complementary"><span
+            class="ad-placeholder-label">Espace publicitaire</span></div>
+    <main class="page-main">
+        <section aria-labelledby="app-title" class="app-intro" id="app-intro">
+            <p class="eyebrow">Outil de mesure NovyTools</p>
+            <h1 id="app-title">Minuteur de jeu</h1>
+            <p class="app-subtitle">Mesurez la durée d’une activité de jeu, de la mise en place jusqu’au calcul des
+                points.</p>
+        </section>
 
-<div class="session-layout" id="session-view">
-<section aria-labelledby="session-title" class="session-card">
-<div class="section-heading">
-<p class="eyebrow">Parcours de la partie</p>
-<h2 id="session-title">Étapes de la partie</h2>
-<p>Les étapes se suivent toujours dans cet ordre.</p>
-</div>
-<ol aria-label="Étapes de la partie" class="session-steps" id="session-steps"></ol>
-</section>
+        <div class="session-layout" id="session-view">
+            <section aria-labelledby="session-title" class="session-card">
+                <div class="section-heading">
+                    <p class="eyebrow">Parcours de la partie</p>
+                    <h2 id="session-title">Étapes de la partie</h2>
+                    <p>Les étapes se suivent toujours dans cet ordre.</p>
+                </div>
+                <ol aria-label="Étapes de la partie" class="session-steps" id="session-steps"></ol>
+            </section>
 
-<section aria-labelledby="current-step-name" class="timer-card">
-<div class="current-step-summary" aria-live="polite">
-<span class="current-step-counter" id="current-step-counter">Étape 1 sur 4</span>
-<h2 class="current-step-name" id="current-step-name">Placement du jeu</h2>
-</div>
+            <section aria-labelledby="current-step-name" class="timer-card">
+                <div class="current-step-summary" aria-live="polite">
+                    <span class="current-step-counter" id="current-step-counter">Étape 1 sur 4</span>
+                    <h2 class="current-step-name" id="current-step-name">Placement du jeu</h2>
+                </div>
 
-<div class="session-time-information">
-<div class="time-information-block">
-<span class="time-information-label">Heure de début</span>
-<output class="step-start-time" id="step-start-time">Non démarrée</output>
-</div>
-<div class="time-information-divider" aria-hidden="true"></div>
-<div class="timer-display-group">
-<span class="timer-label" id="timer-label">Temps écoulé</span>
-<output aria-labelledby="timer-label" class="timer-display" id="timer-display">00:00:00</output>
-</div>
-</div>
+                <div class="session-time-information">
+                    <div class="time-information-block">
+                        <span class="time-information-label">Heure de début</span>
+                        <output class="step-start-time" id="step-start-time">Non démarrée</output>
+                    </div>
+                    <div class="time-information-divider" aria-hidden="true"></div>
+                    <div class="timer-display-group">
+                        <span class="timer-label" id="timer-label">Temps écoulé</span>
+                        <output aria-labelledby="timer-label" class="timer-display" id="timer-display">00:00:00</output>
+                    </div>
+                </div>
 
-<p class="session-state-message" id="session-state-message">La session commencera lorsque vous appuierez sur le bouton.</p>
-<div class="session-action-area">
-<button class="timer-button timer-button-primary session-action-button" id="session-start" type="button">Démarrer la partie</button>
-<button aria-describedby="session-state-message" class="timer-button timer-button-primary session-action-button" disabled hidden id="session-next-step" type="button">Étape suivante</button>
-</div>
-<a class="button-link" href="../../index.html">Retour à NovyTools</a>
-</section>
-</div>
+                <p class="session-state-message" id="session-state-message">La session commencera lorsque vous appuierez
+                    sur le bouton.</p>
+                <div class="session-action-area">
+                    <button class="timer-button timer-button-primary session-action-button" id="session-start"
+                        type="button">Démarrer la partie</button>
+                    <button aria-describedby="session-state-message"
+                        class="timer-button timer-button-primary session-action-button" disabled hidden
+                        id="session-next-step" type="button">Étape suivante</button>
+                </div>
+                <a class="button-link" href="../../index.html">Retour à NovyTools</a>
+            </section>
+        </div>
 
-<section aria-labelledby="report-title" class="report-view" hidden id="report-view">
-<div class="report-header-card">
-<div class="report-title-group">
-<span class="report-success-icon" aria-hidden="true">✓</span>
-<div>
-<p class="eyebrow">Rapport de session</p>
-<h1 id="report-title" tabindex="-1">Partie terminée</h1>
-<p>Voici le résumé de votre session.</p>
-</div>
-</div>
-<div class="report-summary-grid">
-<div class="report-summary-item">
-<span>Début de la session</span>
-<strong id="report-session-start">Non disponible</strong>
-</div>
-<div class="report-summary-item">
-<span>Fin de la session</span>
-<strong id="report-session-end">Non disponible</strong>
-</div>
-<div class="report-summary-item report-summary-item--total">
-<span>Durée totale</span>
-<strong id="report-total-duration">Non disponible</strong>
-</div>
-</div>
-</div>
+        <section aria-labelledby="report-title" class="report-view" hidden id="report-view">
+            <div class="report-header-card">
+                <div class="report-title-group">
+                    <span class="report-success-icon" aria-hidden="true">✓</span>
+                    <div>
+                        <p class="eyebrow">Rapport de session</p>
+                        <h1 id="report-title" tabindex="-1">Partie terminée</h1>
+                        <p>Voici le résumé de votre session.</p>
+                    </div>
+                </div>
+                <div class="report-summary-grid">
+                    <div class="report-summary-item">
+                        <span>Début de la session</span>
+                        <strong id="report-session-start">Non disponible</strong>
+                    </div>
+                    <div class="report-summary-item">
+                        <span>Fin de la session</span>
+                        <strong id="report-session-end">Non disponible</strong>
+                    </div>
+                    <div class="report-summary-item report-summary-item--total">
+                        <span>Durée totale</span>
+                        <strong id="report-total-duration">Non disponible</strong>
+                    </div>
+                </div>
+            </div>
 
-<div class="report-details-card">
-<h2>Détail des étapes</h2>
-<div class="report-table-wrapper">
-<table class="report-table">
-<caption class="visually-hidden">Heures de début, heures de fin et durées des étapes de la partie</caption>
-<thead>
-<tr><th scope="col">Étape</th><th scope="col">Début</th><th scope="col">Fin</th><th scope="col">Durée</th></tr>
-</thead>
-<tbody id="report-steps"></tbody>
-<tfoot>
-<tr><th scope="row">Total</th><td id="report-total-start">Non disponible</td><td id="report-total-end">Non disponible</td><td id="report-table-total-duration">Non disponible</td></tr>
-</tfoot>
-</table>
-</div>
-</div>
-<div class="report-actions" id="report-actions">
-<button aria-describedby="copy-report-status" class="timer-button timer-button-secondary report-action-button report-copy-button" id="report-copy" type="button">Copier le rapport</button>
-<button class="timer-button timer-button-primary report-action-button report-new-game-button" id="report-new-game" type="button">Nouvelle partie</button>
-</div>
-<p aria-live="polite" class="visually-hidden" id="copy-report-status" role="status"></p>
-<a class="button-link report-back-link" href="../../index.html">Retour à NovyTools</a>
-</section>
-</main>
-<div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-bottom" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div>
-<footer class="site-footer">
-<p>© <span id="current-year">2026</span> NovyTools – Minuteur</p>
-<nav aria-label="Navigation secondaire" class="footer-nav"><a href="../../../index.html">Accueil NovyLand</a><a href="../../index.html">Accueil NovyTools</a><a href="../../pages/about.html">À propos</a><a href="../../pages/privacy.html">Politique de confidentialité</a><a href="../../pages/legal.html">Mentions légales</a></nav>
-</footer>
-<script src="../../../assets/js/navigation.js" type="module"></script>
+            <div class="report-details-card">
+                <h2>Détail des étapes</h2>
+                <div class="report-table-wrapper">
+                    <table class="report-table">
+                        <caption class="visually-hidden">Heures de début, heures de fin et durées des étapes de la
+                            partie</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Étape</th>
+                                <th scope="col">Début</th>
+                                <th scope="col">Fin</th>
+                                <th scope="col">Durée</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-steps"></tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="row">Total</th>
+                                <td id="report-total-start">Non disponible</td>
+                                <td id="report-total-end">Non disponible</td>
+                                <td id="report-table-total-duration">Non disponible</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="report-actions" id="report-actions">
+                <button aria-describedby="copy-report-status"
+                    class="timer-button timer-button-secondary report-action-button report-copy-button" id="report-copy"
+                    type="button">Copier le rapport</button>
+                <button class="timer-button timer-button-primary report-action-button report-new-game-button"
+                    id="report-new-game" type="button">Nouvelle partie</button>
+            </div>
+            <p aria-live="polite" class="visually-hidden" id="copy-report-status" role="status"></p>
+            <a class="button-link report-back-link" href="../../index.html">Retour à NovyTools</a>
+        </section>
+    </main>
+    <div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true"
+        data-ad-slot="page-bottom" data-ad-status="placeholder" role="complementary"><span
+            class="ad-placeholder-label">Espace publicitaire</span></div>
+    <footer class="site-footer">
+        <p>© <span id="current-year">2026</span> NovyTools – Minuteur</p>
+        <nav aria-label="Navigation secondaire" class="footer-nav"><a href="../../../index.html">Accueil NovyLand</a><a
+                href="../../index.html">Accueil NovyTools</a><a href="../../pages/about.html">À propos</a><a
+                href="../../pages/privacy.html">Politique de confidentialité</a><a
+                href="../../pages/legal.html">Mentions légales</a></nav>
+    </footer>
+    <script src="../../../assets/js/navigation.js" type="module"></script>
 </body>
+
 </html>
