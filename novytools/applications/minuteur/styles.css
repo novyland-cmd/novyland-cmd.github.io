@@ -111,7 +111,16 @@
 .report-duration-cell { font-weight: 800; }
 .report-table tfoot th, .report-table tfoot td { color: #1d7d40; background: #eef8f1; border-bottom: 0; font-weight: 850; }
 .report-table tfoot th { text-align: left; }
+.report-actions { display: grid; width: min(100%, 28rem); min-height: 3.6rem; margin: .5rem auto 0; }
+.report-new-game-button { grid-area: 1 / 1; width: 100%; min-height: 3.6rem; font-size: 1.05rem; transition: opacity .16s ease, transform .16s ease, background-color .16s ease; }
+.report-new-game-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--color-primary) 35%, transparent); outline-offset: 3px; }
+.report-new-game-button:active:not(:disabled) { transform: translateY(1px); }
+.report-new-game-button:disabled { cursor: not-allowed; opacity: .58; }
 .report-back-link { justify-self: center; }
+
+@media (max-width: 37.5rem) {
+  .report-actions { width: 100%; }
+}
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .view-is-leaving { opacity: 0; transform: translateY(-.35rem); transition: opacity .18s ease, transform .18s ease; }
 .view-is-entering { opacity: 0; transform: translateY(.35rem); }

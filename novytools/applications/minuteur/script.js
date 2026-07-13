@@ -1,46 +1,51 @@
 import { GameSession, STEP_STATUS } from './gameSession.js';
 import { Timer, formatElapsedTime } from './timer.js';
 
+const NEUTRAL_TIME_TEXT = 'Non disponible';
+
 function initializeApplication() {
    updateCurrentYear();
 
    const elements = getInterfaceElements();
    if (!elements) return;
 
-   const session = new GameSession();
-   const timer = new Timer({
-      now: () => Date.now(),
-      onTick(elapsedMilliseconds) {
-         elements.timerDisplay.textContent = formatElapsedTime(elapsedMilliseconds);
-      }
-   });
+   // L'état mutable de l'application vit ici afin qu'une nouvelle partie
+   // puisse remplacer la session et le minuteur sans recréer les écouteurs.
+   const state = {
+      session: new GameSession(),
+      timer: createTimer(elements),
+      isProcessingAction: false,
+      isResetting: false
+   };
 
-   let isProcessingAction = false;
-
-   renderApplication(session, elements);
+   renderApplication(state.session, elements);
 
    elements.startButton.addEventListener('click', () => {
-      startSession(session, timer, elements);
-   }, { once: true });
+      startSession(state, elements);
+   });
 
    elements.nextStepButton.addEventListener('click', () => {
-      if (isProcessingAction || session.isFinished()) return;
+      if (state.isProcessingAction || state.session.isFinished()) return;
 
-      isProcessingAction = true;
+      state.isProcessingAction = true;
       elements.nextStepButton.disabled = true;
 
       try {
-         if (session.hasNextStep()) {
-            moveToNextStep(session, timer, elements);
+         if (state.session.hasNextStep()) {
+            moveToNextStep(state, elements);
          } else {
-            finishSession(session, timer, elements);
+            finishSession(state, elements);
          }
       } finally {
-         isProcessingAction = session.isFinished();
+         state.isProcessingAction = state.session.isFinished();
       }
    });
 
-   window.addEventListener('pagehide', () => timer.destroy(), { once: true });
+   elements.newGameButton.addEventListener('click', () => {
+      resetApplication(state, elements);
+   });
+
+   window.addEventListener('pagehide', () => state.timer.destroy(), { once: true });
 }
 
 function updateCurrentYear() {
@@ -61,6 +66,7 @@ function getInterfaceElements() {
       timerDisplay: document.querySelector('#timer-display'),
       startButton: document.querySelector('#session-start'),
       nextStepButton: document.querySelector('#session-next-step'),
+      newGameButton: document.querySelector('#report-new-game'),
       stateMessage: document.querySelector('#session-state-message'),
       reportSessionStart: document.querySelector('#report-session-start'),
       reportSessionEnd: document.querySelector('#report-session-end'),
@@ -79,24 +85,36 @@ function getInterfaceElements() {
    return elements;
 }
 
-function startSession(session, timer, elements) {
-   if (session.isStarted() || elements.startButton.disabled) return;
+/** Crée un minuteur générique relié à l'affichage courant. */
+function createTimer(elements) {
+   return new Timer({
+      now: () => Date.now(),
+      onTick(elapsedMilliseconds) {
+         elements.timerDisplay.textContent = formatElapsedTime(elapsedMilliseconds);
+      }
+   });
+}
+
+function startSession(state, elements) {
+   if (state.session.isStarted() || elements.startButton.disabled) return;
 
    elements.startButton.disabled = true;
 
-   const startedStep = session.start(new Date());
+   const startedStep = state.session.start(new Date());
    if (!startedStep || !(startedStep.startedAt instanceof Date)) {
       elements.startButton.disabled = false;
       elements.stateMessage.textContent = 'La partie n’a pas pu être démarrée. Veuillez réessayer.';
       return;
    }
 
-   renderApplication(session, elements);
-   timer.start(Math.max(0, Date.now() - startedStep.startedAt.getTime()));
+   renderApplication(state.session, elements);
+   state.timer.start(Math.max(0, Date.now() - startedStep.startedAt.getTime()));
 }
 
 /** Termine l'étape active et démarre la suivante avec un horodatage unique. */
-function moveToNextStep(session, timer, elements) {
+function moveToNextStep(state, elements) {
+   const { session, timer } = state;
+
    if (!session.isStarted() || session.isFinished() || !session.hasNextStep()) {
       renderApplication(session, elements);
       return;
@@ -117,7 +135,9 @@ function moveToNextStep(session, timer, elements) {
 }
 
 /** Finalise la dernière étape, arrête le minuteur et affiche le rapport. */
-function finishSession(session, timer, elements) {
+function finishSession(state, elements) {
+   const { session, timer } = state;
+
    if (!session.isStarted() || session.isFinished() || session.hasNextStep()) {
       renderApplication(session, elements);
       return;
@@ -141,10 +161,57 @@ function finishSession(session, timer, elements) {
    showReport(elements);
 }
 
+/**
+ * Réinitialise complètement l'application afin de permettre le démarrage
+ * d'une nouvelle partie sans recharger la page. Idempotente : un appel alors
+ * que l'application est déjà à l'état initial ne produit aucune erreur.
+ */
+function resetApplication(state, elements) {
+   if (state.isResetting) return;
+
+   // Rien à faire si aucune session n'a jamais démarré et que le rapport
+   // n'est pas affiché : l'application est déjà à son état initial.
+   if (!state.session.isStarted() && elements.reportView.hidden) return;
+
+   state.isResetting = true;
+   elements.newGameButton.disabled = true;
+
+   // Arrête définitivement l'ancien minuteur avant toute autre opération,
+   // pour empêcher qu'il ne mette encore à jour l'interface.
+   state.timer.pause();
+   state.timer.destroy();
+
+   // Nouvelle structure de session indépendante : aucune référence à
+   // l'ancienne session n'est conservée.
+   state.session = new GameSession();
+   state.timer = createTimer(elements);
+   state.isProcessingAction = false;
+
+   clearReport(elements);
+   showSessionView(elements, () => {
+      elements.startButton.disabled = false;
+      elements.newGameButton.disabled = false;
+      state.isResetting = false;
+      renderApplication(state.session, elements);
+      elements.startButton.focus({ preventScroll: false });
+   });
+}
+
+/** Vide les champs dynamiques du rapport afin de ne rien laisser dans le DOM. */
+function clearReport(elements) {
+   elements.reportSessionStart.textContent = NEUTRAL_TIME_TEXT;
+   elements.reportSessionEnd.textContent = NEUTRAL_TIME_TEXT;
+   elements.reportTotalDuration.textContent = NEUTRAL_TIME_TEXT;
+   elements.reportTotalStart.textContent = NEUTRAL_TIME_TEXT;
+   elements.reportTotalEnd.textContent = NEUTRAL_TIME_TEXT;
+   elements.reportTableTotalDuration.textContent = NEUTRAL_TIME_TEXT;
+   elements.reportSteps.replaceChildren();
+}
+
 function populateReport(summary, elements) {
    const startText = formatLocalTime(summary.startedAt);
    const endText = formatLocalTime(summary.endedAt);
-   const totalDurationText = formatDuration(summary.durationMilliseconds);
+   const totalDurationText = formatDurationBetween(summary.startedAt, summary.endedAt);
 
    elements.reportSessionStart.textContent = startText;
    elements.reportSessionEnd.textContent = endText;
@@ -189,7 +256,7 @@ function createReportRow(step) {
    const durationCell = document.createElement('td');
    durationCell.dataset.label = 'Durée';
    durationCell.className = 'report-duration-cell';
-   durationCell.textContent = formatDuration(step?.durationMilliseconds);
+   durationCell.textContent = formatDurationBetween(step?.startedAt, step?.endedAt);
 
    row.append(nameCell, startCell, endCell, durationCell);
    return row;
@@ -202,12 +269,34 @@ function showReport(elements) {
    window.setTimeout(() => {
       elements.sessionView.hidden = true;
       elements.appIntro.hidden = true;
+      elements.sessionView.classList.remove('view-is-leaving');
+      elements.appIntro.classList.remove('view-is-leaving');
       elements.reportView.hidden = false;
       elements.reportView.classList.add('view-is-entering');
 
       requestAnimationFrame(() => {
          elements.reportView.classList.remove('view-is-entering');
          elements.reportTitle.focus({ preventScroll: false });
+      });
+   }, getTransitionDuration());
+}
+
+/** Masque le rapport et réaffiche l'écran initial, puis exécute onShown. */
+function showSessionView(elements, onShown) {
+   elements.reportView.classList.add('view-is-leaving');
+
+   window.setTimeout(() => {
+      elements.reportView.hidden = true;
+      elements.reportView.classList.remove('view-is-leaving');
+      elements.appIntro.hidden = false;
+      elements.sessionView.hidden = false;
+      elements.appIntro.classList.add('view-is-entering');
+      elements.sessionView.classList.add('view-is-entering');
+
+      requestAnimationFrame(() => {
+         elements.appIntro.classList.remove('view-is-entering');
+         elements.sessionView.classList.remove('view-is-entering');
+         if (typeof onShown === 'function') onShown();
       });
    }, getTransitionDuration());
 }
@@ -234,6 +323,7 @@ function renderApplication(session, elements) {
       elements.stateMessage.textContent = 'La session commencera lorsque vous appuierez sur le bouton.';
       elements.startButton.hidden = false;
       elements.startButton.disabled = false;
+      elements.startButton.textContent = 'Démarrer la partie';
       elements.nextStepButton.hidden = true;
       return;
    }
@@ -294,8 +384,25 @@ function getStepStatusLabel(step, isSessionStarted) {
    return labels[step.status] ?? '';
 }
 
+function isValidDate(date) {
+   return date instanceof Date && !Number.isNaN(date.getTime());
+}
+
+/**
+ * Seconde entière depuis l'epoch, tronquée comme le fait l'affichage de
+ * l'heure (les millisecondes ne sont jamais montrées). Utiliser cette même
+ * valeur pour l'heure ET pour la durée garantit que les durées des étapes
+ * s'additionnent toujours exactement à la durée totale affichée : comme
+ * la fin d'une étape et le début de la suivante partagent le même instant,
+ * la somme des différences se télescope vers (fin de session − début de
+ * session), sans perte d'arrondi cumulée.
+ */
+function toEpochSeconds(date) {
+   return Math.floor(date.getTime() / 1000);
+}
+
 function formatLocalTime(date) {
-   if (!(date instanceof Date) || Number.isNaN(date.getTime())) return 'Non disponible';
+   if (!isValidDate(date)) return NEUTRAL_TIME_TEXT;
 
    return new Intl.DateTimeFormat('fr-CA', {
       hour: '2-digit',
@@ -305,10 +412,14 @@ function formatLocalTime(date) {
    }).format(date);
 }
 
-function formatDuration(milliseconds) {
-   return Number.isFinite(milliseconds) && milliseconds >= 0
-      ? formatElapsedTime(milliseconds)
-      : 'Non disponible';
+/** Formate la durée entre deux horodatages à partir des mêmes secondes entières que celles affichées pour le début et la fin. */
+function formatDurationBetween(startDate, endDate) {
+   if (!isValidDate(startDate) || !isValidDate(endDate)) return NEUTRAL_TIME_TEXT;
+
+   const durationSeconds = toEpochSeconds(endDate) - toEpochSeconds(startDate);
+   if (durationSeconds < 0) return NEUTRAL_TIME_TEXT;
+
+   return formatElapsedTime(durationSeconds * 1000);
 }
 
 initializeApplication();
