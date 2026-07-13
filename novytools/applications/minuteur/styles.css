@@ -59,3 +59,21 @@
 }
 @media (max-width: 23.75rem) { .timer-card-heading { display: grid; } .timer-display { font-size: clamp(2rem, 14vw, 3.1rem); } }
 @media (max-width: 40rem) { .app-intro { margin-bottom: .75rem; } .timer-card { gap: 1rem; } }
+
+/* Interface de démarrage de session */
+.session-time-information { display: grid; gap: 1.25rem; text-align: center; }
+.time-information-block { display: grid; gap: .5rem; }
+.time-information-label { color: var(--color-text-muted); font-weight: 700; }
+.step-start-time { color: var(--color-primary); font-size: clamp(1.35rem, 3vw, 1.8rem); font-weight: 850; font-variant-numeric: tabular-nums; }
+.time-information-divider { width: min(100%, 32rem); height: 1px; margin: 0 auto; background: var(--color-border); }
+.session-time-information .timer-display-group { padding: .25rem .5rem .75rem; border: 0; background: transparent; }
+.session-state-message { margin: -.25rem 0 0; color: var(--color-text-muted); text-align: center; }
+.session-start-button { width: min(100%, 28rem); min-height: 3.6rem; margin: 0 auto; font-size: 1.05rem; }
+.session-start-button:focus-visible { outline: 3px solid color-mix(in srgb, var(--color-primary) 35%, transparent); outline-offset: 3px; }
+.session-start-button:active { transform: translateY(1px); }
+.session-start-button:disabled { cursor: wait; opacity: .72; }
+.session-start-button[hidden] { display: none; }
+
+@media (max-width: 37.5rem) {
+  .session-start-button { width: 100%; }
+}

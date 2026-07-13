@@ -25,33 +25,32 @@
 <section aria-labelledby="session-title" class="session-card">
 <div class="section-heading">
 <p class="eyebrow">Parcours de la partie</p>
-<h2 id="session-title">Déroulement de la partie</h2>
+<h2 id="session-title">Étapes de la partie</h2>
 <p>Les étapes se suivent toujours dans cet ordre.</p>
 </div>
 <ol aria-label="Étapes de la partie" class="session-steps" id="session-steps"></ol>
 </section>
 
-<section aria-labelledby="timer-title" class="timer-card">
+<section aria-labelledby="current-step-name" class="timer-card">
 <div class="current-step-summary" aria-live="polite">
 <span class="current-step-counter" id="current-step-counter">Étape 1 sur 4</span>
 <h2 class="current-step-name" id="current-step-name">Placement du jeu</h2>
 </div>
-<div class="timer-card-heading">
-<div aria-hidden="true" class="app-icon">⏱️</div>
-<div>
-<h2 id="timer-title">Temps écoulé</h2>
-<p>Le minuteur démarre à zéro et conserve le temps déjà mesuré lorsqu’il est mis en pause.</p>
+
+<div class="session-time-information">
+<div class="time-information-block">
+<span class="time-information-label">Heure de début</span>
+<output class="step-start-time" id="step-start-time">Non démarrée</output>
 </div>
-</div>
+<div class="time-information-divider" aria-hidden="true"></div>
 <div class="timer-display-group">
-<span class="timer-label" id="timer-label">Heures, minutes et secondes</span>
+<span class="timer-label" id="timer-label">Temps écoulé</span>
 <output aria-labelledby="timer-label" class="timer-display" id="timer-display">00:00:00</output>
 </div>
-<div aria-label="Commandes du minuteur" class="timer-controls">
-<button class="timer-button timer-button-primary" id="timer-start" type="button">Démarrer</button>
-<button class="timer-button timer-button-secondary" id="timer-pause" type="button">Pause</button>
-<button class="timer-button timer-button-neutral" id="timer-reset" type="button">Réinitialiser</button>
 </div>
+
+<p class="session-state-message" id="session-state-message">La session commencera lorsque vous appuierez sur le bouton.</p>
+<button class="timer-button timer-button-primary session-start-button" id="session-start" type="button">Démarrer la partie</button>
 <a class="button-link" href="../../index.html">Retour à NovyTools</a>
 </section>
 </div>

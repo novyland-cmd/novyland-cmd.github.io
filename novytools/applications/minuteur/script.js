@@ -3,8 +3,25 @@ import { Timer, formatElapsedTime } from './timer.js';
 
 function initializeApplication() {
    updateCurrentYear();
-   initializeGameSession();
-   initializeTimerInterface();
+
+   const elements = getInterfaceElements();
+   if (!elements) return;
+
+   const session = new GameSession();
+   const timer = new Timer({
+      now: () => Date.now(),
+      onTick(elapsedMilliseconds) {
+         elements.timerDisplay.textContent = formatElapsedTime(elapsedMilliseconds);
+      }
+   });
+
+   renderApplication(session, elements);
+
+   elements.startButton.addEventListener('click', () => {
+      startSession(session, timer, elements);
+   });
+
+   window.addEventListener('pagehide', () => timer.destroy(), { once: true });
 }
 
 function updateCurrentYear() {
@@ -12,33 +29,69 @@ function updateCurrentYear() {
    if (currentYear) currentYear.textContent = String(new Date().getFullYear());
 }
 
-function initializeGameSession() {
-   const stepsContainer = document.querySelector('#session-steps');
-   const currentStepName = document.querySelector('#current-step-name');
-   const currentStepCounter = document.querySelector('#current-step-counter');
+function getInterfaceElements() {
+   const elements = {
+      stepsContainer: document.querySelector('#session-steps'),
+      currentStepName: document.querySelector('#current-step-name'),
+      currentStepCounter: document.querySelector('#current-step-counter'),
+      startTime: document.querySelector('#step-start-time'),
+      timerDisplay: document.querySelector('#timer-display'),
+      startButton: document.querySelector('#session-start'),
+      stateMessage: document.querySelector('#session-state-message')
+   };
 
-   if (!stepsContainer || !currentStepName || !currentStepCounter) {
-      console.warn("La session ne peut pas être affichée : un élément requis est introuvable.");
+   if (Object.values(elements).some((element) => !element)) {
+      console.warn("L'application ne peut pas être initialisée : un élément requis est introuvable.");
+      return null;
+   }
+
+   return elements;
+}
+
+function startSession(session, timer, elements) {
+   if (session.isStarted()) return;
+
+   // Le verrou visuel est posé avant toute autre opération pour neutraliser
+   // les doubles clics rapides.
+   elements.startButton.disabled = true;
+
+   const startedStep = session.start(new Date());
+   if (!startedStep || !(startedStep.startedAt instanceof Date)) {
+      elements.startButton.disabled = false;
+      elements.stateMessage.textContent = 'La partie n’a pas pu être démarrée. Veuillez réessayer.';
       return;
    }
 
-   const session = new GameSession();
-   renderSession(session, { stepsContainer, currentStepName, currentStepCounter });
+   renderApplication(session, elements);
+   timer.start();
 }
 
-function renderSession(session, elements) {
+function renderApplication(session, elements) {
    const steps = session.getSteps();
    const currentStep = session.getCurrentStep();
 
-   elements.stepsContainer.replaceChildren(...steps.map(createStepElement));
+   elements.stepsContainer.replaceChildren(...steps.map((step) => createStepElement(step, session.isStarted())));
 
-   if (currentStep) {
-      elements.currentStepName.textContent = currentStep.name;
-      elements.currentStepCounter.textContent = `Étape ${currentStep.number} sur ${steps.length}`;
+   if (!currentStep) return;
+
+   elements.currentStepName.textContent = currentStep.name;
+   elements.currentStepCounter.textContent = `Étape ${currentStep.number} sur ${steps.length}`;
+
+   if (!session.isStarted()) {
+      elements.startTime.textContent = 'Non démarrée';
+      elements.timerDisplay.textContent = '00:00:00';
+      elements.stateMessage.textContent = 'La session commencera lorsque vous appuierez sur le bouton.';
+      elements.startButton.hidden = false;
+      elements.startButton.disabled = false;
+      return;
    }
+
+   elements.startTime.textContent = formatLocalTime(currentStep.startedAt);
+   elements.stateMessage.textContent = `${currentStep.name} est en cours.`;
+   elements.startButton.hidden = true;
 }
 
-function createStepElement(step) {
+function createStepElement(step, isSessionStarted) {
    const item = document.createElement('li');
    item.className = `session-step session-step--${step.status}`;
    item.dataset.stepId = step.id;
@@ -61,44 +114,34 @@ function createStepElement(step) {
 
    const status = document.createElement('span');
    status.className = 'session-step-status';
-   status.textContent = getStepStatusLabel(step.status);
+   status.textContent = getStepStatusLabel(step, isSessionStarted);
 
    content.append(name, status);
    item.append(marker, content);
    return item;
 }
 
-function getStepStatusLabel(status) {
+function getStepStatusLabel(step, isSessionStarted) {
+   if (!isSessionStarted && step.number === 1) return 'À démarrer';
+
    const labels = {
       [STEP_STATUS.CURRENT]: 'En cours',
       [STEP_STATUS.UPCOMING]: 'À venir',
       [STEP_STATUS.COMPLETED]: 'Terminée'
    };
 
-   return labels[status] ?? '';
+   return labels[step.status] ?? '';
 }
 
-function initializeTimerInterface() {
-   const display = document.querySelector('#timer-display');
-   const startButton = document.querySelector('#timer-start');
-   const pauseButton = document.querySelector('#timer-pause');
-   const resetButton = document.querySelector('#timer-reset');
+function formatLocalTime(date) {
+   if (!(date instanceof Date) || Number.isNaN(date.getTime())) return 'Non disponible';
 
-   if (!display || !startButton || !pauseButton || !resetButton) {
-      console.warn('Le minuteur ne peut pas être initialisé : un élément requis est introuvable.');
-      return;
-   }
-
-   const timer = new Timer({
-      onTick(elapsedMilliseconds) {
-         display.textContent = formatElapsedTime(elapsedMilliseconds);
-      }
-   });
-
-   startButton.addEventListener('click', () => timer.start());
-   pauseButton.addEventListener('click', () => timer.pause());
-   resetButton.addEventListener('click', () => timer.reset());
-   window.addEventListener('pagehide', () => timer.destroy(), { once: true });
+   return new Intl.DateTimeFormat('fr-CA', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+   }).format(date);
 }
 
 initializeApplication();

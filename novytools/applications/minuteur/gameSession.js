@@ -1,6 +1,5 @@
 /**
  * États possibles d'une étape de partie.
- * Cette liste centralisée prépare les futures évolutions de l'application.
  */
 export const STEP_STATUS = Object.freeze({
    UPCOMING: 'upcoming',
@@ -9,8 +8,7 @@ export const STEP_STATUS = Object.freeze({
 });
 
 /**
- * Parcours de base d'une partie.
- * Les noms et l'ordre des étapes ne doivent être définis qu'ici.
+ * Parcours de base d'une partie. Les noms et l'ordre ne sont définis qu'ici.
  */
 export const DEFAULT_GAME_STEPS = Object.freeze([
    Object.freeze({ id: 'setup', name: 'Placement du jeu' }),
@@ -19,19 +17,12 @@ export const DEFAULT_GAME_STEPS = Object.freeze([
    Object.freeze({ id: 'scoring', name: 'Calcul des points' })
 ]);
 
-/**
- * Crée les données internes d'une étape pour une nouvelle session.
- *
- * @param {{ id: string, name: string }} step
- * @param {number} index
- * @returns {object}
- */
 function createSessionStep(step, index) {
    return {
       id: step.id,
       number: index + 1,
       name: step.name,
-      status: index === 0 ? STEP_STATUS.CURRENT : STEP_STATUS.UPCOMING,
+      status: STEP_STATUS.UPCOMING,
       startedAt: null,
       endedAt: null,
       durationMilliseconds: 0,
@@ -40,13 +31,10 @@ function createSessionStep(step, index) {
 }
 
 /**
- * Représente le parcours logique d'une partie.
- * La classe ne dépend volontairement pas du minuteur ni de l'interface.
+ * Source de vérité unique pour l'état d'une session.
+ * Cette classe ne dépend ni du DOM ni du minuteur visuel.
  */
 export class GameSession {
-   /**
-    * @param {Array<{ id: string, name: string }>} [steps]
-    */
    constructor(steps = DEFAULT_GAME_STEPS) {
       if (!Array.isArray(steps) || steps.length === 0) {
          throw new TypeError('Une session doit contenir au moins une étape.');
@@ -54,45 +42,65 @@ export class GameSession {
 
       this.steps = steps.map(createSessionStep);
       this.currentStepIndex = 0;
+      this.started = false;
+      this.startedAt = null;
    }
 
-   /** @returns {object|null} */
+   isStarted() {
+      return this.started;
+   }
+
    getCurrentStep() {
       return this.steps[this.currentStepIndex] ?? null;
    }
 
-   /** @returns {Array<object>} */
    getSteps() {
       return this.steps.map((step) => ({ ...step }));
    }
 
    /**
-    * Passe uniquement à l'étape suivante du parcours.
-    * Aucun index cible n'est accepté afin d'empêcher les sauts directs.
-    *
-    * @returns {object|null} La nouvelle étape active, ou null si la session est terminée.
+    * Démarre une seule fois la session et sa première étape.
+    * @param {Date} [startedAt]
+    * @returns {object|null}
+    */
+   start(startedAt = new Date()) {
+      if (this.started || this.isFinished()) {
+         return null;
+      }
+
+      const validDate = startedAt instanceof Date && !Number.isNaN(startedAt.getTime())
+         ? new Date(startedAt.getTime())
+         : new Date();
+
+      this.started = true;
+      this.startedAt = validDate;
+
+      const currentStep = this.getCurrentStep();
+      currentStep.status = STEP_STATUS.CURRENT;
+      currentStep.startedAt = validDate;
+
+      return { ...currentStep };
+   }
+
+   /**
+    * Prépare la future progression séquentielle. Cette méthode n'est pas
+    * encore reliée à l'interface dans la présente version.
     */
    moveToNextStep() {
-      if (this.isFinished()) {
+      if (!this.started || this.isFinished()) {
          return null;
       }
 
       const currentStep = this.getCurrentStep();
-      if (currentStep) {
-         currentStep.status = STEP_STATUS.COMPLETED;
-      }
+      if (currentStep) currentStep.status = STEP_STATUS.COMPLETED;
 
       this.currentStepIndex += 1;
       const nextStep = this.getCurrentStep();
+      if (nextStep) nextStep.status = STEP_STATUS.CURRENT;
 
-      if (nextStep) {
-         nextStep.status = STEP_STATUS.CURRENT;
-      }
-
-      return nextStep;
+      return nextStep ? { ...nextStep } : null;
    }
 
-   /** @returns {boolean} */
    isFinished() {
       return this.currentStepIndex >= this.steps.length;
    }
