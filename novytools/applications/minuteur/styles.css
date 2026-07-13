@@ -1,12 +1,32 @@
 /* Styles propres au Minuteur de jeu */
 .app-intro { max-width: 48rem; margin: 0 auto 1rem; text-align: center; }
-.timer-card { width: min(100%, 47.5rem); margin: 0 auto; padding: clamp(1.25rem, 4vw, 2.5rem); display: grid; gap: clamp(1rem, 2.5vw, 1.5rem); }
+.session-layout { width: min(100%, 72rem); margin: 0 auto; display: grid; grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 1.5rem); align-items: start; }
+.session-card, .timer-card { padding: clamp(1.25rem, 3vw, 2rem); }
+.session-card { display: grid; gap: 1.5rem; }
+.section-heading h2 { margin: .15rem 0 .35rem; color: var(--color-text); }
+.section-heading p:last-child { margin: 0; color: var(--color-text-muted); }
+.session-steps { position: relative; display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.session-steps::before { content: ''; position: absolute; top: 1.35rem; bottom: 1.35rem; left: 1rem; width: 2px; background: var(--color-border); }
+.session-step { position: relative; display: grid; grid-template-columns: 2rem minmax(0,1fr); gap: .9rem; min-height: 5rem; padding: .4rem 0; }
+.session-step-marker { position: relative; z-index: 1; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; color: #fff; background: var(--color-text); font-weight: 800; box-shadow: 0 0 0 5px #fff; }
+.session-step-content { display: grid; align-content: start; gap: .25rem; padding-top: .15rem; }
+.session-step-name { color: var(--color-text); font-weight: 800; line-height: 1.3; }
+.session-step-status { color: var(--color-text-muted); font-size: .92rem; }
+.session-step--current::after { content: ''; position: absolute; inset: 0 auto 0 -1.25rem; width: 3px; border-radius: 999px; background: var(--color-primary); }
+.session-step--current .session-step-marker { background: var(--color-primary); }
+.session-step--current .session-step-name, .session-step--current .session-step-status { color: var(--color-primary); }
+.session-step--completed .session-step-marker { background: #238c4a; }
+
+.timer-card { display: grid; gap: clamp(1rem, 2.5vw, 1.5rem); }
+.current-step-summary { padding: 1rem 1.25rem; text-align: center; border: 1px solid color-mix(in srgb, var(--color-primary) 20%, var(--color-border)); border-radius: var(--radius-medium); background: color-mix(in srgb, var(--color-primary) 6%, white); }
+.current-step-counter { display: inline-flex; margin-bottom: .65rem; padding: .4rem .75rem; border-radius: 999px; color: #fff; background: var(--color-primary); font-size: .88rem; font-weight: 800; }
+.current-step-name { margin: 0; color: var(--color-text); font-size: clamp(1.65rem, 4vw, 2.35rem); }
 .timer-card-heading { display: flex; align-items: center; gap: 1rem; }
 .timer-card h2 { margin: 0 0 .35rem; color: var(--color-primary); }
 .timer-card-heading p { margin: 0; color: var(--color-text-muted); }
 .timer-display-group { min-width: 0; padding: clamp(1rem, 3vw, 1.75rem) clamp(.75rem, 4vw, 2rem); text-align: center; border: 1px solid color-mix(in srgb, var(--color-primary) 18%, var(--color-border)); border-radius: var(--radius-medium); background: color-mix(in srgb, var(--color-primary) 5%, white); }
 .timer-label { display: block; margin-bottom: .65rem; color: var(--color-text-muted); font-size: .82rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
-.timer-display { display: block; width: 100%; color: var(--color-primary-dark); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: clamp(2.55rem, 11vw, 6.5rem); font-weight: 850; line-height: 1; letter-spacing: -.06em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.timer-display { display: block; width: 100%; color: var(--color-primary-dark); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: clamp(2.55rem, 9vw, 5.8rem); font-weight: 850; line-height: 1; letter-spacing: -.06em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .timer-controls { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .85rem; }
 .timer-button-primary { color: #fff; background: var(--color-primary); }
 .timer-button-primary:hover { background: var(--color-primary-dark); }
@@ -15,10 +35,27 @@
 .timer-button-neutral { color: var(--color-text); background: #eef1f0; border-color: var(--color-border); }
 .timer-button-neutral:hover { background: #e4e9e7; }
 .timer-card .button-link { justify-self: center; }
-@media (max-width: 37.5rem) { .timer-card-heading { align-items: flex-start; } .timer-controls { grid-template-columns: 1fr; } .timer-button, .timer-card .button-link { width: 100%; } .timer-display { font-size: clamp(2.35rem, 15vw, 4.5rem); } }
-@media (max-width: 23.75rem) { .timer-card-heading { display: grid; } .timer-display { font-size: clamp(2rem, 14vw, 3.1rem); } }
 
-@media (max-width: 40rem) {
-  .app-intro { margin-bottom: .75rem; }
-  .timer-card { gap: 1rem; }
+@media (max-width: 50rem) {
+  .session-layout { grid-template-columns: 1fr; }
+  .session-card { order: 0; }
+  .timer-card { order: 1; }
+  .session-steps { grid-template-columns: repeat(4, minmax(0,1fr)); gap: .5rem; }
+  .session-steps::before { top: 1rem; right: 1rem; bottom: auto; left: 1rem; width: auto; height: 2px; }
+  .session-step { grid-template-columns: 1fr; gap: .65rem; min-height: auto; text-align: center; }
+  .session-step-marker { margin: 0 auto; }
+  .session-step--current::after { inset: auto 15% -.45rem; width: auto; height: 3px; }
 }
+@media (max-width: 37.5rem) {
+  .timer-card-heading { align-items: flex-start; }
+  .timer-controls { grid-template-columns: 1fr; }
+  .timer-button, .timer-card .button-link { width: 100%; }
+  .timer-display { font-size: clamp(2.35rem, 15vw, 4.5rem); }
+  .session-steps { grid-template-columns: 1fr; gap: 0; }
+  .session-steps::before { top: 1.35rem; right: auto; bottom: 1.35rem; left: 1rem; width: 2px; height: auto; }
+  .session-step { grid-template-columns: 2rem minmax(0,1fr); gap: .9rem; min-height: 4.5rem; text-align: left; }
+  .session-step-marker { margin: 0; }
+  .session-step--current::after { inset: 0 auto 0 -1.25rem; width: 3px; height: auto; }
+}
+@media (max-width: 23.75rem) { .timer-card-heading { display: grid; } .timer-display { font-size: clamp(2rem, 14vw, 3.1rem); } }
+@media (max-width: 40rem) { .app-intro { margin-bottom: .75rem; } .timer-card { gap: 1rem; } }

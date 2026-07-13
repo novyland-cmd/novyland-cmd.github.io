@@ -1,23 +1,41 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="Minuteur de jeu NovyTools pour mesurer simplement la durée d'une activité pendant une partie de jeu de société." name="description"/>
 <title>Minuteur de jeu – NovyTools</title>
-<link href="../../../assets/css/theme.css" rel="stylesheet"/><link href="../../../assets/css/advertising.css" rel="stylesheet"/>
+<link href="../../../assets/css/theme.css" rel="stylesheet"/>
+<link href="../../../assets/css/advertising.css" rel="stylesheet"/>
 <link href="styles.css" rel="stylesheet"/>
 <script src="script.js" type="module"></script>
-<link href="../../../assets/css/navigation.css" rel="stylesheet"/></head>
-<body><div data-brand="NovyTools" data-context="novytools" data-page="timer" data-site-navigation="" data-subtitle="Minuteur de jeu"><a class="novy-nav-fallback" href="../../../index.html">Accueil NovyLand</a></div><div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-top" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div>
+<link href="../../../assets/css/navigation.css" rel="stylesheet"/>
+</head>
+<body>
+<div data-brand="NovyTools" data-context="novytools" data-page="timer" data-site-navigation="" data-subtitle="Minuteur de jeu"><a class="novy-nav-fallback" href="../../../index.html">Accueil NovyLand</a></div>
+<div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-top" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div>
 <main class="page-main">
 <section aria-labelledby="app-title" class="app-intro">
 <p class="eyebrow">Outil de mesure NovyTools</p>
 <h1 id="app-title">Minuteur de jeu</h1>
-<p class="app-subtitle">Mesurez la durée d’une activité de jeu, de la mise en place jusqu’au dernier tour.</p>
+<p class="app-subtitle">Mesurez la durée d’une activité de jeu, de la mise en place jusqu’au calcul des points.</p>
 </section>
+
+<div class="session-layout">
+<section aria-labelledby="session-title" class="session-card">
+<div class="section-heading">
+<p class="eyebrow">Parcours de la partie</p>
+<h2 id="session-title">Déroulement de la partie</h2>
+<p>Les étapes se suivent toujours dans cet ordre.</p>
+</div>
+<ol aria-label="Étapes de la partie" class="session-steps" id="session-steps"></ol>
+</section>
+
 <section aria-labelledby="timer-title" class="timer-card">
+<div class="current-step-summary" aria-live="polite">
+<span class="current-step-counter" id="current-step-counter">Étape 1 sur 4</span>
+<h2 class="current-step-name" id="current-step-name">Placement du jeu</h2>
+</div>
 <div class="timer-card-heading">
 <div aria-hidden="true" class="app-icon">⏱️</div>
 <div>
@@ -36,10 +54,13 @@
 </div>
 <a class="button-link" href="../../index.html">Retour à NovyTools</a>
 </section>
+</div>
 </main>
-<div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-bottom" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div><footer class="site-footer">
+<div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-bottom" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div>
+<footer class="site-footer">
 <p>© <span id="current-year">2026</span> NovyTools – Minuteur</p>
 <nav aria-label="Navigation secondaire" class="footer-nav"><a href="../../../index.html">Accueil NovyLand</a><a href="../../index.html">Accueil NovyTools</a><a href="../../pages/about.html">À propos</a><a href="../../pages/privacy.html">Politique de confidentialité</a><a href="../../pages/legal.html">Mentions légales</a></nav>
 </footer>
-<script src="../../../assets/js/navigation.js" type="module"></script></body>
+<script src="../../../assets/js/navigation.js" type="module"></script>
+</body>
 </html>
