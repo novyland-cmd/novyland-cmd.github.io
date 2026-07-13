@@ -1,0 +1,54 @@
+/*
+ * Emplacements publicitaires communs à l'ensemble du site NovyLand.
+ * Aucun code Google AdSense n'est chargé ici. Chaque bloc réserve uniquement
+ * l'espace nécessaire à une future annonce afin de limiter les décalages de page.
+ */
+.ad-container {
+  width: min(100% - 2rem, 47.5rem);
+  min-height: 5.5rem;
+  margin: clamp(.65rem, 1.8vw, 1rem) auto;
+  padding: .75rem 1rem;
+  display: grid;
+  place-items: center;
+  border: 1px dashed color-mix(in srgb, var(--color-primary) 25%, transparent);
+  border-radius: var(--radius-medium);
+  background: rgba(255, 255, 255, .55);
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+}
+
+/* Formats prévus pour les futurs blocs responsives. */
+.ad-container--horizontal {
+  min-height: 5.625rem;
+}
+
+.ad-container--content {
+  min-height: 6.25rem;
+}
+
+/* Permet de désactiver un emplacement sans retirer son code HTML. */
+.ad-container[hidden],
+.ad-container[data-ad-enabled="false"] {
+  display: none !important;
+}
+
+/* Le texte de test disparaîtra automatiquement lorsque le futur code publicitaire sera injecté. */
+.ad-container[data-ad-status="active"] > .ad-placeholder-label {
+  display: none;
+}
+
+@media (max-width: 40rem) {
+  .ad-container {
+    width: min(100% - 1.25rem, 47.5rem);
+    min-height: 5rem;
+    margin-block: .65rem;
+    padding: .65rem .75rem;
+  }
+
+  .ad-container--content {
+    min-height: 5.5rem;
+  }
+}

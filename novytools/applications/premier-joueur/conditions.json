@@ -206,7 +206,7 @@
   {
     "id": 35,
     "category": "observation",
-    "text": "Le premier joueur à trouver quelque chose de jaune commence.",
+    "text": "Le premier joueur à trouver quelque chose de jaune dans la pièce commence.",
     "image": "meeple-jumelles.png"
   },
   {
@@ -362,7 +362,7 @@
   {
     "id": 61,
     "category": "novyland",
-    "text": "Le joueur qui choisirait un éléphant comme chef de tribu commence.",
+    "text": "Le joueur qui choisi l'éléphant comme chef de tribu commence.",
     "image": "meeple-jeux.png"
   },
   {

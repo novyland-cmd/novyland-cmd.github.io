@@ -1,10 +1,10 @@
 /* Styles propres au Minuteur de jeu */
-.app-intro { max-width: 48rem; margin: 0 auto 2rem; text-align: center; }
-.timer-card { width: min(100%, 47.5rem); margin: 0 auto; padding: clamp(1.25rem, 4vw, 2.5rem); display: grid; gap: clamp(1.4rem, 4vw, 2.2rem); }
+.app-intro { max-width: 48rem; margin: 0 auto 1rem; text-align: center; }
+.timer-card { width: min(100%, 47.5rem); margin: 0 auto; padding: clamp(1.25rem, 4vw, 2.5rem); display: grid; gap: clamp(1rem, 2.5vw, 1.5rem); }
 .timer-card-heading { display: flex; align-items: center; gap: 1rem; }
 .timer-card h2 { margin: 0 0 .35rem; color: var(--color-primary); }
 .timer-card-heading p { margin: 0; color: var(--color-text-muted); }
-.timer-display-group { min-width: 0; padding: clamp(1.25rem, 5vw, 2.5rem) clamp(.75rem, 4vw, 2rem); text-align: center; border: 1px solid color-mix(in srgb, var(--color-primary) 18%, var(--color-border)); border-radius: var(--radius-medium); background: color-mix(in srgb, var(--color-primary) 5%, white); }
+.timer-display-group { min-width: 0; padding: clamp(1rem, 3vw, 1.75rem) clamp(.75rem, 4vw, 2rem); text-align: center; border: 1px solid color-mix(in srgb, var(--color-primary) 18%, var(--color-border)); border-radius: var(--radius-medium); background: color-mix(in srgb, var(--color-primary) 5%, white); }
 .timer-label { display: block; margin-bottom: .65rem; color: var(--color-text-muted); font-size: .82rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
 .timer-display { display: block; width: 100%; color: var(--color-primary-dark); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: clamp(2.55rem, 11vw, 6.5rem); font-weight: 850; line-height: 1; letter-spacing: -.06em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .timer-controls { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .85rem; }
@@ -17,3 +17,8 @@
 .timer-card .button-link { justify-self: center; }
 @media (max-width: 37.5rem) { .timer-card-heading { align-items: flex-start; } .timer-controls { grid-template-columns: 1fr; } .timer-button, .timer-card .button-link { width: 100%; } .timer-display { font-size: clamp(2.35rem, 15vw, 4.5rem); } }
 @media (max-width: 23.75rem) { .timer-card-heading { display: grid; } .timer-display { font-size: clamp(2rem, 14vw, 3.1rem); } }
+
+@media (max-width: 40rem) {
+  .app-intro { margin-bottom: .75rem; }
+  .timer-card { gap: 1rem; }
+}
