@@ -627,10 +627,6 @@
   border-color: #a33131;
 }
 
-.report-back-link {
-  justify-self: center;
-}
-
 @media (max-width: 37.5rem) {
   .report-actions {
     grid-template-columns: 1fr;
@@ -763,9 +759,6 @@
     grid-template-columns: 1fr;
   }
 
-  .report-back-link {
-    width: 100%;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

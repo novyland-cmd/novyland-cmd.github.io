@@ -122,7 +122,7 @@ function buildNavigation(mount) {
 
    const brand = createElement("a", {
       className: "novy-header__brand",
-      attributes: { href: resolveDestination("index.html"), "aria-label": "Retour à l’accueil NovyLand" }
+      attributes: { href: resolveDestination("index.html"), "aria-label": "Accueil principal de NovyLand" }
    });
    const logo = createElement("img", {
       className: "novy-header__logo",
