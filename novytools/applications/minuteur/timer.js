@@ -18,6 +18,35 @@ export function formatElapsedTime(elapsedMilliseconds) {
 }
 
 /**
+ * Formate une durée en millisecondes dans un langage lisible.
+ * Exemples : 32 s, 8 min 08 s, 1 h 07 min 28 s.
+ *
+ * @param {number} elapsedMilliseconds
+ * @returns {string}
+ */
+export function formatReadableDuration(elapsedMilliseconds) {
+   const numericMilliseconds = Number(elapsedMilliseconds);
+   if (!Number.isFinite(numericMilliseconds) || numericMilliseconds < 0) {
+      return 'Non disponible';
+   }
+
+   const totalSeconds = Math.floor(numericMilliseconds / 1000);
+   const hours = Math.floor(totalSeconds / 3600);
+   const minutes = Math.floor((totalSeconds % 3600) / 60);
+   const seconds = totalSeconds % 60;
+
+   if (hours > 0) {
+      return `${hours} h ${String(minutes).padStart(2, '0')} min ${String(seconds).padStart(2, '0')} s`;
+   }
+
+   if (minutes > 0) {
+      return `${minutes} min ${String(seconds).padStart(2, '0')} s`;
+   }
+
+   return `${seconds} s`;
+}
+
+/**
  * Minuteur générique basé sur des horodatages haute précision.
  * La boucle d'affichage ne sert qu'à notifier le consommateur.
  */

@@ -1,7 +1,9 @@
 import { GameSession, STEP_STATUS } from './gameSession.js';
-import { Timer, formatElapsedTime } from './timer.js';
+import { Timer, formatElapsedTime, formatReadableDuration } from './timer.js';
 
 const NEUTRAL_TIME_TEXT = 'Non disponible';
+const COPY_BUTTON_DEFAULT_TEXT = 'Copier le rapport';
+const COPY_FEEDBACK_DURATION = 2000;
 
 function initializeApplication() {
    updateCurrentYear();
@@ -15,7 +17,9 @@ function initializeApplication() {
       session: new GameSession(),
       timer: createTimer(elements),
       isProcessingAction: false,
-      isResetting: false
+      isResetting: false,
+      isCopying: false,
+      copyFeedbackTimeoutId: null
    };
 
    renderApplication(state.session, elements);
@@ -39,6 +43,10 @@ function initializeApplication() {
       } finally {
          state.isProcessingAction = state.session.isFinished();
       }
+   });
+
+   elements.copyReportButton.addEventListener('click', async () => {
+      await copySessionReport(state, elements);
    });
 
    elements.newGameButton.addEventListener('click', () => {
@@ -66,6 +74,8 @@ function getInterfaceElements() {
       timerDisplay: document.querySelector('#timer-display'),
       startButton: document.querySelector('#session-start'),
       nextStepButton: document.querySelector('#session-next-step'),
+      copyReportButton: document.querySelector('#report-copy'),
+      copyReportStatus: document.querySelector('#copy-report-status'),
       newGameButton: document.querySelector('#report-new-game'),
       stateMessage: document.querySelector('#session-state-message'),
       reportSessionStart: document.querySelector('#report-session-start'),
@@ -161,6 +171,136 @@ function finishSession(state, elements) {
    showReport(elements);
 }
 
+/** Génère une version texte autonome du rapport à partir des données brutes. */
+function generateSessionReportText(summary) {
+   const steps = Array.isArray(summary?.steps) ? summary.steps : [];
+   const lines = [
+      'RAPPORT DE SESSION',
+      'Partie terminée',
+      `Début de la session : ${formatLocalTime(summary?.startedAt)}`,
+      `Fin de la session : ${formatLocalTime(summary?.endedAt)}`,
+      `Durée totale : ${formatReadableDurationBetween(summary?.startedAt, summary?.endedAt)}`,
+      '',
+      'DÉTAIL DES ÉTAPES'
+   ];
+
+   const fixedStepCount = 4;
+   for (let index = 0; index < fixedStepCount; index += 1) {
+      const step = steps[index] ?? {};
+      const number = Number.isFinite(step.number) ? step.number : index + 1;
+      const name = typeof step.name === 'string' && step.name.trim()
+         ? step.name.trim()
+         : 'Étape non disponible';
+
+      lines.push(
+         `${number}. ${name}`,
+         `Début : ${formatLocalTime(step.startedAt)}`,
+         `Fin : ${formatLocalTime(step.endedAt)}`,
+         `Durée : ${formatReadableDurationBetween(step.startedAt, step.endedAt)}`
+      );
+
+      if (index < fixedStepCount - 1) lines.push('');
+   }
+
+   return lines.join('\n');
+}
+
+/** Copie le rapport avec l'API moderne, puis avec une méthode de secours. */
+async function copySessionReport(state, elements) {
+   if (!state.session.isFinished() || state.isCopying) return;
+
+   state.isCopying = true;
+   const reportText = generateSessionReportText(state.session.getSummary());
+   elements.copyReportButton.disabled = true;
+
+   let copied = false;
+   let modernClipboardError = null;
+
+   if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+      try {
+         await navigator.clipboard.writeText(reportText);
+         copied = true;
+      } catch (error) {
+         modernClipboardError = error;
+      }
+   }
+
+   if (!copied) {
+      copied = copyTextWithFallback(reportText);
+   }
+
+   if (!copied) {
+      console.error('Impossible de copier le rapport avec les méthodes disponibles.', modernClipboardError);
+   }
+
+   state.isCopying = false;
+   showCopyFeedback(state, elements, copied);
+}
+
+/** Copie de secours au moyen d'un textarea temporaire immédiatement nettoyé. */
+function copyTextWithFallback(text) {
+   const temporaryTextArea = document.createElement('textarea');
+   temporaryTextArea.value = text;
+   temporaryTextArea.setAttribute('readonly', '');
+   temporaryTextArea.setAttribute('aria-hidden', 'true');
+   temporaryTextArea.style.position = 'fixed';
+   temporaryTextArea.style.inset = '0 auto auto -9999px';
+   temporaryTextArea.style.width = '1px';
+   temporaryTextArea.style.height = '1px';
+   temporaryTextArea.style.opacity = '0';
+
+   document.body.appendChild(temporaryTextArea);
+
+   try {
+      temporaryTextArea.focus({ preventScroll: true });
+      temporaryTextArea.select();
+      temporaryTextArea.setSelectionRange(0, temporaryTextArea.value.length);
+      return document.execCommand('copy');
+   } catch (error) {
+      console.error('La méthode de copie de secours a échoué.', error);
+      return false;
+   } finally {
+      temporaryTextArea.remove();
+      elementsSafeFocus(document.querySelector('#report-copy'));
+   }
+}
+
+function elementsSafeFocus(element) {
+   if (element instanceof HTMLElement) element.focus({ preventScroll: true });
+}
+
+/** Centralise le retour visuel et empêche les délais concurrents. */
+function showCopyFeedback(state, elements, copied) {
+   if (state.copyFeedbackTimeoutId !== null) {
+      window.clearTimeout(state.copyFeedbackTimeoutId);
+   }
+
+   elements.copyReportButton.disabled = false;
+   elements.copyReportButton.textContent = copied ? 'Rapport copié ✓' : 'Copie impossible';
+   elements.copyReportButton.classList.toggle('report-copy-button--success', copied);
+   elements.copyReportButton.classList.toggle('report-copy-button--error', !copied);
+   elements.copyReportStatus.textContent = copied
+      ? 'Le rapport a été copié dans le presse-papiers.'
+      : 'La copie du rapport est impossible.';
+
+   state.copyFeedbackTimeoutId = window.setTimeout(() => {
+      resetCopyButtonState(state, elements);
+   }, COPY_FEEDBACK_DURATION);
+}
+
+function resetCopyButtonState(state, elements) {
+   if (state.copyFeedbackTimeoutId !== null) {
+      window.clearTimeout(state.copyFeedbackTimeoutId);
+      state.copyFeedbackTimeoutId = null;
+   }
+
+   state.isCopying = false;
+   elements.copyReportButton.textContent = COPY_BUTTON_DEFAULT_TEXT;
+   elements.copyReportButton.disabled = false;
+   elements.copyReportButton.classList.remove('report-copy-button--success', 'report-copy-button--error');
+   elements.copyReportStatus.textContent = '';
+}
+
 /**
  * Réinitialise complètement l'application afin de permettre le démarrage
  * d'une nouvelle partie sans recharger la page. Idempotente : un appel alors
@@ -175,6 +315,7 @@ function resetApplication(state, elements) {
 
    state.isResetting = true;
    elements.newGameButton.disabled = true;
+   resetCopyButtonState(state, elements);
 
    // Arrête définitivement l'ancien minuteur avant toute autre opération,
    // pour empêcher qu'il ne mette encore à jour l'interface.
@@ -263,6 +404,7 @@ function createReportRow(step) {
 }
 
 function showReport(elements) {
+   elements.copyReportButton.hidden = false;
    elements.sessionView.classList.add('view-is-leaving');
    elements.appIntro.classList.add('view-is-leaving');
 
@@ -420,6 +562,15 @@ function formatDurationBetween(startDate, endDate) {
    if (durationSeconds < 0) return NEUTRAL_TIME_TEXT;
 
    return formatElapsedTime(durationSeconds * 1000);
+}
+
+function formatReadableDurationBetween(startDate, endDate) {
+   if (!isValidDate(startDate) || !isValidDate(endDate)) return NEUTRAL_TIME_TEXT;
+
+   const durationSeconds = toEpochSeconds(endDate) - toEpochSeconds(startDate);
+   if (durationSeconds < 0) return NEUTRAL_TIME_TEXT;
+
+   return formatReadableDuration(durationSeconds * 1000);
 }
 
 initializeApplication();

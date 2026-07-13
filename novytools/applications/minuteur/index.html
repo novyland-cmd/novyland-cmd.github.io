@@ -100,8 +100,10 @@
 </div>
 </div>
 <div class="report-actions" id="report-actions">
-<button class="timer-button timer-button-primary report-new-game-button" id="report-new-game" type="button">Nouvelle partie</button>
+<button aria-describedby="copy-report-status" class="timer-button timer-button-secondary report-action-button report-copy-button" id="report-copy" type="button">Copier le rapport</button>
+<button class="timer-button timer-button-primary report-action-button report-new-game-button" id="report-new-game" type="button">Nouvelle partie</button>
 </div>
+<p aria-live="polite" class="visually-hidden" id="copy-report-status" role="status"></p>
 <a class="button-link report-back-link" href="../../index.html">Retour à NovyTools</a>
 </section>
 </main>
