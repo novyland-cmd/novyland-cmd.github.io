@@ -15,13 +15,13 @@
 <div data-brand="NovyTools" data-context="novytools" data-page="timer" data-site-navigation="" data-subtitle="Minuteur de jeu"><a class="novy-nav-fallback" href="../../../index.html">Accueil NovyLand</a></div>
 <div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-top" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div>
 <main class="page-main">
-<section aria-labelledby="app-title" class="app-intro">
+<section aria-labelledby="app-title" class="app-intro" id="app-intro">
 <p class="eyebrow">Outil de mesure NovyTools</p>
 <h1 id="app-title">Minuteur de jeu</h1>
 <p class="app-subtitle">Mesurez la durée d’une activité de jeu, de la mise en place jusqu’au calcul des points.</p>
 </section>
 
-<div class="session-layout">
+<div class="session-layout" id="session-view">
 <section aria-labelledby="session-title" class="session-card">
 <div class="section-heading">
 <p class="eyebrow">Parcours de la partie</p>
@@ -57,6 +57,50 @@
 <a class="button-link" href="../../index.html">Retour à NovyTools</a>
 </section>
 </div>
+
+<section aria-labelledby="report-title" class="report-view" hidden id="report-view">
+<div class="report-header-card">
+<div class="report-title-group">
+<span class="report-success-icon" aria-hidden="true">✓</span>
+<div>
+<p class="eyebrow">Rapport de session</p>
+<h1 id="report-title" tabindex="-1">Partie terminée</h1>
+<p>Voici le résumé de votre session.</p>
+</div>
+</div>
+<div class="report-summary-grid">
+<div class="report-summary-item">
+<span>Début de la session</span>
+<strong id="report-session-start">Non disponible</strong>
+</div>
+<div class="report-summary-item">
+<span>Fin de la session</span>
+<strong id="report-session-end">Non disponible</strong>
+</div>
+<div class="report-summary-item report-summary-item--total">
+<span>Durée totale</span>
+<strong id="report-total-duration">Non disponible</strong>
+</div>
+</div>
+</div>
+
+<div class="report-details-card">
+<h2>Détail des étapes</h2>
+<div class="report-table-wrapper">
+<table class="report-table">
+<caption class="visually-hidden">Heures de début, heures de fin et durées des étapes de la partie</caption>
+<thead>
+<tr><th scope="col">Étape</th><th scope="col">Début</th><th scope="col">Fin</th><th scope="col">Durée</th></tr>
+</thead>
+<tbody id="report-steps"></tbody>
+<tfoot>
+<tr><th scope="row">Total</th><td id="report-total-start">Non disponible</td><td id="report-total-end">Non disponible</td><td id="report-table-total-duration">Non disponible</td></tr>
+</tfoot>
+</table>
+</div>
+</div>
+<a class="button-link report-back-link" href="../../index.html">Retour à NovyTools</a>
+</section>
 </main>
 <div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-bottom" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div>
 <footer class="site-footer">

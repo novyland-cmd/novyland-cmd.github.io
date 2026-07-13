@@ -59,14 +59,22 @@ export class GameSession {
       this.steps = steps.map(createSessionStep);
       this.currentStepIndex = 0;
       this.started = false;
+      this.finished = false;
       this.startedAt = null;
+      this.endedAt = null;
+      this.durationMilliseconds = null;
    }
 
    isStarted() {
       return this.started;
    }
 
+   isFinished() {
+      return this.finished;
+   }
+
    getCurrentStep() {
+      if (this.finished) return null;
       return this.steps[this.currentStepIndex] ?? null;
    }
 
@@ -74,8 +82,19 @@ export class GameSession {
       return this.steps.map(cloneStep);
    }
 
+   getSummary() {
+      return {
+         started: this.started,
+         finished: this.finished,
+         startedAt: cloneDate(this.startedAt),
+         endedAt: cloneDate(this.endedAt),
+         durationMilliseconds: this.durationMilliseconds,
+         steps: this.getSteps()
+      };
+   }
+
    hasNextStep() {
-      return this.started && this.currentStepIndex < this.steps.length - 1;
+      return this.started && !this.finished && this.currentStepIndex < this.steps.length - 1;
    }
 
    /**
@@ -84,9 +103,7 @@ export class GameSession {
     * @returns {object|null}
     */
    start(startedAt = new Date()) {
-      if (this.started || this.isFinished()) {
-         return null;
-      }
+      if (this.started || this.finished) return null;
 
       const validDate = isValidDate(startedAt)
          ? new Date(startedAt.getTime())
@@ -104,8 +121,6 @@ export class GameSession {
 
    /**
     * Termine l'étape actuelle et démarre la suivante au même instant.
-    * Toutes les validations sont effectuées avant de modifier la session.
-    *
     * @param {Date} transitionAt Heure unique de la transition.
     * @returns {{completedStep: object, currentStep: object}|null}
     */
@@ -115,6 +130,7 @@ export class GameSession {
 
       if (
          !this.started
+         || this.finished
          || !currentStep
          || !nextStep
          || currentStep.status !== STEP_STATUS.CURRENT
@@ -135,7 +151,6 @@ export class GameSession {
       }
 
       const transitionTimestamp = validTransition.getTime();
-
       currentStep.endedAt = new Date(transitionTimestamp);
       currentStep.durationMilliseconds = transitionTimestamp - currentStep.startedAt.getTime();
       currentStep.status = STEP_STATUS.COMPLETED;
@@ -152,7 +167,42 @@ export class GameSession {
       };
    }
 
-   isFinished() {
-      return this.currentStepIndex >= this.steps.length;
+   /**
+    * Termine la dernière étape et la session avec un horodatage unique.
+    * L'opération est idempotente.
+    * @param {Date} endedAt
+    * @returns {object|null}
+    */
+   finish(endedAt = new Date()) {
+      const currentStep = this.getCurrentStep();
+      const isLastStep = this.currentStepIndex === this.steps.length - 1;
+
+      if (
+         !this.started
+         || this.finished
+         || !isLastStep
+         || !currentStep
+         || currentStep.status !== STEP_STATUS.CURRENT
+         || !isValidDate(this.startedAt)
+         || !isValidDate(currentStep.startedAt)
+         || isValidDate(currentStep.endedAt)
+         || currentStep.durationMilliseconds !== null
+      ) {
+         return null;
+      }
+
+      const validEnd = isValidDate(endedAt) ? new Date(endedAt.getTime()) : null;
+      if (!validEnd || validEnd.getTime() < currentStep.startedAt.getTime()) return null;
+
+      const endTimestamp = validEnd.getTime();
+      currentStep.endedAt = new Date(endTimestamp);
+      currentStep.durationMilliseconds = endTimestamp - currentStep.startedAt.getTime();
+      currentStep.status = STEP_STATUS.COMPLETED;
+
+      this.endedAt = new Date(endTimestamp);
+      this.durationMilliseconds = Math.max(0, endTimestamp - this.startedAt.getTime());
+      this.finished = true;
+
+      return this.getSummary();
    }
 }
