@@ -50,7 +50,10 @@
 </div>
 
 <p class="session-state-message" id="session-state-message">La session commencera lorsque vous appuierez sur le bouton.</p>
-<button class="timer-button timer-button-primary session-start-button" id="session-start" type="button">Démarrer la partie</button>
+<div class="session-action-area">
+<button class="timer-button timer-button-primary session-action-button" id="session-start" type="button">Démarrer la partie</button>
+<button aria-describedby="session-state-message" class="timer-button timer-button-primary session-action-button" disabled hidden id="session-next-step" type="button">Étape suivante</button>
+</div>
 <a class="button-link" href="../../index.html">Retour à NovyTools</a>
 </section>
 </div>

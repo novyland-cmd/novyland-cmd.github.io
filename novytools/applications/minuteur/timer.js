@@ -56,14 +56,24 @@ export class Timer {
       return this.elapsedBeforeStart + (this.now() - this.startedAt);
    }
 
-   /** Démarre le minuteur ou reprend après une pause. */
-   start() {
+   /**
+    * Démarre le minuteur ou reprend après une pause.
+    * Une durée initiale peut être fournie pour repartir d'un horodatage réel.
+    *
+    * @param {number} [initialElapsedMilliseconds]
+    */
+   start(initialElapsedMilliseconds) {
       if (this.isRunning) {
          return;
       }
 
+      if (Number.isFinite(initialElapsedMilliseconds)) {
+         this.elapsedBeforeStart = Math.max(0, initialElapsedMilliseconds);
+      }
+
       this.isRunning = true;
       this.startedAt = this.now();
+      this.notify();
       this.animationFrameId = requestAnimationFrame(this.runLoop);
    }
 

@@ -19,6 +19,11 @@ function initializeApplication() {
 
    elements.startButton.addEventListener('click', () => {
       startSession(session, timer, elements);
+   }, { once: true });
+
+   // Le comportement de progression sera branché ici à l'étape suivante.
+   elements.nextStepButton.addEventListener('click', () => {
+      // Intentionnellement sans transition dans cette version.
    });
 
    window.addEventListener('pagehide', () => timer.destroy(), { once: true });
@@ -37,6 +42,7 @@ function getInterfaceElements() {
       startTime: document.querySelector('#step-start-time'),
       timerDisplay: document.querySelector('#timer-display'),
       startButton: document.querySelector('#session-start'),
+      nextStepButton: document.querySelector('#session-next-step'),
       stateMessage: document.querySelector('#session-state-message')
    };
 
@@ -49,10 +55,9 @@ function getInterfaceElements() {
 }
 
 function startSession(session, timer, elements) {
-   if (session.isStarted()) return;
+   if (session.isStarted() || elements.startButton.disabled) return;
 
-   // Le verrou visuel est posé avant toute autre opération pour neutraliser
-   // les doubles clics rapides.
+   // Le verrou visuel est posé immédiatement afin de neutraliser les doubles clics.
    elements.startButton.disabled = true;
 
    const startedStep = session.start(new Date());
@@ -63,7 +68,10 @@ function startSession(session, timer, elements) {
    }
 
    renderApplication(session, elements);
-   timer.start();
+
+   // Le minuteur repart de l'heure réelle enregistrée pour l'étape.
+   const elapsedSinceStepStart = Date.now() - startedStep.startedAt.getTime();
+   timer.start(elapsedSinceStepStart);
 }
 
 function renderApplication(session, elements) {
@@ -83,12 +91,15 @@ function renderApplication(session, elements) {
       elements.stateMessage.textContent = 'La session commencera lorsque vous appuierez sur le bouton.';
       elements.startButton.hidden = false;
       elements.startButton.disabled = false;
+      elements.nextStepButton.hidden = true;
       return;
    }
 
    elements.startTime.textContent = formatLocalTime(currentStep.startedAt);
    elements.stateMessage.textContent = `${currentStep.name} est en cours.`;
    elements.startButton.hidden = true;
+   elements.nextStepButton.hidden = false;
+   elements.nextStepButton.disabled = true;
 }
 
 function createStepElement(step, isSessionStarted) {
