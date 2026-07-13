@@ -21,9 +21,12 @@ const NAVIGATION_SECTIONS = [
    {
       title: "Informations",
       items: [
-         { id: "about", label: "À propos", path: "novytools/pages/about.html" },
-         { id: "privacy", label: "Politique de confidentialité", path: "novytools/pages/privacy.html" },
-         { id: "legal", label: "Mentions légales", path: "novytools/pages/legal.html" }
+         { id: "about-games", label: "À propos de NovyLand Games", path: "jeux/about.html" },
+         { id: "about-tools", label: "À propos de NovyTools", path: "novytools/pages/about.html" },
+         { id: "about-first-player", label: "À propos de Premier Joueur", path: "novytools/applications/premier-joueur/about.html" },
+         { id: "about-timer", label: "À propos du Minuteur", path: "novytools/applications/minuteur/about.html" },
+         { id: "privacy", label: "Politique de confidentialité", path: "pages/privacy.html" },
+         { id: "legal", label: "Mentions légales", path: "pages/legal.html" }
       ]
    }
 ];

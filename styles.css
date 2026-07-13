@@ -46,3 +46,26 @@
     padding-bottom: 1rem;
   }
 }
+/* Pages informatives communes */
+.info-card.reading-width {
+  margin-inline: auto;
+}
+
+.info-card > h1 {
+  margin: 0 0 .75rem;
+  color: var(--color-primary);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.08;
+}
+
+.page-introduction {
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+  font-size: clamp(1.02rem, 2vw, 1.15rem);
+}
+
+.legal-update {
+  margin-top: 1.75rem;
+  color: var(--color-text-muted);
+  font-size: .92rem;
+}
