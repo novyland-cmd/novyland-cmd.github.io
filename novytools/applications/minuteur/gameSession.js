@@ -25,8 +25,24 @@ function createSessionStep(step, index) {
       status: STEP_STATUS.UPCOMING,
       startedAt: null,
       endedAt: null,
-      durationMilliseconds: 0,
+      durationMilliseconds: null,
       comment: ''
+   };
+}
+
+function isValidDate(value) {
+   return value instanceof Date && !Number.isNaN(value.getTime());
+}
+
+function cloneDate(value) {
+   return isValidDate(value) ? new Date(value.getTime()) : null;
+}
+
+function cloneStep(step) {
+   return {
+      ...step,
+      startedAt: cloneDate(step.startedAt),
+      endedAt: cloneDate(step.endedAt)
    };
 }
 
@@ -55,7 +71,11 @@ export class GameSession {
    }
 
    getSteps() {
-      return this.steps.map((step) => ({ ...step }));
+      return this.steps.map(cloneStep);
+   }
+
+   hasNextStep() {
+      return this.started && this.currentStepIndex < this.steps.length - 1;
    }
 
    /**
@@ -68,7 +88,7 @@ export class GameSession {
          return null;
       }
 
-      const validDate = startedAt instanceof Date && !Number.isNaN(startedAt.getTime())
+      const validDate = isValidDate(startedAt)
          ? new Date(startedAt.getTime())
          : new Date();
 
@@ -79,26 +99,57 @@ export class GameSession {
       currentStep.status = STEP_STATUS.CURRENT;
       currentStep.startedAt = validDate;
 
-      return { ...currentStep };
+      return cloneStep(currentStep);
    }
 
    /**
-    * Prépare la future progression séquentielle. Cette méthode n'est pas
-    * encore reliée à l'interface dans la présente version.
+    * Termine l'étape actuelle et démarre la suivante au même instant.
+    * Toutes les validations sont effectuées avant de modifier la session.
+    *
+    * @param {Date} transitionAt Heure unique de la transition.
+    * @returns {{completedStep: object, currentStep: object}|null}
     */
-   moveToNextStep() {
-      if (!this.started || this.isFinished()) {
+   completeCurrentStepAndStartNext(transitionAt = new Date()) {
+      const currentStep = this.getCurrentStep();
+      const nextStep = this.steps[this.currentStepIndex + 1] ?? null;
+
+      if (
+         !this.started
+         || !currentStep
+         || !nextStep
+         || currentStep.status !== STEP_STATUS.CURRENT
+         || !isValidDate(currentStep.startedAt)
+         || isValidDate(currentStep.endedAt)
+         || currentStep.durationMilliseconds !== null
+         || nextStep.status !== STEP_STATUS.UPCOMING
+      ) {
          return null;
       }
 
-      const currentStep = this.getCurrentStep();
-      if (currentStep) currentStep.status = STEP_STATUS.COMPLETED;
+      const validTransition = isValidDate(transitionAt)
+         ? new Date(transitionAt.getTime())
+         : null;
+
+      if (!validTransition || validTransition.getTime() < currentStep.startedAt.getTime()) {
+         return null;
+      }
+
+      const transitionTimestamp = validTransition.getTime();
+
+      currentStep.endedAt = new Date(transitionTimestamp);
+      currentStep.durationMilliseconds = transitionTimestamp - currentStep.startedAt.getTime();
+      currentStep.status = STEP_STATUS.COMPLETED;
 
       this.currentStepIndex += 1;
-      const nextStep = this.getCurrentStep();
-      if (nextStep) nextStep.status = STEP_STATUS.CURRENT;
+      nextStep.startedAt = new Date(transitionTimestamp);
+      nextStep.endedAt = null;
+      nextStep.durationMilliseconds = null;
+      nextStep.status = STEP_STATUS.CURRENT;
 
-      return nextStep ? { ...nextStep } : null;
+      return {
+         completedStep: cloneStep(currentStep),
+         currentStep: cloneStep(nextStep)
+      };
    }
 
    isFinished() {

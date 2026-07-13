@@ -15,15 +15,25 @@ function initializeApplication() {
       }
    });
 
+   let isTransitioning = false;
+
    renderApplication(session, elements);
 
    elements.startButton.addEventListener('click', () => {
       startSession(session, timer, elements);
    }, { once: true });
 
-   // Le comportement de progression sera branché ici à l'étape suivante.
    elements.nextStepButton.addEventListener('click', () => {
-      // Intentionnellement sans transition dans cette version.
+      if (isTransitioning) return;
+
+      isTransitioning = true;
+      elements.nextStepButton.disabled = true;
+
+      try {
+         moveToNextStep(session, timer, elements);
+      } finally {
+         isTransitioning = false;
+      }
    });
 
    window.addEventListener('pagehide', () => timer.destroy(), { once: true });
@@ -57,7 +67,6 @@ function getInterfaceElements() {
 function startSession(session, timer, elements) {
    if (session.isStarted() || elements.startButton.disabled) return;
 
-   // Le verrou visuel est posé immédiatement afin de neutraliser les doubles clics.
    elements.startButton.disabled = true;
 
    const startedStep = session.start(new Date());
@@ -69,9 +78,36 @@ function startSession(session, timer, elements) {
 
    renderApplication(session, elements);
 
-   // Le minuteur repart de l'heure réelle enregistrée pour l'étape.
    const elapsedSinceStepStart = Date.now() - startedStep.startedAt.getTime();
    timer.start(elapsedSinceStepStart);
+}
+
+/**
+ * Termine l'étape active et démarre la suivante avec un horodatage unique.
+ */
+function moveToNextStep(session, timer, elements) {
+   if (!session.isStarted() || !session.hasNextStep()) {
+      renderApplication(session, elements);
+      return;
+   }
+
+   // Cet instant unique ferme l'étape actuelle et ouvre la suivante.
+   const transitionAt = new Date();
+   const transition = session.completeCurrentStepAndStartNext(transitionAt);
+
+   if (!transition) {
+      elements.stateMessage.textContent = 'Le passage à l’étape suivante est momentanément impossible.';
+      renderApplication(session, elements);
+      return;
+   }
+
+   // Une seule boucle de minuteur est conservée. reset() annule l'ancienne
+   // référence, affiche zéro, puis start() repart du nouvel horodatage réel.
+   timer.reset();
+   renderApplication(session, elements);
+
+   const elapsedSinceTransition = Date.now() - transition.currentStep.startedAt.getTime();
+   timer.start(elapsedSinceTransition);
 }
 
 function renderApplication(session, elements) {
@@ -99,7 +135,16 @@ function renderApplication(session, elements) {
    elements.stateMessage.textContent = `${currentStep.name} est en cours.`;
    elements.startButton.hidden = true;
    elements.nextStepButton.hidden = false;
-   elements.nextStepButton.disabled = true;
+
+   const hasNextStep = session.hasNextStep();
+   elements.nextStepButton.textContent = hasNextStep ? 'Étape suivante' : 'Terminer la partie';
+   elements.nextStepButton.disabled = !hasNextStep;
+   elements.nextStepButton.setAttribute(
+      'aria-label',
+      hasNextStep
+         ? `Terminer ${currentStep.name} et démarrer l’étape suivante`
+         : 'La fin de partie sera disponible dans une prochaine étape'
+   );
 }
 
 function createStepElement(step, isSessionStarted) {
@@ -114,7 +159,7 @@ function createStepElement(step, isSessionStarted) {
    const marker = document.createElement('span');
    marker.className = 'session-step-marker';
    marker.setAttribute('aria-hidden', 'true');
-   marker.textContent = String(step.number);
+   marker.textContent = step.status === STEP_STATUS.COMPLETED ? '✓' : String(step.number);
 
    const content = document.createElement('div');
    content.className = 'session-step-content';
