@@ -459,7 +459,7 @@
   margin-bottom: 1.5rem;
 }
 
-.report-title-group h1 {
+.report-title-group h2 {
   margin: .1rem 0 .3rem;
   color: var(--color-text);
   font-size: clamp(1.8rem, 4vw, 2.5rem);

@@ -1,0 +1,23 @@
+{
+  "name": "NovyLand",
+  "short_name": "NovyLand",
+  "description": "Jeux de société, prototypes et outils web pour joueurs.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#f4efe2",
+  "theme_color": "#27342d",
+  "lang": "fr-CA",
+  "icons": [
+    {
+      "src": "/assets/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

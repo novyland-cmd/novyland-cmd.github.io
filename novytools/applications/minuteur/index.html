@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 
-<html lang="fr">
+<html lang="fr-CA">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Minuteur de jeu NovyTools pour mesurer simplement la durée d'une activité pendant une partie de jeu de société." name="description"/>
-<title>Minuteur de jeu – NovyTools</title>
+<meta charset="UTF-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/><title>Minuteur de jeu | Mesurer chaque étape d’une partie</title><meta content="Mesurez la mise en place, l’explication, la partie et le calcul des points, puis obtenez un rapport complet de votre session." name="description"/><meta content="index, follow, max-image-preview:large" name="robots"/><link href="https://novyland.ca/novytools/applications/minuteur/" rel="canonical"/><meta content="website" property="og:type"/><meta content="fr_CA" property="og:locale"/><meta content="NovyLand" property="og:site_name"/><meta content="Minuteur de jeu" property="og:title"/><meta content="Mesurez la mise en place, l’explication, la partie et le calcul des points, puis obtenez un rapport complet de votre session." property="og:description"/><meta content="https://novyland.ca/novytools/applications/minuteur/" property="og:url"/><meta content="https://novyland.ca/assets/brand/og-novyland.jpg" property="og:image"/><meta content="Identité visuelle de NovyLand, jeux de société et outils ludiques" property="og:image:alt"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="summary_large_image" name="twitter:card"/><meta content="Minuteur de jeu" name="twitter:title"/><meta content="Mesurez la mise en place, l’explication, la partie et le calcul des points, puis obtenez un rapport complet de votre session." name="twitter:description"/><meta content="https://novyland.ca/assets/brand/og-novyland.jpg" name="twitter:image"/><meta content="Identité visuelle de NovyLand, jeux de société et outils ludiques" name="twitter:image:alt"/><link href="/favicon.ico" rel="icon" type="image/x-icon"/><link href="/assets/brand/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="/assets/brand/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/assets/brand/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link href="/site.webmanifest" rel="manifest"/><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Minuteur de jeu",
+  "description": "Mesurez la mise en place, l’explication, la partie et le calcul des points, puis obtenez un rapport complet de votre session.",
+  "url": "https://novyland.ca/novytools/applications/minuteur/",
+  "inLanguage": "fr-CA",
+  "applicationCategory": "GameApplication",
+  "operatingSystem": "Navigateur web",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "CAD"
+  }
+}
+</script>
+
+
 <link href="../../../assets/css/theme.css" rel="stylesheet"/>
 <link href="../../../assets/css/advertising.css" rel="stylesheet"/>
 <link href="styles.css" rel="stylesheet"/>
@@ -54,7 +71,6 @@
 <button class="timer-button timer-button-primary session-action-button" id="session-start" type="button">Démarrer la partie</button>
 <button aria-describedby="session-state-message" class="timer-button timer-button-primary session-action-button" disabled="" hidden="" id="session-next-step" type="button">Étape suivante</button>
 </div>
-
 </section>
 </div>
 <section aria-labelledby="report-title" class="report-view" hidden="" id="report-view">
@@ -63,7 +79,7 @@
 <span aria-hidden="true" class="report-success-icon">✓</span>
 <div>
 <p class="eyebrow">Rapport de session</p>
-<h1 id="report-title" tabindex="-1">Partie terminée</h1>
+<h2 id="report-title" tabindex="-1">Partie terminée</h2>
 <p>Voici le résumé de votre session.</p>
 </div>
 </div>
@@ -113,28 +129,27 @@
 <button class="timer-button timer-button-primary report-action-button report-new-game-button" id="report-new-game" type="button">Nouvelle partie</button>
 </div>
 <p aria-live="polite" class="visually-hidden" id="copy-report-status" role="status"></p>
-
 </section>
 </main>
 <div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-bottom" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div>
 <footer class="site-footer">
-  <div class="site-footer-section">
-    <p class="site-footer-title">Explorer NovyLand</p>
-    <nav class="site-footer-links" aria-label="Explorer NovyLand">
-      <a href="../../../index.html">Accueil</a>
-      <a href="../../../jeux/index.html">NovyLand Games</a>
-      <a href="../../../novytools/index.html">NovyTools</a>
-    </nav>
-  </div>
-  <div class="site-footer-section">
-    <p class="site-footer-title">Documentation et informations</p>
-    <nav class="site-footer-links" aria-label="Documentation et informations">
-      <a href="about.html">À propos</a>
-      <a href="../../../pages/privacy.html">Politique de confidentialité</a>
-      <a href="../../../pages/legal.html">Mentions légales</a>
-    </nav>
-  </div>
-  <p class="site-footer-copyright">© NovyLand – Projet en développement</p>
+<div class="site-footer-section">
+<p class="site-footer-title">Explorer NovyLand</p>
+<nav aria-label="Explorer NovyLand" class="site-footer-links">
+<a href="../../../index.html">Accueil</a>
+<a href="../../../jeux/index.html">NovyLand Games</a>
+<a href="../../../novytools/index.html">NovyTools</a>
+</nav>
+</div>
+<div class="site-footer-section">
+<p class="site-footer-title">Documentation et informations</p>
+<nav aria-label="Documentation et informations" class="site-footer-links">
+<a href="about.html">À propos</a>
+<a href="../../../pages/privacy.html">Politique de confidentialité</a>
+<a href="../../../pages/legal.html">Mentions légales</a>
+</nav>
+</div>
+<p class="site-footer-copyright">© 2024-2026 NovyLand – Projet en développement</p>
 </footer>
 <script src="../../../assets/js/navigation.js" type="module"></script>
 </body>
