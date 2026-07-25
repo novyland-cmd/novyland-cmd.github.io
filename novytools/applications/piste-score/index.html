@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Configuration de la partie | Piste de score | NovyTools</title>
+  <meta name="description" content="Configurez de 1 à 6 joueurs avant de démarrer une partie sur la piste de score numérique de NovyTools.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://novyland.ca/novytools/applications/piste-score/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_CA">
+  <meta property="og:site_name" content="NovyLand">
+  <meta property="og:title" content="Piste de score | NovyTools">
+  <meta property="og:description" content="Configurez les joueurs puis préparez votre prochaine partie sur une piste de score numérique.">
+  <meta property="og:url" content="https://novyland.ca/novytools/applications/piste-score/">
+  <meta property="og:image" content="https://novyland.ca/assets/brand/og-novyland.jpg">
+  <meta property="og:image:alt" content="Identité visuelle de NovyLand, jeux de société et outils ludiques">
+
+  <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../../../assets/brand/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../../../assets/brand/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="../../../assets/brand/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="../../../site.webmanifest">
+
+  <link rel="stylesheet" href="../../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../../assets/css/advertising.css">
+  <link rel="stylesheet" href="../../../assets/css/navigation.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div
+    data-brand="NovyTools"
+    data-context="novytools"
+    data-page="score"
+    data-site-navigation
+    data-subtitle="Piste de score"
+  >
+    <a class="novy-nav-fallback" href="../../../index.html">Accueil NovyLand</a>
+  </div>
+
+  <div
+    class="ad-container ad-container--horizontal"
+    data-ad-enabled="true"
+    data-ad-slot="page-top"
+    data-ad-status="placeholder"
+    aria-label="Emplacement publicitaire"
+    role="complementary"
+  >
+    <span class="ad-placeholder-label">Espace publicitaire</span>
+  </div>
+
+  <main class="page-main score-app" id="main-content">
+    <section class="app-intro" aria-labelledby="app-title">
+      <p class="eyebrow">Piste de score NovyTools</p>
+      <h1 id="app-title">Configuration de la partie</h1>
+      <p id="app-subtitle" class="app-subtitle">
+        Préparez les joueurs, leur jeton et leur ordre de jeu avant de démarrer la partie.
+      </p>
+    </section>
+
+    <div class="score-app-layout">
+      <section id="player-configuration" class="content-card configuration-panel" aria-labelledby="configuration-title">
+        <header class="configuration-heading">
+          <div>
+            <p class="eyebrow">Nouvelle partie</p>
+            <h2 id="configuration-title">Sélection des joueurs</h2>
+          </div>
+
+          <div class="player-count-field">
+            <label for="player-count">Nombre de joueurs</label>
+            <select id="player-count" name="player-count" aria-describedby="player-count-help">
+              <option value="1">1 joueur</option>
+              <option value="2" selected>2 joueurs</option>
+              <option value="3">3 joueurs</option>
+              <option value="4">4 joueurs</option>
+              <option value="5">5 joueurs</option>
+              <option value="6">6 joueurs</option>
+            </select>
+            <small id="player-count-help">Choisissez entre 1 et 6 joueurs.</small>
+          </div>
+        </header>
+
+        <div id="players-list" class="players-list" aria-live="polite"></div>
+
+        <div class="configuration-actions">
+          <p id="configuration-status" class="configuration-status" role="status" aria-live="polite">
+            Complétez les informations obligatoires pour démarrer la partie.
+          </p>
+          <button id="start-game-button" class="button button--primary start-game-button" type="button" disabled>
+            Démarrer la partie
+          </button>
+        </div>
+      </section>
+
+      <section id="game-screen" class="game-screen" aria-labelledby="game-title" hidden>
+        <div class="content-card game-panel">
+          <header class="game-heading">
+            <div>
+              <p class="eyebrow">Partie en cours</p>
+              <h2 id="game-title">Piste de score</h2>
+              <p class="game-heading-text">Tous les joueurs commencent sur la case Départ avec un score de 0.</p>
+            </div>
+            <button id="new-game-button" class="button button--secondary" type="button">Nouvelle partie</button>
+          </header>
+
+          <section id="score-summary" class="score-summary" aria-labelledby="players-summary-title">
+            <h3 id="players-summary-title">Joueurs</h3>
+            <div id="game-players-list" class="game-players-list"></div>
+          </section>
+
+          <section id="game-information" class="active-player-panel" aria-labelledby="active-player-panel-label">
+            <div class="active-player-panel__identity">
+              <p id="active-player-panel-label" class="active-player-panel__label">Joueur actif</p>
+              <div class="active-player-summary">
+                <span id="active-player-token" class="player-token active-player-token" aria-hidden="true">?</span>
+                <div>
+                  <h3 id="active-player-title">Aucun joueur actif</h3>
+                  <p id="active-player-order">Ordre de jeu non défini</p>
+                </div>
+              </div>
+            </div>
+
+            <dl class="active-player-stats" aria-label="Informations du joueur actif">
+              <div class="active-player-stat active-player-stat--score">
+                <dt>Score</dt>
+                <dd id="active-player-score">0</dd>
+              </div>
+              <div class="active-player-stat">
+                <dt>Position</dt>
+                <dd id="active-player-position">Départ</dd>
+              </div>
+              <div class="active-player-stat">
+                <dt>Palier</dt>
+                <dd id="active-player-milestone">Départ</dd>
+              </div>
+            </dl>
+
+            <div class="active-player-controls" aria-label="Contrôles du score">
+              <div class="score-stepper">
+                <button id="decrease-score-button" class="score-control-button" type="button" aria-label="Retirer 1 point">−</button>
+                <button id="increase-score-button" class="score-control-button" type="button" aria-label="Ajouter 1 point">+</button>
+              </div>
+              <button id="end-turn-button" class="button button--primary end-turn-button" type="button">Fin du tour</button>
+            </div>
+          </section>
+
+          <section class="score-track-section" aria-labelledby="score-track-title">
+            <div class="score-track-heading">
+              <div>
+                <p class="eyebrow">Parcours</p>
+                <h3 id="score-track-title">Piste de 50 cases</h3>
+              </div>
+              <p class="score-track-help">Départ et paliers de 50 points, puis cinq rangées de dix cases.</p>
+            </div>
+
+            <div
+              id="score-track"
+              class="score-track"
+              role="group"
+              aria-label="Piste de score comprenant une case Départ et 50 cases numérotées"
+            ></div>
+          </section>
+
+        </div>
+      </section>
+
+      <div id="app-notifications" class="app-notifications" role="status" aria-live="polite" hidden></div>
+    </div>
+  </main>
+
+  <dialog id="new-game-dialog" class="confirmation-dialog" aria-labelledby="new-game-dialog-title" aria-describedby="new-game-dialog-message">
+    <form method="dialog" class="confirmation-dialog-content">
+      <h2 id="new-game-dialog-title">Commencer une nouvelle partie ?</h2>
+      <p id="new-game-dialog-message">La partie actuelle sera perdue. Cette action ne peut pas être annulée.</p>
+      <div class="confirmation-dialog-actions">
+        <button id="cancel-new-game-button" class="button button--quiet" type="submit" value="cancel">Annuler</button>
+        <button id="confirm-new-game-button" class="button button--primary" type="submit" value="confirm">Nouvelle partie</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div
+    class="ad-container ad-container--horizontal"
+    data-ad-enabled="true"
+    data-ad-slot="page-bottom"
+    data-ad-status="placeholder"
+    aria-label="Emplacement publicitaire"
+    role="complementary"
+  >
+    <span class="ad-placeholder-label">Espace publicitaire</span>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-section">
+      <p class="site-footer-title">Explorer NovyLand</p>
+      <nav class="site-footer-links" aria-label="Explorer NovyLand">
+        <a href="../../../index.html">Accueil</a>
+        <a href="../../../jeux/index.html">NovyLand Games</a>
+        <a href="../../index.html">NovyTools</a>
+      </nav>
+    </div>
+
+    <div class="site-footer-section">
+      <p class="site-footer-title">Documentation et informations</p>
+      <nav class="site-footer-links" aria-label="Documentation et informations">
+        <a href="../../about.html">À propos</a>
+        <a href="../../../pages/privacy.html">Politique de confidentialité</a>
+        <a href="../../../pages/legal.html">Mentions légales</a>
+      </nav>
+    </div>
+
+    <p class="site-footer-copyright">© 2024-2026 NovyLand – Projet en développement</p>
+  </footer>
+
+  <script src="../../../assets/js/navigation.js" type="module"></script>
+</body>
+</html>

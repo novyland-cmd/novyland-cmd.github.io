@@ -20,3 +20,21 @@
     margin-top: .85rem;
   }
 }
+
+.score-card-icon {
+  width: 5rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  color: var(--color-primary-dark);
+  background: color-mix(in srgb, var(--color-accent) 45%, white);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-small);
+}
+
+.score-card-icon span {
+  font-size: 1.55rem;
+  font-weight: 850;
+  line-height: 1;
+}
