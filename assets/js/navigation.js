@@ -1,3 +1,5 @@
+import "./select.js?v=20260905";
+
 "use strict";
 
 const NAVIGATION_SECTIONS = [

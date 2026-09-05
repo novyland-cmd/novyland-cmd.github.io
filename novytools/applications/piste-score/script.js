@@ -1,3 +1,5 @@
+import { enhanceSelects, refreshSelect, focusSelect } from "../../../assets/js/select.js?v=20260905";
+
 "use strict";
 
 /**
@@ -262,6 +264,7 @@ function renderPlayers() {
   const fragment = document.createDocumentFragment();
   scoreTrackState.players.forEach((player) => fragment.append(createPlayerCard(player)));
   dom.playersList.replaceChildren(fragment);
+  enhanceSelects(dom.playersList);
   scoreTrackState.players.forEach((player) => updateTokenPreview(player.id));
 }
 
@@ -297,9 +300,24 @@ function refreshSelectAvailability() {
   scoreTrackState.players.forEach((player) => {
     const card = dom.playersList.querySelector(`[data-player-id="${player.id}"]`);
     if (!card) return;
-    card.querySelector('[data-field="letter"]').replaceWith(buildLetterSelect(player));
-    card.querySelector('[data-field="color"]').replaceWith(buildColorSelect(player));
-    card.querySelector('[data-field="turnOrder"]').replaceWith(buildTurnOrderSelect(player));
+    {
+      const select = card.querySelector('[data-field="letter"]');
+      select.replaceChildren(...buildLetterSelect(player).options);
+      select.value = String(player.letter ?? "");
+      refreshSelect(select);
+    }
+    {
+      const select = card.querySelector('[data-field="color"]');
+      select.replaceChildren(...buildColorSelect(player).options);
+      select.value = String(player.color ?? "");
+      refreshSelect(select);
+    }
+    {
+      const select = card.querySelector('[data-field="turnOrder"]');
+      select.replaceChildren(...buildTurnOrderSelect(player).options);
+      select.value = String(player.turnOrder ?? "");
+      refreshSelect(select);
+    }
   });
 }
 
@@ -766,7 +784,7 @@ function showConfigurationScreen() {
   dom.appTitle.textContent = "Configuration de la partie";
   dom.appSubtitle.textContent = "Préparez les joueurs, leur jeton et leur ordre de jeu avant de démarrer la partie.";
   dom.notifications.hidden = true;
-  dom.playerCount.focus({ preventScroll: true });
+  focusSelect(dom.playerCount);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -780,6 +798,7 @@ function resetGame() {
   scoreTrackState.players = [];
   scoreTrackState.isConfigurationValid = false;
   dom.playerCount.value = "2";
+  refreshSelect(dom.playerCount);
   synchronizePlayers(2);
   renderPlayers();
   validateConfiguration();
@@ -825,7 +844,7 @@ function bindEvents() {
 
   dom.playersList.addEventListener("input", (event) => {
     const control = event.target.closest("[data-player-id][data-field]");
-    if (control) updatePlayerFromControl(control);
+    if (control?.matches("input")) updatePlayerFromControl(control);
   });
 
   dom.playersList.addEventListener("change", (event) => {
@@ -877,6 +896,7 @@ function initializeScoreTrackApp() {
   generateScoreTrack();
   renderPlayers();
   bindEvents();
+  enhanceSelects(dom.configurationPanel);
   validateConfiguration();
   document.documentElement.classList.add("score-app-ready");
 
@@ -901,4 +921,8 @@ function initializeScoreTrackApp() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initializeScoreTrackApp, { once: true });
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeScoreTrackApp, { once: true });
+} else {
+  initializeScoreTrackApp();
+}

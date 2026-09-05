@@ -41,6 +41,7 @@
 
 .player-count-field {
   width: min(100%, 15rem);
+  min-width: 0;
 }
 
 .player-count-field label,
@@ -1011,4 +1012,10 @@
   .end-turn-button {
     min-height: 3.25rem;
   }
+}
+
+/* Animated player cards form stacking contexts; raise the active popup card. */
+.player-card:has(.novy-select.is-open) {
+  position: relative;
+  z-index: 2;
 }
