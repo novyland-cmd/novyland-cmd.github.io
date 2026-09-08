@@ -1,3 +1,5 @@
+import "./select.js?v=20260905";
+
 "use strict";
 
 const NAVIGATION_SECTIONS = [
@@ -15,7 +17,7 @@ const NAVIGATION_SECTIONS = [
       items: [
          { id: "first-player", label: "Premier Joueur", path: "novytools/applications/premier-joueur/index.html" },
          { id: "timer", label: "Minuteur de jeu", path: "novytools/applications/minuteur/index.html" },
-         { id: "score", label: "Compteur de points · Bientôt", disabled: true }
+         { id: "score", label: "Piste de score", path: "novytools/applications/piste-score/index.html" }
       ]
    },
    {
