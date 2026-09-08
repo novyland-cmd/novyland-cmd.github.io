@@ -26,8 +26,8 @@
   <link rel="stylesheet" href="../../../assets/css/theme.css?v=20260905-select">
   <link rel="stylesheet" href="../../../assets/css/advertising.css">
   <link rel="stylesheet" href="../../../assets/css/navigation.css">
-  <link rel="stylesheet" href="styles.css?v=20260905-shared-select-3">
-  <script src="script.js?v=20260905-shared-select-3" type="module"></script>
+  <link rel="stylesheet" href="styles.css?v=20260905-compact-players">
+  <script src="script.js?v=20260905-compact-players" type="module"></script>
 </head>
 <body>
   <div
@@ -140,8 +140,18 @@
             <div class="active-player-controls" aria-label="Contrôles du score">
               <div class="score-stepper">
                 <button id="decrease-score-button" class="score-control-button" type="button" aria-label="Retirer 1 point">−</button>
+                <div class="score-step-field">
+                  <input id="score-step" type="number" min="1" max="999999" step="1" value="1" inputmode="numeric" required aria-label="Valeur de déplacement" aria-describedby="score-step-error" aria-controls="score-step-presets">
+                  <div id="score-step-presets" class="score-step-presets" role="group" aria-label="Déplacements rapides" hidden>
+                    <button type="button" data-score-step="1">1</button>
+                    <button type="button" data-score-step="5">5</button>
+                    <button type="button" data-score-step="10">10</button>
+                    <button type="button" data-score-step="100">100</button>
+                  </div>
+                </div>
                 <button id="increase-score-button" class="score-control-button" type="button" aria-label="Ajouter 1 point">+</button>
               </div>
+              <p id="score-step-error" class="score-step-error" role="status" hidden></p>
               <button id="end-turn-button" class="button button--primary end-turn-button" type="button">Fin du tour</button>
             </div>
           </section>

@@ -670,13 +670,7 @@ function createGamePlayerSummary(player) {
   scoreValue.textContent = String(player.score);
   score.append(scoreLabel, scoreValue);
 
-  const position = document.createElement("p");
-  position.className = "game-player-position";
-  position.textContent = player.trackPosition === 0
-    ? "Départ"
-    : `Case ${player.trackPosition}${player.milestone ? ` · Jeton de palier ${player.milestone}` : ""}`;
-
-  item.append(token, identity, score, position);
+  item.append(token, identity, score);
   return item;
 }
 
@@ -724,7 +718,7 @@ function renderActivePlayerPanel(activePlayer) {
   dom.activePlayerMilestone.textContent = activePlayer.milestone === 0
     ? "Départ"
     : String(activePlayer.milestone);
-  dom.decreaseScoreButton.disabled = activePlayer.score === 0;
+  updateScoreStepControls();
 
   dom.gameInformation.style.setProperty("--active-player-color", color?.value || activePlayer.colorValue || "#8b9490");
   dom.gameInformation.style.setProperty("--active-player-text", color?.textColor || "#ffffff");
@@ -744,6 +738,35 @@ function renderGame() {
   const activePlayer = getActivePlayer();
   renderActivePlayerPanel(activePlayer);
   updateActivePlayerHighlights();
+}
+
+function updateScoreStepControls() {
+  const step = dom.scoreStep.valueAsNumber;
+  const valid = dom.scoreStep.checkValidity() && Number.isSafeInteger(step);
+  const player = getActivePlayer();
+  dom.scoreStep.setAttribute("aria-invalid", String(!valid));
+  dom.scoreStepError.hidden = valid;
+  dom.scoreStepError.textContent = valid ? "" : "Saisissez un entier de 1 à 999 999.";
+  dom.decreaseScoreButton.disabled = !valid || !player || player.score === 0;
+  dom.increaseScoreButton.disabled = !valid || !player || !Number.isSafeInteger(player.score + step);
+  if (valid) {
+    const points = `${step} point${step > 1 ? "s" : ""}`;
+    dom.decreaseScoreButton.setAttribute("aria-label", `Retirer ${points}`);
+    dom.increaseScoreButton.setAttribute("aria-label", `Ajouter ${points}`);
+  }
+  dom.scoreStepPresets.querySelectorAll("button").forEach((button) => {
+    button.setAttribute("aria-pressed", String(valid && Number(button.dataset.scoreStep) === step));
+  });
+  return valid;
+}
+
+function applyScoreStep(direction) {
+  if (!updateScoreStepControls()) return;
+  const player = getActivePlayer();
+  if (!player) return;
+  const nextScore = Math.max(0, player.score + direction * dom.scoreStep.valueAsNumber);
+  if (!Number.isSafeInteger(nextScore) || nextScore === player.score) return;
+  updatePlayerScore(player.id, nextScore);
 }
 
 function modifyActivePlayerScore(delta) {
@@ -794,6 +817,9 @@ function resetGame() {
     updateTokenLayout(Number(layer.dataset.tokenLayer), layer.dataset.layerType || "track");
   });
   scoreTrackState.game = null;
+  dom.scoreStep.value = "1";
+  dom.scoreStepPresets.hidden = true;
+  updateScoreStepControls();
   scoreTrackState.playerCount = 2;
   scoreTrackState.players = [];
   scoreTrackState.isConfigurationValid = false;
@@ -853,8 +879,33 @@ function bindEvents() {
   });
 
   dom.startButton.addEventListener("click", handleStartGame);
-  dom.decreaseScoreButton.addEventListener("click", () => modifyActivePlayerScore(-1));
-  dom.increaseScoreButton.addEventListener("click", () => modifyActivePlayerScore(1));
+  dom.decreaseScoreButton.addEventListener("click", () => applyScoreStep(-1));
+  dom.increaseScoreButton.addEventListener("click", () => applyScoreStep(1));
+  dom.scoreStep.addEventListener("input", updateScoreStepControls);
+  dom.scoreStep.addEventListener("focus", () => { dom.scoreStepPresets.hidden = false; });
+  dom.scoreStep.addEventListener("click", () => { dom.scoreStepPresets.hidden = false; });
+  dom.scoreStep.parentElement.addEventListener("focusout", (event) => {
+    if (!dom.scoreStep.parentElement.contains(event.relatedTarget)) dom.scoreStepPresets.hidden = true;
+  });
+  dom.scoreStep.parentElement.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      dom.scoreStep.focus();
+      dom.scoreStepPresets.hidden = true;
+      event.preventDefault();
+    }
+  });
+  // Conserve le focus jusqu’au clic, même si le navigateur ne focalise pas les boutons.
+  dom.scoreStepPresets.addEventListener("pointerdown", (event) => {
+    if (event.target.closest("[data-score-step]")) event.preventDefault();
+  });
+  dom.scoreStepPresets.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-score-step]");
+    if (!button) return;
+    dom.scoreStep.value = button.dataset.scoreStep;
+    updateScoreStepControls();
+    dom.scoreStep.focus();
+    dom.scoreStepPresets.hidden = true;
+  });
   dom.endTurnButton.addEventListener("click", goToNextPlayer);
   dom.newGameButton.addEventListener("click", openNewGameConfirmation);
   dom.newGameDialog.addEventListener("close", handleConfirmationClose);
@@ -880,6 +931,9 @@ function initializeScoreTrackApp() {
     activePlayerMilestone: document.getElementById("active-player-milestone"),
     decreaseScoreButton: document.getElementById("decrease-score-button"),
     increaseScoreButton: document.getElementById("increase-score-button"),
+    scoreStep: document.getElementById("score-step"),
+    scoreStepPresets: document.getElementById("score-step-presets"),
+    scoreStepError: document.getElementById("score-step-error"),
     endTurnButton: document.getElementById("end-turn-button"),
     gamePlayersList: document.getElementById("game-players-list"),
     scoreTrack: document.getElementById("score-track"),
