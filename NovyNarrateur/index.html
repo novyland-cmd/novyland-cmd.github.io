@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Bienvenue sur NovyNarrateur, le début d’une nouvelle façon d’écouter vos jeux narratifs.">
+    <meta name="theme-color" content="#f7f4ee">
+    <title>NovyNarrateur — Bienvenue</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="NovyNarrateur, accueil">
+        <span class="brand-icon" aria-hidden="true">N<span>✦</span></span>
+        NovyNarrateur
+      </a>
+      <span class="version">Premiers pas · v0.1</span>
+    </header>
+
+    <main>
+      <section class="welcome" aria-labelledby="welcome-title">
+        <p class="eyebrow"><span aria-hidden="true">✦</span> Chaque histoire commence ici</p>
+        <h1 id="welcome-title">Bienvenue dans<br>NovyNarrateur<span class="accent">.</span></h1>
+        <p class="intro">Hello World ! Votre prochaine aventure prend vie.</p>
+        <p class="description">Bientôt, photographiez un passage de votre jeu de société et laissez la narration vous emporter.</p>
+
+        <div class="test-card">
+          <div class="chapter" aria-hidden="true">01</div>
+          <div class="test-content">
+            <h2>Un premier clic, et l’aventure commence.</h2>
+            <p>Testez le bouton pour vérifier que la page est interactive.</p>
+            <button id="test-button" type="button" aria-describedby="test-status" disabled>
+              Tester JavaScript <span aria-hidden="true">↗</span>
+            </button>
+            <p id="test-status" class="status" role="status" aria-live="polite" aria-atomic="true">Le test sera disponible après le chargement de JavaScript.</p>
+            <noscript><p class="noscript">JavaScript est désactivé. Activez-le dans votre navigateur, puis rechargez la page pour utiliser le bouton.</p></noscript>
+          </div>
+        </div>
+
+        <p class="footnote">Une première page. Le début de nombreuses histoires.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>NovyNarrateur · Hello World</span>
+      <span>Pensé pour téléphone, tablette et ordinateur.</span>
+    </footer>
+  </body>
+</html>
