@@ -40,6 +40,38 @@
   text-decoration: none;
 }
 
+.novy-header__social {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.novy-header__social-link {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  color: var(--novy-nav-primary);
+}
+
+.novy-header__social-link:hover {
+  background: color-mix(in srgb, var(--novy-nav-primary) 12%, transparent);
+}
+
+.novy-header__social-link:focus-visible {
+  outline: 2px solid var(--novy-nav-primary);
+  outline-offset: 2px;
+}
+
+.novy-header__social-link svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
 .novy-header__logo {
   width: 40px;
   height: 40px;
