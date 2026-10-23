@@ -1,10 +1,24 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { prepareLibrary, findPassage, normalizeId, passageParts, libraryLabel } from "../library.mjs";
+import { prepareLibrary, findPassage, normalizeId, passageParts, libraryLabel, reflowText } from "../library.mjs";
 
 const passage = (id, extra = {}) => ({ id, key: id, text: "Un passage de test.", title: null, ...extra });
 const data = passages => ({ schema_version: 1, game_id: "test", passages });
+
+test("la lecture fluide rassemble les phrases sans mélanger choix et consignes", () => {
+  const text = "La porte est en fer massif, haute comme deux étages, sans\nserrure ni ouverture visible.\n— Capitaine ! On pourrait la faire sauter\navec le canon !\nA. Utiliser le canon pour ouvrir\nla porte.\n→ Allez au paragraphe\n9.2\nB. Partir.\nObtenir : 2 XP\n\nLa suite.";
+  const p = passage("1", { text, references: [{ detection: "explicit", raw_id: "9.2", text_offset: Array.from(text.slice(0, text.indexOf("9.2"))).length }] });
+  const parts = passageParts(p, { reflow: true });
+  assert.match(reflowText(text), /sans serrure ni ouverture visible/);
+  assert.match(reflowText(text), /\n— Capitaine/);
+  assert.match(reflowText(text), /\nA\. Utiliser le canon pour ouvrir la porte/);
+  assert.match(reflowText(text), /\nB\. Partir\.\nObtenir/);
+  assert.match(reflowText(text), /\n\nLa suite/);
+  assert.equal(parts.map(p => p.text).join(""), reflowText(text));
+  assert.deepEqual(parts.filter(p => p.target), [{ text: "9.2", target: "9.2" }]);
+  assert.equal(reflowText(text).length, text.length);
+});
 
 test("le libellé suit la langue sélectionnée sans supposer le français", () => {
   const source = { ...data([passage("1")]), game_id: "sleeping-gods" };
@@ -83,5 +97,8 @@ test("bibliothèque complète : aucun contenu perdu dans le rendu des renvois", 
     const parts = passageParts(p);
     assert.equal(parts.map(part => part.text).join(""), p.text, p.id);
     assert.equal(parts.filter(part => part.target).length, p.references.filter(r => r.detection === "explicit").length, p.id);
+    const flowing = passageParts(p, { reflow: true });
+    assert.equal(flowing.map(part => part.text).join("").replace(/\s/g, ""), p.text.replace(/\s/g, ""), p.id);
+    assert.deepEqual(flowing.filter(part => part.target), parts.filter(part => part.target), p.id);
   }
 });

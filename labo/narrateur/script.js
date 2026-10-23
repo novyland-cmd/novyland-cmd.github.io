@@ -1,4 +1,4 @@
-import { prepareLibrary, findPassage, passageParts, libraryLabel } from "./library.mjs?v=20261023-4";
+import { prepareLibrary, findPassage, passageParts, libraryLabel } from "./library.mjs?v=20261023-8";
 import { refreshSelect } from "../../assets/js/select.js?v=20260905";
 
 const $ = id => document.getElementById(id);
@@ -65,7 +65,7 @@ function displayPassage(value) {
   $("passage-source").textContent = pages.length ? `Livret d’aventure · ${pages.length > 1 ? "Pages" : "Page"} ${pages.join(", ")} du PDF` : "";
   const fragment = document.createDocumentFragment();
   let links = 0;
-  for (const part of passageParts(passage)) {
+  for (const part of passageParts(passage, { reflow: library.language.split(/[-_]/)[0] === "fr" })) {
     if (part.target) {
       const button = document.createElement("button");
       button.type = "button";

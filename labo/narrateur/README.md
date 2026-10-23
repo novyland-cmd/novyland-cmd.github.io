@@ -14,6 +14,8 @@ Les renvois explicites sont cliquables et demandent confirmation, sans aperçu d
 
 Le réglage du texte va de 16 à 32 px. Les passages sont affichés comme du texte, jamais interprétés comme du HTML. Aucun historique de passages ni position de lecture n'est enregistré.
 
+Pour le français, les retours de ligne dus aux colonnes du PDF sont remplacés par des espaces au milieu des phrases lors de l'affichage. Les séparations entre dialogues, choix, consignes et paragraphes sont conservées. Les fichiers sources et les positions des renvois ne sont pas modifiés.
+
 ## Vérifier le lecteur
 
 Avec Node.js :

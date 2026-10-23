@@ -57,7 +57,20 @@ export function findPassage(library, input) {
 
 // Seuls les renvois explicites et correctement positionnés sont interactifs.
 // Les candidats sans verbe restent du texte. Aucune chaîne importée n'est du HTML.
-export function passageParts(passage) {
+export function reflowText(text) {
+  const lines = text.split("\n");
+  const startsBlock = /^(?:[—–]|-\s|[«“]|[A-Z]\.[ \t]|\d+[.)][ \t]|[•→➡]|\p{Extended_Pictographic}|(?:Obtenir|Obtenez|Gagner|Gagnez|Gagne|Perdre|Perdez|Perte|Retirez|Remove|Échec|Succès|Réussite|Nécessite|Indisponible|Si\b|Sinon\b|Choix\b|Retournez|Retourne)\s*[:：]?)/u;
+  return lines.map((line, i) => {
+    if (i === lines.length - 1) return line;
+    const next = lines[i + 1].trim();
+    const keepBreak = !line.trim() || !next || /[.!?…:;»”]$/.test(line.trim()) || startsBlock.test(next);
+    return line + (keepBreak ? "\n" : " ");
+  }).join("");
+}
+
+export function passageParts(passage, { reflow = false } = {}) {
+  // Remplacer un retour par une espace conserve les positions des renvois.
+  const text = reflow ? reflowText(passage.text) : passage.text;
   // Les offsets Python comptent les points Unicode ; JavaScript compte les
   // unités UTF-16. Les symboles comme 🧠 occupent deux unités dans le navigateur.
   const offsets = [0];
@@ -73,10 +86,10 @@ export function passageParts(passage) {
   const parts = [];
   for (const ref of references) {
     if (ref.start < cursor) continue;
-    parts.push({ text: passage.text.slice(cursor, ref.start) });
+    parts.push({ text: text.slice(cursor, ref.start) });
     parts.push({ text: ref.raw_id, target: ref.raw_id });
     cursor = ref.start + ref.raw_id.length;
   }
-  parts.push({ text: passage.text.slice(cursor) });
+  parts.push({ text: text.slice(cursor) });
   return parts;
 }
