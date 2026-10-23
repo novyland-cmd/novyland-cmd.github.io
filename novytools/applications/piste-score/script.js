@@ -1,4 +1,5 @@
-import { enhanceSelects, refreshSelect, focusSelect } from "../../../assets/js/select.js?v=20260905";
+import { focusSelect } from "../../../assets/js/select.js?v=20260905";
+import { createPlayerSelection, getColorDefinition, applyTokenAppearance } from "../../../assets/js/player-selection.js";
 
 "use strict";
 
@@ -11,16 +12,7 @@ const PLAYER_LIMITS = Object.freeze({ min: 1, max: 6 });
 const SCORE_MILESTONES = Object.freeze([50, 100, 150, 200]);
 const SCORE_TRACK_CONFIG = Object.freeze({ totalSpaces: 50, spacesPerRow: 10, maxDisplayedMilestone: 200 });
 const TOKEN_LAYOUT_LIMIT = PLAYER_LIMITS.max;
-const AVAILABLE_LETTERS = Object.freeze("ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""));
-const AVAILABLE_COLORS = Object.freeze([
-  { id: "red", label: "Rouge", value: "#c94b49" },
-  { id: "blue", label: "Bleu", value: "#3976c5" },
-  { id: "green", label: "Vert", value: "#4d8b59" },
-  { id: "yellow", label: "Jaune", value: "#e0b83f", textColor: "#2b2b22" },
-  { id: "orange", label: "Orange", value: "#df7a32" },
-  { id: "purple", label: "Violet", value: "#8556a8" },
-  { id: "turquoise", label: "Turquoise", value: "#2a9d9f" }
-]);
+
 
 const scoreTrackState = {
   playerCount: 2,
@@ -30,6 +22,7 @@ const scoreTrackState = {
 };
 
 const dom = {};
+let playerSelection;
 
 
 /** Retourne un score entier positif ou nul afin de protéger les calculs de piste. */
@@ -66,274 +59,6 @@ function cloneData(data) {
   return typeof structuredClone === "function"
     ? structuredClone(data)
     : JSON.parse(JSON.stringify(data));
-}
-
-function createDefaultPlayer(index) {
-  return {
-    id: index + 1,
-    name: "",
-    letter: AVAILABLE_LETTERS[index] || "",
-    color: AVAILABLE_COLORS[index]?.id || "",
-    turnOrder: index + 1
-  };
-}
-
-function normalizePlayerCount(value) {
-  const parsedValue = Number.parseInt(value, 10);
-  if (Number.isNaN(parsedValue)) return PLAYER_LIMITS.min;
-  return Math.min(PLAYER_LIMITS.max, Math.max(PLAYER_LIMITS.min, parsedValue));
-}
-
-function synchronizePlayers(playerCount) {
-  const normalizedCount = normalizePlayerCount(playerCount);
-  const retainedPlayers = scoreTrackState.players.slice(0, normalizedCount);
-
-  while (retainedPlayers.length < normalizedCount) {
-    retainedPlayers.push(createDefaultPlayer(retainedPlayers.length));
-  }
-
-  scoreTrackState.playerCount = normalizedCount;
-  scoreTrackState.players = retainedPlayers.map((player, index) => ({
-    ...player,
-    id: index + 1
-  }));
-}
-
-function createOption(value, label, selectedValue, disabled = false) {
-  const option = document.createElement("option");
-  option.value = String(value);
-  option.textContent = label;
-  option.selected = String(value) === String(selectedValue);
-  option.disabled = disabled;
-  return option;
-}
-
-function appendPlaceholder(select, label, selectedValue) {
-  select.append(createOption("", label, selectedValue));
-}
-
-function getUsedValues(propertyName, excludedPlayerId) {
-  return new Set(
-    scoreTrackState.players
-      .filter((player) => player.id !== excludedPlayerId)
-      .map((player) => String(player[propertyName] ?? ""))
-      .filter(Boolean)
-  );
-}
-
-function buildLetterSelect(player) {
-  const select = document.createElement("select");
-  select.id = `player-letter-${player.id}`;
-  select.dataset.playerId = String(player.id);
-  select.dataset.field = "letter";
-  select.required = true;
-  select.setAttribute("aria-label", `Lettre du joueur ${player.id}`);
-  appendPlaceholder(select, "Choisir", player.letter);
-
-  const usedLetters = getUsedValues("letter", player.id);
-  AVAILABLE_LETTERS.forEach((letter) => {
-    select.append(createOption(letter, letter, player.letter, usedLetters.has(letter)));
-  });
-  return select;
-}
-
-function buildColorSelect(player) {
-  const select = document.createElement("select");
-  select.id = `player-color-${player.id}`;
-  select.dataset.playerId = String(player.id);
-  select.dataset.field = "color";
-  select.required = true;
-  select.setAttribute("aria-label", `Couleur du joueur ${player.id}`);
-  appendPlaceholder(select, "Choisir", player.color);
-
-  const usedColors = getUsedValues("color", player.id);
-  AVAILABLE_COLORS.forEach((color) => {
-    select.append(createOption(color.id, color.label, player.color, usedColors.has(color.id)));
-  });
-  return select;
-}
-
-function buildTurnOrderSelect(player) {
-  const select = document.createElement("select");
-  select.id = `player-order-${player.id}`;
-  select.dataset.playerId = String(player.id);
-  select.dataset.field = "turnOrder";
-  select.required = true;
-  select.setAttribute("aria-label", `Ordre de jeu du joueur ${player.id}`);
-  appendPlaceholder(select, "Choisir", player.turnOrder);
-
-  const usedOrders = getUsedValues("turnOrder", player.id);
-  for (let order = 1; order <= scoreTrackState.playerCount; order += 1) {
-    select.append(createOption(
-      order,
-      `${order}${order === 1 ? "er" : "e"}`,
-      player.turnOrder,
-      usedOrders.has(String(order))
-    ));
-  }
-  return select;
-}
-
-function createField(labelText, control) {
-  const wrapper = document.createElement("div");
-  wrapper.className = "player-field";
-  const label = document.createElement("label");
-  label.htmlFor = control.id;
-  label.textContent = labelText;
-  wrapper.append(label, control);
-  return wrapper;
-}
-
-function getColorDefinition(colorId) {
-  return AVAILABLE_COLORS.find((color) => color.id === colorId) || null;
-}
-
-function applyTokenAppearance(token, player, accessible = true) {
-  const color = getColorDefinition(player.colorId || player.color);
-  token.textContent = player.letter || "?";
-  token.style.backgroundColor = color?.value || player.colorValue || "#8b9490";
-  token.style.color = color?.textColor || "#ffffff";
-  if (accessible) {
-    token.setAttribute("aria-label", `Jeton ${player.displayName || player.name || player.letter}`);
-  }
-}
-
-function updateTokenPreview(playerId, animate = false) {
-  const player = scoreTrackState.players.find((item) => item.id === playerId);
-  const token = document.querySelector(`[data-token-player-id="${playerId}"]`);
-  if (!player || !token) return;
-
-  applyTokenAppearance(token, player);
-  if (animate) {
-    token.classList.remove("is-updated");
-    requestAnimationFrame(() => {
-      token.classList.add("is-updated");
-      window.setTimeout(() => token.classList.remove("is-updated"), 180);
-    });
-  }
-}
-
-function createPlayerCard(player) {
-  const card = document.createElement("article");
-  card.className = "player-card";
-  card.dataset.playerId = String(player.id);
-
-  const heading = document.createElement("header");
-  heading.className = "player-card-heading";
-  const title = document.createElement("h3");
-  title.textContent = `Joueur ${player.id}`;
-  const subtitle = document.createElement("p");
-  subtitle.textContent = "Configurez son jeton";
-  heading.append(title, subtitle);
-
-  const nameInput = document.createElement("input");
-  nameInput.id = `player-name-${player.id}`;
-  nameInput.type = "text";
-  nameInput.maxLength = 30;
-  nameInput.value = player.name;
-  nameInput.placeholder = "Nom facultatif";
-  nameInput.autocomplete = "off";
-  nameInput.dataset.playerId = String(player.id);
-  nameInput.dataset.field = "name";
-
-  const fields = document.createElement("div");
-  fields.className = "player-fields";
-  fields.append(
-    createField("Nom", nameInput),
-    createField("Lettre", buildLetterSelect(player)),
-    createField("Couleur", buildColorSelect(player)),
-    createField("Ordre de jeu", buildTurnOrderSelect(player))
-  );
-
-  const tokenGroup = document.createElement("div");
-  tokenGroup.className = "token-preview-group";
-  const tokenLabel = document.createElement("span");
-  tokenLabel.className = "token-preview-label";
-  tokenLabel.textContent = "Jeton";
-  const token = document.createElement("div");
-  token.className = "player-token";
-  token.dataset.tokenPlayerId = String(player.id);
-  token.setAttribute("role", "img");
-  tokenGroup.append(tokenLabel, token);
-
-  card.append(heading, fields, tokenGroup);
-  return card;
-}
-
-function renderPlayers() {
-  const fragment = document.createDocumentFragment();
-  scoreTrackState.players.forEach((player) => fragment.append(createPlayerCard(player)));
-  dom.playersList.replaceChildren(fragment);
-  enhanceSelects(dom.playersList);
-  scoreTrackState.players.forEach((player) => updateTokenPreview(player.id));
-}
-
-function findDuplicateValues(propertyName) {
-  const counts = new Map();
-  scoreTrackState.players.forEach((player) => {
-    const value = String(player[propertyName] ?? "");
-    if (value) counts.set(value, (counts.get(value) || 0) + 1);
-  });
-  return [...counts.entries()].filter(([, count]) => count > 1).map(([value]) => value);
-}
-
-function validateConfiguration() {
-  const messages = [];
-  if (scoreTrackState.players.some((player) => !player.letter)) messages.push("choisissez une lettre pour chaque joueur");
-  if (scoreTrackState.players.some((player) => !player.color)) messages.push("choisissez une couleur pour chaque joueur");
-  if (scoreTrackState.players.some((player) => !player.turnOrder)) messages.push("choisissez un ordre pour chaque joueur");
-  if (findDuplicateValues("letter").length) messages.push("les lettres doivent être uniques");
-  if (findDuplicateValues("color").length) messages.push("les couleurs doivent être uniques");
-  if (findDuplicateValues("turnOrder").length) messages.push("les ordres de jeu doivent être uniques");
-
-  scoreTrackState.isConfigurationValid = messages.length === 0;
-  dom.startButton.disabled = !scoreTrackState.isConfigurationValid;
-  dom.status.classList.toggle("is-valid", scoreTrackState.isConfigurationValid);
-  dom.status.classList.toggle("is-invalid", !scoreTrackState.isConfigurationValid && messages.length > 0);
-  dom.status.textContent = scoreTrackState.isConfigurationValid
-    ? "Configuration valide. La partie peut être démarrée."
-    : `Configuration incomplète : ${messages.join("; ")}.`;
-  return scoreTrackState.isConfigurationValid;
-}
-
-function refreshSelectAvailability() {
-  scoreTrackState.players.forEach((player) => {
-    const card = dom.playersList.querySelector(`[data-player-id="${player.id}"]`);
-    if (!card) return;
-    {
-      const select = card.querySelector('[data-field="letter"]');
-      select.replaceChildren(...buildLetterSelect(player).options);
-      select.value = String(player.letter ?? "");
-      refreshSelect(select);
-    }
-    {
-      const select = card.querySelector('[data-field="color"]');
-      select.replaceChildren(...buildColorSelect(player).options);
-      select.value = String(player.color ?? "");
-      refreshSelect(select);
-    }
-    {
-      const select = card.querySelector('[data-field="turnOrder"]');
-      select.replaceChildren(...buildTurnOrderSelect(player).options);
-      select.value = String(player.turnOrder ?? "");
-      refreshSelect(select);
-    }
-  });
-}
-
-function updatePlayerFromControl(control) {
-  const playerId = Number.parseInt(control.dataset.playerId, 10);
-  const fieldName = control.dataset.field;
-  const player = scoreTrackState.players.find((item) => item.id === playerId);
-  if (!player || !fieldName) return;
-
-  player[fieldName] = fieldName === "turnOrder"
-    ? (control.value ? Number.parseInt(control.value, 10) : null)
-    : control.value.trim();
-
-  if (fieldName === "letter" || fieldName === "color") updateTokenPreview(playerId, true);
-  if (["letter", "color", "turnOrder"].includes(fieldName)) refreshSelectAvailability();
-  validateConfiguration();
 }
 
 /**
@@ -624,7 +349,7 @@ function setActivePlayer(playerId) {
 }
 
 function initializeGame() {
-  if (!validateConfiguration()) return null;
+  if (!playerSelection.validate()) return null;
 
   const players = scoreTrackState.players
     .map(createGamePlayer)
@@ -820,14 +545,7 @@ function resetGame() {
   dom.scoreStep.value = "1";
   dom.scoreStepPresets.hidden = true;
   updateScoreStepControls();
-  scoreTrackState.playerCount = 2;
-  scoreTrackState.players = [];
-  scoreTrackState.isConfigurationValid = false;
-  dom.playerCount.value = "2";
-  refreshSelect(dom.playerCount);
-  synchronizePlayers(2);
-  renderPlayers();
-  validateConfiguration();
+  playerSelection.reset();
   showConfigurationScreen();
 
   document.dispatchEvent(new CustomEvent("scoretrack:game-reset"));
@@ -861,23 +579,6 @@ function handleStartGame() {
 }
 
 function bindEvents() {
-  dom.playerCount.addEventListener("change", (event) => {
-    synchronizePlayers(event.target.value);
-    renderPlayers();
-    validateConfiguration();
-    dom.notifications.hidden = true;
-  });
-
-  dom.playersList.addEventListener("input", (event) => {
-    const control = event.target.closest("[data-player-id][data-field]");
-    if (control?.matches("input")) updatePlayerFromControl(control);
-  });
-
-  dom.playersList.addEventListener("change", (event) => {
-    const control = event.target.closest("[data-player-id][data-field]");
-    if (control) updatePlayerFromControl(control);
-  });
-
   dom.startButton.addEventListener("click", handleStartGame);
   dom.decreaseScoreButton.addEventListener("click", () => applyScoreStep(-1));
   dom.increaseScoreButton.addEventListener("click", () => applyScoreStep(1));
@@ -916,10 +617,7 @@ function initializeScoreTrackApp() {
     appTitle: document.getElementById("app-title"),
     appSubtitle: document.getElementById("app-subtitle"),
     configurationPanel: document.getElementById("player-configuration"),
-    playerCount: document.getElementById("player-count"),
-    playersList: document.getElementById("players-list"),
     startButton: document.getElementById("start-game-button"),
-    status: document.getElementById("configuration-status"),
     gameScreen: document.getElementById("game-screen"),
     newGameButton: document.getElementById("new-game-button"),
     gameInformation: document.getElementById("game-information"),
@@ -946,12 +644,11 @@ function initializeScoreTrackApp() {
     return;
   }
 
-  synchronizePlayers(dom.playerCount.value);
+  playerSelection = createPlayerSelection({root: dom.configurationPanel, startButton: dom.startButton,
+    state: scoreTrackState, min: PLAYER_LIMITS.min, max: PLAYER_LIMITS.max, onChange: () => { dom.notifications.hidden = true; }});
+  dom.playerCount = playerSelection.playerCount;
   generateScoreTrack();
-  renderPlayers();
   bindEvents();
-  enhanceSelects(dom.configurationPanel);
-  validateConfiguration();
   document.documentElement.classList.add("score-app-ready");
 
   window.scoreTrackApp = Object.freeze({

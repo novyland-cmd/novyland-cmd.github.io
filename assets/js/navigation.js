@@ -16,6 +16,7 @@ const NAVIGATION_SECTIONS = [
       title: "Applications",
       items: [
          { id: "first-player", label: "Premier Joueur", path: "novytools/applications/premier-joueur/index.html" },
+         { id: "player-timer", label: "Chrono des joueurs", path: "novytools/applications/chrono-joueurs/index.html" },
          { id: "timer", label: "Minuteur de jeu", path: "novytools/applications/minuteur/index.html" },
          { id: "score", label: "Piste de score", path: "novytools/applications/piste-score/index.html" },
          { id: "choice-wheel", label: "La roue chanceuse", path: "novytools/applications/roue-de-choix/index.html" }
@@ -27,6 +28,7 @@ const NAVIGATION_SECTIONS = [
          { id: "about-games", label: "À propos de NovyLand Games", path: "jeux/about.html" },
          { id: "about-tools", label: "À propos de NovyTools", path: "novytools/about.html" },
          { id: "about-first-player", label: "À propos de Premier Joueur", path: "novytools/applications/premier-joueur/about.html" },
+         { id: "about-player-timer", label: "À propos du Chrono des joueurs", path: "novytools/applications/chrono-joueurs/about.html" },
          { id: "about-timer", label: "À propos du Minuteur", path: "novytools/applications/minuteur/about.html" },
          { id: "about-score", label: "À propos de la Piste de score", path: "novytools/applications/piste-score/about.html" },
          { id: "about-choice-wheel", label: "À propos de La roue chanceuse", path: "novytools/applications/roue-de-choix/about.html" },

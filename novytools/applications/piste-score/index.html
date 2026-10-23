@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="../../../assets/css/theme.css?v=20260905-select">
   <link rel="stylesheet" href="../../../assets/css/advertising.css">
   <link rel="stylesheet" href="../../../assets/css/navigation.css">
+  <link rel="stylesheet" href="../../../assets/css/player-selection.css">
   <link rel="stylesheet" href="styles.css?v=20260905-compact-players">
   <script src="script.js?v=20260905-compact-players" type="module"></script>
 </head>
@@ -62,36 +63,7 @@
 
     <div class="score-app-layout">
       <section id="player-configuration" class="content-card configuration-panel" aria-labelledby="configuration-title">
-        <header class="configuration-heading">
-          <div>
-            <p class="eyebrow">Nouvelle partie</p>
-            <h2 id="configuration-title">Sélection des joueurs</h2>
-          </div>
-
-          <div class="player-count-field">
-            <label for="player-count">Nombre de joueurs</label>
-            <select id="player-count" name="player-count" aria-describedby="player-count-help">
-              <option value="1">1 joueur</option>
-              <option value="2" selected>2 joueurs</option>
-              <option value="3">3 joueurs</option>
-              <option value="4">4 joueurs</option>
-              <option value="5">5 joueurs</option>
-              <option value="6">6 joueurs</option>
-            </select>
-            <small id="player-count-help">Choisissez entre 1 et 6 joueurs.</small>
-          </div>
-        </header>
-
-        <div id="players-list" class="players-list" aria-live="polite"></div>
-
-        <div class="configuration-actions">
-          <p id="configuration-status" class="configuration-status" role="status" aria-live="polite">
-            Complétez les informations obligatoires pour démarrer la partie.
-          </p>
-          <button id="start-game-button" class="button button--primary start-game-button" type="button" disabled>
-            Démarrer la partie
-          </button>
-        </div>
+        <button id="start-game-button" class="button button--primary start-game-button" type="button" disabled>Démarrer la partie</button>
       </section>
 
       <section id="game-screen" class="game-screen" aria-labelledby="game-title" hidden>
