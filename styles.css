@@ -1,4 +1,37 @@
 /* Styles propres aux pages NovyLand */
+.labo-access {
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-small);
+}
+
+.labo-access:hover {
+  color: var(--color-primary);
+  background: var(--color-surface-soft);
+}
+
+.labo-access:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.labo-status {
+  align-self: flex-start;
+  padding: .2rem .7rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-soft);
+  color: var(--color-text-muted);
+  font-size: .85rem;
+}
+
+.labo-note {
+  margin: 2rem auto 0;
+  max-width: 42rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
 .home-main {
   padding-top: .35rem;
   padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
