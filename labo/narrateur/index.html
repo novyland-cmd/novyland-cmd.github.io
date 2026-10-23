@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Retrouvez un passage de votre aventure sans dévoiler la suite." />
+  <title>Narrateur | Labo NovyLand</title>
+  <link rel="icon" href="../../favicon.ico" />
+  <link rel="stylesheet" href="../../assets/css/theme.css?v=20260905-select" />
+  <link rel="stylesheet" href="../../assets/css/navigation.css" />
+  <link rel="stylesheet" href="styles.css?v=20261023-7" />
+  <script type="module" src="script.js?v=20261023-7"></script>
+</head>
+<body>
+  <a class="skip-link" href="#reader">Aller au lecteur</a>
+  <div data-brand="NovyLand" data-context="novyland" data-page="narrateur" data-site-navigation
+    data-subtitle="Le laboratoire des idées">
+    <a class="novy-nav-fallback" href="../index.html">Retour au labo</a>
+  </div>
+  <main class="page-main narrator-main" id="reader">
+    <header class="reader-intro">
+      <a class="back-link" href="../index.html">← Le labo</a>
+      <div class="intro-heading">
+        <h1>Narrateur<span aria-hidden="true">.</span></h1>
+        <span class="prototype-badge">Première version</span>
+      </div>
+      <p>Votre aventure, un passage à la fois.</p>
+    </header>
+
+    <section class="library-panel" aria-labelledby="library-title">
+      <div class="library-copy">
+        <span class="book-icon" aria-hidden="true">§</span>
+        <div>
+          <h2 id="library-title">Votre livret d’aventure</h2>
+          <p id="library-status" role="status">Choisissez la bibliothèque de votre jeu pour commencer.</p>
+        </div>
+      </div>
+      <div class="library-choice">
+        <label for="library-select">Bibliothèques disponibles</label>
+        <select id="library-select" aria-describedby="library-help" disabled>
+          <option value="" disabled selected>Choisir un livret…</option>
+        </select>
+      </div>
+      <p class="library-help" id="library-help">Choisissez un livret parmi les bibliothèques disponibles.</p>
+      <p class="feedback error" id="library-error" role="alert" hidden></p>
+    </section>
+
+    <section class="search-panel" aria-labelledby="search-title">
+      <div class="section-topline"><p class="eyebrow">Au fil de l’aventure</p><span id="game-name" class="game-name" hidden></span></div>
+      <h2 id="search-title">Quel passage souhaitez-vous lire ?</h2>
+      <form id="passage-form" novalidate>
+        <label for="paragraph-id">Numéro de paragraphe</label>
+        <div class="search-row">
+          <input id="paragraph-id" name="paragraph" type="text" placeholder="Ex. : 9.2" autocomplete="off"
+            autocapitalize="characters" spellcheck="false" maxlength="40" aria-describedby="search-help search-feedback" />
+          <button id="show-passage" class="button--primary" type="submit" disabled>Afficher <span aria-hidden="true">→</span></button>
+        </div>
+        <p id="search-help" class="field-help">Le point et la virgule sont acceptés : 9.2 ou 9,2.</p>
+        <p id="search-feedback" class="feedback" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="reading-area" aria-label="Lecture du passage">
+      <div class="reader-toolbar">
+        <div class="font-controls" role="group" aria-label="Taille du texte">
+          <span class="toolbar-label">Taille du texte</span>
+          <button id="font-smaller" class="size-button" type="button" aria-label="Réduire la taille du texte">A−</button>
+          <output id="font-size" aria-live="polite">20 px</output>
+          <button id="font-larger" class="size-button" type="button" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button id="hide-passage" class="button--quiet hide-button" type="button" disabled>Masquer le texte</button>
+      </div>
+      <div class="reading-placeholder" id="reading-placeholder">
+        <span class="placeholder-mark" aria-hidden="true">§</span>
+        <h2 id="placeholder-title">L’histoire attend votre numéro.</h2>
+        <p id="placeholder-text">Seul le passage demandé apparaîtra ici.</p>
+      </div>
+      <article id="passage" class="passage" aria-labelledby="passage-title" hidden>
+        <header class="passage-header">
+          <p class="eyebrow" id="passage-number"></p>
+          <h2 id="passage-title" tabindex="-1"></h2>
+          <p id="passage-source" class="passage-source"></p>
+        </header>
+        <div id="passage-text" class="passage-text"></div>
+        <p id="reference-note" class="reference-note" hidden>Les renvois soulignés demandent confirmation avant d’ouvrir un autre passage.</p>
+      </article>
+    </section>
+    <p class="reader-footnote">Pas de liste de passages, pas d’aperçu de la suite. Juste le numéro choisi.</p>
+    <noscript><p class="feedback error">Activez JavaScript pour charger une bibliothèque et afficher ses passages.</p></noscript>
+  </main>
+  <dialog id="reference-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <form method="dialog">
+      <p class="eyebrow">Continuer l’aventure</p>
+      <h2 id="dialog-title">Ouvrir ce passage ?</h2>
+      <p id="dialog-description"></p>
+      <div class="dialog-actions">
+        <button class="button--quiet" value="cancel" autofocus>Rester ici</button>
+        <button id="confirm-reference" class="button--primary" value="open">Ouvrir le passage</button>
+      </div>
+    </form>
+  </dialog>
+  <footer class="site-footer">
+    <nav class="site-footer-links" aria-label="Liens de retour">
+      <a href="../index.html">Labo NovyLand</a><a href="../../index.html">Accueil NovyLand</a>
+    </nav>
+    <p class="site-footer-copyright">© 2024-2026 NovyLand · Narrateur, un projet du labo</p>
+  </footer>
+  <script src="../../assets/js/navigation.js?v=20260905-select" type="module"></script>
+</body>
+</html>

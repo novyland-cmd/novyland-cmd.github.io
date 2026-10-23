@@ -1,0 +1,3 @@
+# Bibliothèques et rapports issus des livrets, conservés uniquement en local.
+.local/
+__pycache__/

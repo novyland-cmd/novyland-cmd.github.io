@@ -2,3 +2,9 @@
 novytools/.DS_Store
 novytools/applications/premier-joueur/.DS_Store
 novytools/applications/.DS_Store
+
+# Fichiers de travail et caches, inutiles à la publication du site.
+/tmp/
+/output/
+__pycache__/
+*.pyc
