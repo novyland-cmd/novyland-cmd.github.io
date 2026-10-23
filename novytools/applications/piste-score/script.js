@@ -9,8 +9,7 @@ import { createPlayerSelection, getColorDefinition, applyTokenAppearance } from 
  */
 
 const PLAYER_LIMITS = Object.freeze({ min: 1, max: 6 });
-const SCORE_MILESTONES = Object.freeze([50, 100, 150, 200]);
-const SCORE_TRACK_CONFIG = Object.freeze({ totalSpaces: 50, spacesPerRow: 10, maxDisplayedMilestone: 200 });
+const SCORE_TRACK_CONFIG = Object.freeze({ totalSpaces: 50, spacesPerRow: 10 });
 const TOKEN_LAYOUT_LIMIT = PLAYER_LIMITS.max;
 
 
@@ -52,7 +51,7 @@ function calculateMilestone(score) {
 
   const completedMilestone = Math.floor((normalizedScore - 1) / SCORE_TRACK_CONFIG.totalSpaces)
     * SCORE_TRACK_CONFIG.totalSpaces;
-  return Math.min(completedMilestone, SCORE_TRACK_CONFIG.maxDisplayedMilestone);
+  return completedMilestone;
 }
 
 function cloneData(data) {
@@ -89,27 +88,26 @@ function createTrackSpace(position) {
   return space;
 }
 
-/** Crée une grande case de palier de deux colonnes. */
-function createMilestoneSpace(value) {
-  const isStart = value === 0;
+/** Crée la case Départ ou la zone commune des jetons de palier. */
+function createMilestoneSpace(isStart) {
   const space = document.createElement("div");
-  space.id = isStart ? "score-space-start" : `score-milestone-${value}`;
+  space.id = isStart ? "score-space-start" : "score-milestones";
   space.className = `score-track-space score-track-space--milestone${isStart ? " score-track-space--start" : ""}`;
-  space.dataset.trackPosition = String(value);
+  if (isStart) space.dataset.trackPosition = "0";
   space.dataset.spaceType = isStart ? "start" : "milestone";
   space.setAttribute("role", "group");
-  space.setAttribute("aria-label", isStart ? "Case Départ" : `Palier ${value}`);
+  space.setAttribute("aria-label", isStart ? "Case Départ" : "Paliers des joueurs");
 
   const label = document.createElement("span");
   label.className = "score-track-number";
-  label.textContent = isStart ? "Départ" : String(value);
+  label.textContent = isStart ? "Départ" : "Paliers";
   label.setAttribute("aria-hidden", "true");
 
   const tokenLayer = document.createElement("span");
   tokenLayer.className = "score-track-tokens score-track-tokens--milestone";
-  tokenLayer.dataset.tokenLayer = String(value);
+  tokenLayer.dataset.tokenLayer = isStart ? "0" : "paliers";
   tokenLayer.dataset.layerType = "milestone";
-  tokenLayer.setAttribute("aria-hidden", "true");
+  if (isStart) tokenLayer.setAttribute("aria-hidden", "true");
 
   space.append(label, tokenLayer);
   return space;
@@ -140,7 +138,7 @@ function generateScoreTrack() {
   milestoneRow.dataset.trackRow = "milestones";
   milestoneRow.setAttribute("role", "group");
   milestoneRow.setAttribute("aria-label", "Départ et paliers de 50 points");
-  [0, ...SCORE_MILESTONES].forEach((value) => milestoneRow.append(createMilestoneSpace(value)));
+  milestoneRow.append(createMilestoneSpace(true), createMilestoneSpace(false));
   fragment.append(milestoneRow);
 
   const rowCount = Math.ceil(SCORE_TRACK_CONFIG.totalSpaces / SCORE_TRACK_CONFIG.spacesPerRow);
@@ -171,7 +169,7 @@ function createTrackToken(player, tokenType = "track") {
 
 /** Retourne la couche de jetons d'une case et d'un type donnés. */
 function getTokenLayer(position, layerType = "track") {
-  const normalizedPosition = Number(position);
+  const normalizedPosition = position === "paliers" ? position : Number(position);
   return dom.scoreTrack?.querySelector(
     `[data-token-layer="${normalizedPosition}"][data-layer-type="${layerType}"]`
   ) || null;
@@ -223,32 +221,24 @@ function placePlayerTrackToken(player) {
 
 /** Place, déplace ou retire le second jeton indiquant le palier dépassé. */
 function placePlayerMilestoneToken(player) {
-  const previousMilestone = Number.isInteger(player.displayedMilestone) ? player.displayedMilestone : 0;
   const nextMilestone = calculateMilestone(player.score);
   let token = dom.scoreTrack.querySelector(
     `[data-track-token-player-id="${player.id}"][data-token-type="milestone"]`
   );
-
-  if (nextMilestone === 0) {
-    token?.remove();
-    player.displayedMilestone = 0;
-    if (previousMilestone) updateTokenLayout(previousMilestone, "milestone");
-    return true;
-  }
-
-  const destinationLayer = getTokenLayer(nextMilestone, "milestone");
+  const destinationLayer = getTokenLayer("paliers", "milestone");
   if (!destinationLayer) return false;
   if (!token) token = createTrackToken(player, "milestone");
 
   applyTokenAppearance(token, player);
+  token.textContent = String(nextMilestone);
+  token.setAttribute("aria-label", `${player.displayName} · Palier ${nextMilestone} · Score ${player.score}`);
   token.title = `${player.displayName} · Palier ${nextMilestone} dépassé · Score ${player.score}`;
   token.dataset.score = String(player.score);
   token.dataset.milestone = String(nextMilestone);
   destinationLayer.append(token);
   player.displayedMilestone = nextMilestone;
 
-  if (previousMilestone) updateTokenLayout(previousMilestone, "milestone");
-  updateTokenLayout(nextMilestone, "milestone");
+  updateTokenLayout("paliers", "milestone");
   return true;
 }
 
@@ -272,15 +262,11 @@ function updateAllPlayerTokens() {
   scoreTrackState.game.players.forEach((player) => {
     player.score = normalizeScore(player.score);
     player.milestone = calculateMilestone(player.score);
-    player.milestoneIndicators = SCORE_MILESTONES.map((value) => ({
-      value,
-      active: player.milestone >= value
-    }));
     placePlayerToken(player);
   });
 
   dom.scoreTrack.querySelectorAll("[data-token-layer]").forEach((layer) => {
-    updateTokenLayout(Number(layer.dataset.tokenLayer), layer.dataset.layerType || "track");
+    updateTokenLayout(layer.dataset.tokenLayer, layer.dataset.layerType || "track");
   });
 }
 
@@ -296,10 +282,6 @@ function updatePlayerScore(playerId, nextScore) {
   const previousPosition = player.trackPosition;
   player.score = normalizeScore(nextScore);
   player.milestone = calculateMilestone(player.score);
-  player.milestoneIndicators = SCORE_MILESTONES.map((value) => ({
-    value,
-    active: player.milestone >= value
-  }));
 
   placePlayerToken(player);
   renderGame();
@@ -335,7 +317,6 @@ function createGamePlayer(configuredPlayer) {
     trackPosition: 0,
     milestone: 0,
     displayedMilestone: 0,
-    milestoneIndicators: SCORE_MILESTONES.map((value) => ({ value, active: false })),
     isActive: false
   };
 }
@@ -539,7 +520,7 @@ function showConfigurationScreen() {
 function resetGame() {
   dom.scoreTrack?.querySelectorAll("[data-track-token-player-id]").forEach((token) => token.remove());
   dom.scoreTrack?.querySelectorAll("[data-token-layer]").forEach((layer) => {
-    updateTokenLayout(Number(layer.dataset.tokenLayer), layer.dataset.layerType || "track");
+    updateTokenLayout(layer.dataset.tokenLayer, layer.dataset.layerType || "track");
   });
   scoreTrackState.game = null;
   dom.scoreStep.value = "1";
