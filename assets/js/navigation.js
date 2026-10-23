@@ -17,7 +17,8 @@ const NAVIGATION_SECTIONS = [
       items: [
          { id: "first-player", label: "Premier Joueur", path: "novytools/applications/premier-joueur/index.html" },
          { id: "timer", label: "Minuteur de jeu", path: "novytools/applications/minuteur/index.html" },
-         { id: "score", label: "Piste de score", path: "novytools/applications/piste-score/index.html" }
+         { id: "score", label: "Piste de score", path: "novytools/applications/piste-score/index.html" },
+         { id: "choice-wheel", label: "La roue chanceuse", path: "novytools/applications/roue-de-choix/index.html" }
       ]
    },
    {
@@ -27,6 +28,8 @@ const NAVIGATION_SECTIONS = [
          { id: "about-tools", label: "À propos de NovyTools", path: "novytools/about.html" },
          { id: "about-first-player", label: "À propos de Premier Joueur", path: "novytools/applications/premier-joueur/about.html" },
          { id: "about-timer", label: "À propos du Minuteur", path: "novytools/applications/minuteur/about.html" },
+         { id: "about-score", label: "À propos de la Piste de score", path: "novytools/applications/piste-score/about.html" },
+         { id: "about-choice-wheel", label: "À propos de La roue chanceuse", path: "novytools/applications/roue-de-choix/about.html" },
          { id: "privacy", label: "Politique de confidentialité", path: "pages/privacy.html" },
          { id: "legal", label: "Mentions légales", path: "pages/legal.html" }
       ]

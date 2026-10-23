@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/><title>La roue chanceuse | NovyTools</title><meta content="Ajoutez vos choix et laissez la roue décider !" name="description"/><meta content="index, follow, max-image-preview:large" name="robots"/><link href="https://novyland.ca/novytools/applications/roue-de-choix/" rel="canonical"/><meta content="website" property="og:type"/><meta content="fr_CA" property="og:locale"/><meta content="NovyLand" property="og:site_name"/><meta content="La roue chanceuse" property="og:title"/><meta content="Ajoutez vos choix et laissez la roue décider !" property="og:description"/><meta content="https://novyland.ca/novytools/applications/roue-de-choix/" property="og:url"/><meta content="https://novyland.ca/assets/brand/og-novyland.jpg" property="og:image"/><meta content="Identité visuelle de NovyLand, jeux de société et outils ludiques" property="og:image:alt"/><meta content="1200" property="og:image:width"/><meta content="630" property="og:image:height"/><meta content="summary_large_image" name="twitter:card"/><meta content="La roue chanceuse" name="twitter:title"/><meta content="Ajoutez vos choix et laissez la roue décider !" name="twitter:description"/><meta content="https://novyland.ca/assets/brand/og-novyland.jpg" name="twitter:image"/><meta content="Identité visuelle de NovyLand, jeux de société et outils ludiques" name="twitter:image:alt"/><link href="/favicon.ico" rel="icon" type="image/x-icon"/><link href="/assets/brand/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/><link href="/assets/brand/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/assets/brand/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/><link href="/site.webmanifest" rel="manifest"/><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "La roue chanceuse | NovyTools",
+  "description": "Ajoutez vos choix et laissez la roue décider !",
+  "url": "https://novyland.ca/novytools/applications/roue-de-choix/",
+  "inLanguage": "fr-CA"
+}
+</script>
+
+<link href="../../../assets/css/theme.css?v=20260905-select" rel="stylesheet"/>
+<link href="../../../assets/css/advertising.css" rel="stylesheet"/>
+<link href="../../styles.css" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<link href="../../../assets/css/navigation.css" rel="stylesheet"/>
+</head>
+<body>
+<div data-brand="NovyTools" data-context="novytools" data-page="choice-wheel" data-site-navigation data-subtitle="La roue chanceuse"><a class="novy-nav-fallback" href="../../index.html">Accueil NovyTools</a></div>
+<div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-top" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div>
+<main class="page-main">
+<section class="hero" aria-labelledby="wheel-title">
+<p class="eyebrow">Laissez le hasard décider</p>
+<h1 id="wheel-title">La roue chanceuse</h1>
+<p>Ajoutez vos choix et laissez la roue décider !</p>
+</section>
+<div class="wheel-layout">
+<section class="content-card choices-panel" aria-labelledby="choices-title">
+<h2 id="choices-title">Vos choix</h2>
+<form id="choice-form">
+<label for="new-choice">Ajouter un mot, un nom ou une courte phrase</label>
+<div class="choice-entry">
+<input id="new-choice" name="choice" type="text" maxlength="100" autocomplete="off" aria-describedby="choice-help" placeholder="Ex. : Jeu de stratégie"/>
+<button class="button" type="submit">Ajouter</button>
+</div>
+<p id="choice-help" class="help-text">Jusqu’à 100 caractères par choix. Les entrées vides sont ignorées.</p>
+</form>
+<p id="empty-choices" class="help-text">Aucun choix pour le moment. Ajoutez votre première idée !</p>
+<ol id="choices-list" class="choices-list" aria-label="Choix modifiables"></ol>
+<button id="clear-choices" class="button--secondary" type="button" disabled>Vider la liste</button>
+<p id="storage-status" class="help-text" role="status">Vos choix sont enregistrés automatiquement dans ce navigateur.</p>
+<p id="choice-feedback" class="help-text" role="status"></p>
+</section>
+<section class="content-card wheel-panel" aria-labelledby="preview-title">
+<h2 id="preview-title">Votre roue</h2>
+<svg id="choice-wheel" viewBox="0 0 400 400" role="img" aria-labelledby="wheel-description">
+<title id="wheel-description">Roue sans choix</title>
+<g id="wheel-sectors"></g>
+<circle cx="200" cy="200" r="182" fill="none" stroke="var(--color-primary-dark)" stroke-width="4"/>
+<circle cx="200" cy="200" r="12" fill="var(--color-surface)" stroke="var(--color-primary-dark)" stroke-width="4"/>
+<path d="m188 4 12 28L212 4Z" fill="var(--color-primary-dark)"/>
+</svg>
+<button id="spin-button" class="button" type="button" aria-describedby="wheel-status" disabled>Faire tourner</button>
+<div id="wheel-result" class="wheel-result" hidden>
+<p class="eyebrow">Le choix de la roue</p>
+<p id="result-value" class="result-value"></p>
+</div>
+<p id="result-announcement" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+<p id="wheel-status" class="help-text" role="status">Ajoutez au moins deux choix pour préparer un tirage.</p>
+<a class="button--secondary" href="../../index.html">Retour à NovyTools</a>
+</section>
+</div>
+<noscript><p>Activez JavaScript pour ajouter des choix et afficher la roue.</p></noscript>
+</main>
+<div aria-label="Emplacement publicitaire" class="ad-container ad-container--horizontal" data-ad-enabled="true" data-ad-slot="page-bottom" data-ad-status="placeholder" role="complementary"><span class="ad-placeholder-label">Espace publicitaire</span></div>
+<footer class="site-footer">
+<div class="site-footer-section">
+<p class="site-footer-title">Explorer NovyLand</p>
+<nav aria-label="Explorer NovyLand" class="site-footer-links">
+<a href="../../../index.html">Accueil</a>
+<a href="../../../jeux/index.html">NovyLand Games</a>
+<a href="../../../novytools/index.html">NovyTools</a>
+</nav>
+</div>
+<div class="site-footer-section">
+<p class="site-footer-title">Documentation et informations</p>
+<nav aria-label="Documentation et informations" class="site-footer-links">
+<a href="about.html">À propos</a>
+<a href="../../../pages/privacy.html">Politique de confidentialité</a>
+<a href="../../../pages/legal.html">Mentions légales</a>
+</nav>
+</div>
+<p class="site-footer-copyright">© 2024-2026 NovyLand – Projet en développement</p>
+</footer>
+<script src="script.js" defer></script>
+<script src="../../../assets/js/navigation.js?v=20260905-select" type="module"></script>
+</body>
+</html>

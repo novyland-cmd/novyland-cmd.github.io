@@ -1,0 +1,88 @@
+.wheel-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.wheel-layout h2 { margin-top: 0; color: var(--color-primary); }
+.wheel-layout label { display: block; font-weight: 750; margin-bottom: .4rem; }
+.choice-entry { display: flex; gap: .6rem; }
+.wheel-layout input,
+.wheel-layout textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 3rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: .65rem .8rem;
+}
+.wheel-layout input:focus-visible,
+.wheel-layout textarea:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.help-text { color: var(--color-text-muted); font-size: .9rem; overflow-wrap: anywhere; }
+.choices-list { display: grid; gap: 1rem; padding-left: 1.5rem; }
+.choices-list li { padding-left: .3rem; }
+.choices-list label { font-size: .85rem; }
+.choices-list button { margin-top: .4rem; }
+.wheel-panel { text-align: center; }
+#choice-wheel { display: block; width: 100%; max-width: 28rem; margin-inline: auto; height: auto; }
+@media (max-width: 48rem) {
+  .wheel-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 30rem) {
+  .choice-entry { flex-direction: column; }
+}
+
+.wheel-layout > * { min-width: 0; }
+.wheel-layout textarea {
+  display: block;
+  resize: vertical;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+#choice-wheel { overflow: visible; }
+#choice-wheel text { font-family: inherit; }
+
+#spin-button { width: 100%; margin-top: 1rem; }
+.wheel-result {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface-soft);
+}
+.wheel-result[hidden] { display: none; }
+.result-value {
+  margin: .5rem 0 0;
+  color: var(--color-primary-dark);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.choices-panel :disabled { cursor: wait; opacity: .65; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.wheel-layout button:focus-visible,
+.wheel-layout a:focus-visible {
+  outline: 3px solid var(--color-primary-dark);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wheel-layout button, .wheel-layout a { transition: none; }
+}
