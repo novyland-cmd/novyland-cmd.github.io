@@ -55,6 +55,17 @@ button:disabled { cursor: not-allowed; opacity: .5; }
 .reference-link:hover { background: #dbe8d5; }
 .reference-note { color: var(--color-text-muted); font-size: .8rem; border-top: 1px solid #e6e6dc; padding-top: 1.2rem; margin: 1.8rem 0 0; }
 .reader-footnote { color: var(--color-text-muted); font-size: .8rem; text-align: center; margin: 1rem 0; }
+.speech-panel { padding: 1rem 1.2rem; background: #f4f6f0; border-bottom: 1px solid var(--color-border); }
+.speech-panel h2 { font-size: 1rem; color: var(--color-primary-dark); margin: 0 0 .8rem; }
+.speech-settings { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.3fr); gap: .7rem; }
+.speech-settings > div { min-width: 0; }
+.speech-settings label { display: block; font-size: .8rem; font-weight: 700; margin-bottom: .3rem; }
+.speech-settings select { width: 100%; min-height: 2.8rem; padding: .5rem; border: 1px solid #adbdb4; border-radius: .5rem; background: white; }
+.speech-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; }
+.speech-actions button { width: 3.25rem; height: 3.25rem; min-height: 3.25rem; padding: .75rem; border-radius: 50%; }
+#speech-status { font-size: .85rem; color: var(--color-primary-dark); margin: .7rem 0 .2rem; }
+.speech-help { font-size: .75rem; color: var(--color-text-muted); margin: .2rem 0; }
+@media (max-width: 40rem) { .speech-settings { grid-template-columns: 1fr; } }
 dialog { width: min(31rem, calc(100% - 2rem)); max-height: calc(100% - 2rem); padding: 1.8rem; border: 1px solid var(--color-border); border-radius: 1rem; color: var(--color-text); box-shadow: var(--shadow-medium); }
 dialog::backdrop { background: #10251dcc; }
 dialog h2 { color: var(--color-primary-dark); margin: .7rem 0; }

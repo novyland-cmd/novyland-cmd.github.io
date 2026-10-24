@@ -1,4 +1,6 @@
-import { prepareLibrary, findPassage, passageParts, libraryLabel } from "./library.mjs?v=20261023-8";
+import { prepareLibrary, findPassage, passageParts, libraryLabel, reflowText } from "./library.mjs?v=20261023-8";
+import { SpeechReader } from "./speech.mjs?v=20261023-9";
+import { RemoteAudioReader, ELEVENLABS_VOICES, audioEndpoint } from "./remote-audio.mjs?v=20261024-2";
 import { refreshSelect } from "../../assets/js/select.js?v=20260905";
 
 const $ = id => document.getElementById(id);
@@ -10,6 +12,12 @@ let loadVersion = 0;
 let libraryLoading = false;
 let activeCatalogId = "";
 const catalog = new Map();
+let spokenPassage = null;
+let availableVoices = [];
+const deviceSpeech = new SpeechReader(window.speechSynthesis, window.SpeechSynthesisUtterance, () => updateSpeechControls());
+const remoteSpeech = new RemoteAudioReader({ getToken: requestGenerationCode, onState: () => updateSpeechControls() });
+let speech = deviceSpeech;
+let generationCode = "";
 let fontSize = 20;
 try {
   const saved = Number(localStorage.getItem("narrateur-font-size"));
@@ -24,6 +32,9 @@ function feedback(text = "", error = false) {
 }
 
 function conceal({ manual = false } = {}) {
+  spokenPassage = null;
+  deviceSpeech.stop();
+  remoteSpeech.stop();
   if (dialog.open) dialog.close("cancel");
   pendingReference = null;
   $("passage").hidden = true;
@@ -82,9 +93,15 @@ function displayPassage(value) {
   $("reading-placeholder").hidden = true;
   $("passage").hidden = false;
   $("hide-passage").disabled = false;
+  spokenPassage = passage;
+  $("speech-mode").value = "full";
+  $("speech-mode").querySelector('[value="narration"]').disabled = speech === remoteSpeech || !hasNarration();
+  refreshSelect($("speech-mode"));
+  $("speech-mode-help").hidden = speech !== remoteSpeech && hasNarration();
+  updateSpeechControls();
   feedback(`Paragraphe ${passage.id} affiché.`);
   $("passage-title").focus({ preventScroll: true });
-  $("passage").scrollIntoView({ block: "start", behavior: "instant" });
+  $("reading-area").scrollIntoView({ block: "start", behavior: "instant" });
 }
 
 function confirmReference(id) {
@@ -112,6 +129,7 @@ function installLibrary(data, catalogId) {
   const prepared = prepareLibrary(data);
   library = prepared;
   conceal();
+  refreshVoices();
   feedback();
   const name = libraryLabel(library);
   $("library-title").textContent = name;
@@ -136,11 +154,15 @@ $("hide-passage").addEventListener("click", () => {
   input.focus({ preventScroll: true });
 });
 document.addEventListener("keydown", event => {
-  if (event.key === "Escape" && !dialog.open && !$("passage").hidden) {
+  if (event.key === "Escape" && !dialog.open && !$("audio-access-dialog").open && !$("passage").hidden) {
     conceal({ manual: true });
     feedback("Texte masqué.");
     input.focus({ preventScroll: true });
   }
+});
+input.addEventListener("focus", () => {
+  input.value = "";
+  feedback();
 });
 input.addEventListener("input", () => feedback());
 
@@ -202,3 +224,124 @@ fetch("./libraries/catalog.json", { cache: "no-store" })
   .catch(() => {
     $("library-help").textContent = "La liste des livrets est indisponible. Réessayez en rechargeant la page.";
   });
+
+function hasNarration() {
+  return spokenPassage?.narration_verified === true &&
+    typeof spokenPassage.narration_text === "string" && spokenPassage.narration_text.trim().length > 0;
+}
+
+function updateSpeechControls() {
+  const active = ["playing", "paused", "loading"].includes(speech.state);
+  const ready = speech.supported && spokenPassage && availableVoices.length > 0;
+  const playing = speech.state === "playing";
+  const action = playing ? "Mettre en pause" : speech.state === "paused" ? "Reprendre" : "Lire";
+  $("speech-toggle").disabled = speech.state === "loading" || (!ready && !active);
+  $("speech-toggle").setAttribute("aria-label", action);
+  $("speech-toggle").title = action;
+  $("speech-play-icon").toggleAttribute("hidden", playing);
+  $("speech-pause-icon").toggleAttribute("hidden", !playing);
+  $("speech-stop").disabled = !active;
+  $("speech-voice").disabled = !speech.supported || !availableVoices.length || active;
+  $("speech-rate").disabled = !speech.supported || active;
+  $("speech-mode").disabled = !speech.supported || !spokenPassage || active;
+  for (const id of ["speech-voice", "speech-rate", "speech-mode"]) refreshSelect($(id));
+  $("speech-status").textContent = !speech.supported ? "La lecture vocale n’est pas disponible dans ce navigateur." :
+    !spokenPassage ? "Affichez un passage pour démarrer la lecture." :
+    !availableVoices.length ? "Aucune voix disponible dans la langue de ce livret. Ajoutez une voix dans les réglages de votre appareil, puis revenez ici." :
+    ({ loading: "Préparation de l’audio… Un nouvel enregistrement peut prendre quelques secondes.",
+       ready: "L’audio est prêt. Appuyez sur Lire pour l’écouter.",
+       playing: "Lecture en cours…", paused: "Lecture en pause.", finished: "Lecture terminée.",
+       error: speech === remoteSpeech ? remoteSpeech.message : "La lecture a été interrompue par l’appareil. Réessayez ou choisissez une autre voix." })[speech.state] || "Prêt à lire le passage affiché.";
+  if (remoteSpeech.accessDenied) { generationCode = ""; remoteSpeech.accessDenied = false; }
+}
+
+function refreshVoices() {
+  const previous = availableVoices[Number($("speech-voice").value)];
+  const lang = (library?.language || "fr").split(/[-_]/)[0].toLowerCase();
+  availableVoices = deviceSpeech.supported ? deviceSpeech.synth.getVoices()
+    .filter(voice => voice.lang.split(/[-_]/)[0].toLowerCase() === lang)
+    .sort((a, b) => Number(b.localService) - Number(a.localService) || a.name.localeCompare(b.name, "fr")) : [];
+  if (remoteSpeech.supported) availableVoices.unshift(...ELEVENLABS_VOICES.map(voice => ({ ...voice, lang })));
+  const select = $("speech-voice");
+  select.replaceChildren();
+  availableVoices.forEach((voice, index) => {
+    const option = document.createElement("option");
+    option.value = String(index);
+    option.textContent = voice.provider === "elevenlabs" ? voice.name : `${voice.name} (${voice.lang})${voice.localService ? "" : " · en ligne"}`;
+    select.append(option);
+  });
+  if (!availableVoices.length) {
+    const option = document.createElement("option");
+    option.textContent = "Aucune voix disponible";
+    select.append(option);
+  } else {
+    const index = availableVoices.findIndex(voice => voice.voiceURI === previous?.voiceURI && voice.lang === previous?.lang);
+    select.value = String(Math.max(0, index));
+  }
+  selectSpeechEngine();
+}
+
+$("speech-toggle").addEventListener("click", () => {
+  if (speech.state === "playing") { speech.pause(); return; }
+  if (speech.state === "paused") { speech.resume(); return; }
+  if (speech.state === "ready") { remoteSpeech.playReady(); return; }
+  if (!spokenPassage) return;
+  const voice = availableVoices[Number($("speech-voice").value)];
+  if (!voice) return;
+  if (voice.provider === "elevenlabs") {
+    remoteSpeech.start({ library: activeCatalogId, passage: spokenPassage.id, voice: voice.alias }, Number($("speech-rate").value), reflowText(spokenPassage.text));
+    return;
+  }
+  const text = $("speech-mode").value === "narration" && hasNarration() ? spokenPassage.narration_text : spokenPassage.text;
+  speech.start(reflowText(text), { voice, lang: library.language, rate: Number($("speech-rate").value) });
+});
+$("speech-stop").addEventListener("click", () => speech.stop());
+$("speech-voice").addEventListener("change", () => { speech.stop(); selectSpeechEngine(); });
+for (const id of ["speech-rate", "speech-mode"]) $(id).addEventListener("change", () => speech.stop());
+window.addEventListener("pagehide", () => { speech.stop(); generationCode = ""; });
+window.addEventListener("beforeunload", () => speech.stop());
+window.addEventListener("focus", refreshVoices);
+deviceSpeech.synth?.addEventListener("voiceschanged", refreshVoices);
+refreshVoices();
+
+function selectSpeechEngine() {
+  const selected = availableVoices[Number($("speech-voice").value)];
+  const engine = selected?.provider === "elevenlabs" ? remoteSpeech : deviceSpeech;
+  if (engine !== speech) { speech.stop(); speech = engine; }
+  $("speech-mode").value = "full";
+  $("speech-mode").querySelector('[value="narration"]').disabled = speech === remoteSpeech || !hasNarration();
+  updateSpeechControls();
+}
+
+function requestGenerationCode(signal) {
+  if (signal.aborted) return Promise.resolve(null);
+  if (generationCode) return Promise.resolve(generationCode);
+  const access = $("audio-access-dialog");
+  const code = $("audio-access-code");
+  return new Promise(resolve => {
+    const cancel = () => { if (access.open) access.close("cancel"); };
+    access.addEventListener("close", () => {
+      signal.removeEventListener("abort", cancel);
+      const result = access.returnValue === "generate" && !signal.aborted ? code.value.trim() : "";
+      code.value = "";
+      if (result) generationCode = result;
+      resolve(result || null);
+    }, { once: true });
+    code.value = "";
+    access.returnValue = "";
+    signal.addEventListener("abort", cancel, { once: true });
+    access.showModal();
+    code.focus();
+  });
+}
+
+fetch("./audio-config.json", { cache: "no-store" })
+  .then(response => { if (!response.ok) throw new Error("configuration"); return response.json(); })
+  .then(config => {
+    remoteSpeech.endpoint = audioEndpoint(config.endpoint);
+    if (remoteSpeech.supported) {
+      $("elevenlabs-note").textContent = "Patrick et Anna : les enregistrements existants sont réutilisés. Un code privé autorise les nouvelles générations.";
+      refreshVoices();
+    }
+  })
+  .catch(() => { /* Les voix de l'appareil restent utilisables. */ });

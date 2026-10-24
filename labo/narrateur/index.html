@@ -9,8 +9,8 @@
   <link rel="icon" href="../../favicon.ico" />
   <link rel="stylesheet" href="../../assets/css/theme.css?v=20260905-select" />
   <link rel="stylesheet" href="../../assets/css/navigation.css" />
-  <link rel="stylesheet" href="styles.css?v=20261023-7" />
-  <script type="module" src="script.js?v=20261023-8"></script>
+  <link rel="stylesheet" href="styles.css?v=20261023-11" />
+  <script type="module" src="script.js?v=20261024-3"></script>
 </head>
 <body>
   <a class="skip-link" href="#reader">Aller au lecteur</a>
@@ -61,7 +61,7 @@
       </form>
     </section>
 
-    <section class="reading-area" aria-label="Lecture du passage">
+    <section class="reading-area" id="reading-area" aria-label="Lecture du passage">
       <div class="reader-toolbar">
         <div class="font-controls" role="group" aria-label="Taille du texte">
           <span class="toolbar-label">Taille du texte</span>
@@ -71,6 +71,32 @@
         </div>
         <button id="hide-passage" class="button--quiet hide-button" type="button" disabled>Masquer le texte</button>
       </div>
+      <section class="speech-panel" aria-labelledby="speech-title">
+        <h2 id="speech-title">Écouter le passage</h2>
+        <div class="speech-settings">
+          <div><label for="speech-voice">Voix</label><select id="speech-voice" disabled><option>Aucune voix disponible</option></select></div>
+          <div><label for="speech-rate">Vitesse</label><select id="speech-rate">
+            <option value="0.75">0,75 × · Lent</option><option value="1" selected>1 × · Normal</option>
+            <option value="1.15">1,15 ×</option><option value="1.3">1,3 ×</option><option value="1.5">1,5 × · Rapide</option>
+          </select></div>
+          <div><label for="speech-mode">Contenu à lire</label><select id="speech-mode">
+            <option value="full">Passage complet</option><option value="narration" disabled>Narration seule</option>
+          </select></div>
+        </div>
+        <div class="speech-actions" role="group" aria-label="Commandes de lecture vocale">
+          <button id="speech-toggle" type="button" class="button--primary" aria-label="Lire" title="Lire" disabled>
+            <svg id="speech-play-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 4.5v15L20 12Z" /></svg>
+            <svg id="speech-pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" hidden><path d="M6 4h4v16H6zm8 0h4v16h-4z" /></svg>
+          </button>
+          <button id="speech-stop" type="button" class="button--quiet" aria-label="Arrêter" title="Arrêter" disabled>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="5" y="5" width="14" height="14" rx="1" /></svg>
+          </button>
+        </div>
+        <p id="speech-status" role="status" aria-live="polite">Affichez un passage pour démarrer la lecture.</p>
+        <p class="speech-help" id="speech-mode-help">La narration seule n’est pas encore disponible pour ces livrets.</p>
+        <p class="speech-help">Les voix proposées dépendent de votre appareil et de votre navigateur.</p>
+        <p class="speech-help" id="elevenlabs-note">Les voix Patrick et Anna seront disponibles après l’activation du service ElevenLabs.</p>
+      </section>
       <div class="reading-placeholder" id="reading-placeholder">
         <span class="placeholder-mark" aria-hidden="true">§</span>
         <h2 id="placeholder-title">L’histoire attend votre numéro.</h2>
@@ -89,6 +115,19 @@
     <p class="reader-footnote">Pas de liste de passages, pas d’aperçu de la suite. Juste le numéro choisi.</p>
     <noscript><p class="feedback error">Activez JavaScript pour charger une bibliothèque et afficher ses passages.</p></noscript>
   </main>
+  <dialog id="audio-access-dialog" aria-labelledby="audio-access-title" aria-describedby="audio-access-description">
+    <form method="dialog">
+      <h2 id="audio-access-title">Créer cet enregistrement</h2>
+      <p id="audio-access-description">Ce passage n’a pas encore été enregistré avec cette voix. La génération utilise le compte ElevenLabs du propriétaire du site. Saisissez votre code privé pour la lancer.</p>
+      <label for="audio-access-code">Code de génération</label>
+      <input id="audio-access-code" type="password" minlength="24" required autocomplete="off" style="width:100%;padding:.7rem;margin-top:.4rem" />
+      <p>Ce code reste uniquement en mémoire jusqu’à la fermeture de cette page. Ce n’est pas la clé API ElevenLabs.</p>
+      <div class="dialog-actions">
+        <button class="button--quiet" value="cancel" formnovalidate>Annuler</button>
+        <button class="button--primary" value="generate">Générer et lire</button>
+      </div>
+    </form>
+  </dialog>
   <dialog id="reference-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
     <form method="dialog">
       <p class="eyebrow">Continuer l’aventure</p>

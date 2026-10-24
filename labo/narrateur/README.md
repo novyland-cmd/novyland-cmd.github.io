@@ -21,7 +21,7 @@ Pour le français, les retours de ligne dus aux colonnes du PDF sont remplacés 
 Avec Node.js :
 
 ```sh
-node --test scripts/library.test.mjs
+node --test scripts/library.test.mjs scripts/speech.test.mjs
 ```
 
 Les tests utilisent des données fictives et, si elle est présente, la bibliothèque locale complète. Ils couvrent la numérotation, les alias, les doublons, les fichiers incompatibles, les positions Unicode après les symboles et la conservation intégrale du texte lors de l'insertion des liens. Les offsets `text_offset` de la bibliothèque comptent les points Unicode (Python) ; le lecteur les convertit en positions UTF-16 (JavaScript).
@@ -32,7 +32,19 @@ Pour un aperçu local depuis la racine du dépôt :
 python3 -m http.server 8765 --bind 127.0.0.1
 ```
 
-Puis ouvrir `http://127.0.0.1:8765/labo/narrateur/`. La lecture vocale ne fait pas partie de cette version.
+Puis ouvrir `http://127.0.0.1:8765/labo/narrateur/`.
+
+## Lecture vocale
+
+**Patrick et Anna avec ElevenLabs v4** : l'intégration à la demande est préparée. Suivre le guide `services/narrateur-audio/INSTALLATION.md` à la racine du dépôt pour créer le service Cloudflare, enregistrer les secrets et renseigner `audio-config.json`. Tant que l'adresse du service est vide, seules les voix de l'appareil sont proposées. Les audios créés sont sauvegardés dans R2 et réutilisés ; les nouvelles générations demandent un code privé.
+
+Le panneau **Écouter le passage** propose deux boutons à icônes : Lecture/Pause et Stop. Le premier lance la lecture, la met en pause puis la reprend au même endroit ; son icône et son libellé accessible suivent l’état de lecture. Stop arrête la lecture ; une nouvelle pression sur Lecture recommence au début. Les voix sont obtenues par l'API de synthèse du navigateur et filtrées selon la langue de la bibliothèque (français ou anglais). Les voix locales sont proposées en premier ; celles signalées comme distantes par le navigateur portent la mention « en ligne ». Leur disponibilité et leur prononciation dépendent du navigateur et de l'appareil. La vitesse peut être choisie avant la lecture, de 0,75 à 1,5 fois la vitesse normale.
+
+Un changement de passage, de bibliothèque, un masquage ou la sortie de page annule la lecture. Les longs textes sont découpés en segments, et les événements tardifs d'une ancienne lecture ne peuvent pas relancer le récit précédent. La lecture n'est jamais lancée automatiquement.
+
+La lecture du passage complet est disponible pour les deux bibliothèques actuelles. La narration seule reste désactivée : les textes ne comportent pas encore de séparation validée entre narration et consignes. Une future bibliothèque pourra fournir `narration_text` et `narration_verified: true` pour un passage relu ; ce mode sera alors activé uniquement pour ce passage. Les boutons sont désactivés avec un message explicatif si la synthèse ou une voix dans la langue du livret n'est pas disponible.
+
+Référence : [API SpeechSynthesis (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis).
 
 ## Fichiers locaux
 
