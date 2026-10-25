@@ -1,10 +1,12 @@
 import french from "../../labo/narrateur/libraries/sleeping-gods-fr.json" with { type: "json" };
 import english from "../../labo/narrateur/libraries/sleeping-gods-en.json" with { type: "json" };
+import cozy from "../../labo/narrateur/libraries/cozy-sticker-ville-fr.json" with { type: "json" };
 import { prepareLibrary, findPassage, reflowText } from "../../labo/narrateur/library.mjs";
 
 const libraries = new Map([
   ["sleeping-gods-fr", prepareLibrary(french)],
   ["sleeping-gods-en", prepareLibrary(english)],
+  ["cozy-sticker-ville-fr", prepareLibrary(cozy)],
 ]);
 export const VOICES = { patrick: "XTyroWkQl32ZSd3rRVZ1", anna: "PSVUmed8NvS8aUA3d5oO" };
 const MODEL = "eleven_v4";
@@ -16,6 +18,7 @@ export async function resolveAudio(url, env) {
   if (!book || !Object.hasOwn(VOICES, voice)) return null;
   const found = findPassage(book, url.searchParams.get("passage") || "");
   if (found.status !== "found") return null;
+  // Chaque résultat est une entrée autonome, comme tout autre passage.
   const text = reflowText(found.passage.text);
   const characters = Array.from(text).length;
   if (characters > 10000) return null;

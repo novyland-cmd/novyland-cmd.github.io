@@ -1,4 +1,4 @@
-import { prepareLibrary, findPassage, passageParts, libraryLabel, reflowText } from "./library.mjs?v=20261023-8";
+import { prepareLibrary, findPassage, passageParts, libraryLabel, reflowText } from "./library.mjs?v=20261025-5";
 import { SpeechReader } from "./speech.mjs?v=20261023-9";
 import { RemoteAudioReader, ELEVENLABS_VOICES, audioEndpoint } from "./remote-audio.mjs?v=20261024-2";
 import { refreshSelect } from "../../assets/js/select.js?v=20260905";
@@ -74,6 +74,26 @@ function displayPassage(value) {
   $("passage-title").textContent = passage.title || `Passage ${passage.id}`;
   const pages = Array.isArray(passage.source_pages) ? passage.source_pages.filter(Number.isInteger) : [];
   $("passage-source").textContent = pages.length ? `Livret d’aventure · ${pages.length > 1 ? "Pages" : "Page"} ${pages.join(", ")} du PDF` : "";
+  if (Array.isArray(passage.printed_pages) && passage.printed_pages.length) {
+    $("passage-source").textContent += ` · Page ${passage.printed_pages.join(", ")} du livret`;
+  }
+  if (passage.conversion_note) $("passage-source").textContent += ` · Note de conversion : ${passage.conversion_note}`;
+  renderPassageText(passage);
+  $("reading-placeholder").hidden = true;
+  $("passage").hidden = false;
+  $("hide-passage").disabled = false;
+  spokenPassage = passage;
+  $("speech-mode").value = "full";
+  $("speech-mode").querySelector('[value="narration"]').disabled = speech === remoteSpeech || !hasNarration();
+  refreshSelect($("speech-mode"));
+  $("speech-mode-help").hidden = speech !== remoteSpeech && hasNarration();
+  updateSpeechControls();
+  feedback(`Paragraphe ${passage.id} affiché.`);
+  $("passage-title").focus({ preventScroll: true });
+  $("reading-area").scrollIntoView({ block: "start", behavior: "instant" });
+}
+
+function renderPassageText(passage) {
   const fragment = document.createDocumentFragment();
   let links = 0;
   for (const part of passageParts(passage, { reflow: library.language.split(/[-_]/)[0] === "fr" })) {
@@ -90,18 +110,6 @@ function displayPassage(value) {
   }
   $("passage-text").replaceChildren(fragment);
   $("reference-note").hidden = !links;
-  $("reading-placeholder").hidden = true;
-  $("passage").hidden = false;
-  $("hide-passage").disabled = false;
-  spokenPassage = passage;
-  $("speech-mode").value = "full";
-  $("speech-mode").querySelector('[value="narration"]').disabled = speech === remoteSpeech || !hasNarration();
-  refreshSelect($("speech-mode"));
-  $("speech-mode-help").hidden = speech !== remoteSpeech && hasNarration();
-  updateSpeechControls();
-  feedback(`Paragraphe ${passage.id} affiché.`);
-  $("passage-title").focus({ preventScroll: true });
-  $("reading-area").scrollIntoView({ block: "start", behavior: "instant" });
 }
 
 function confirmReference(id) {
@@ -133,13 +141,15 @@ function installLibrary(data, catalogId) {
   feedback();
   const name = libraryLabel(library);
   $("library-title").textContent = name;
-  $("library-status").textContent = `${library.passages.size.toLocaleString("fr-CA")} passages prêts à lire.`;
+  $("library-status").textContent = `${library.passages.size.toLocaleString("fr-CA")} passages prêts à lire.${library.partial ? " Bibliothèque partielle de test." : ""}`;
   $("game-name").textContent = name;
   $("game-name").hidden = false;
   activeCatalogId = catalogId;
   $("library-select").value = catalogId;
   refreshSelect($("library-select"));
-  $("library-help").textContent = "Choisissez un numéro pour commencer. Aucun passage ne s’affiche automatiquement.";
+  $("library-help").textContent = library.partial
+    ? "Extrait de test : certains passages et renvois sont absents. Les mentions « sur cette page » désignent le livret physique ; les autocollants ne sont pas suivis par l’application."
+    : "Choisissez un numéro pour commencer. Aucun passage ne s’affiche automatiquement.";
   $("library-error").hidden = true;
   $("show-passage").disabled = false;
 }

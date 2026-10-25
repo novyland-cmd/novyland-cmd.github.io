@@ -22,6 +22,39 @@ const request = (method = "GET", token, url = endpoint) => new Request(url, {
   method, headers: { Origin: "https://novyland.ca", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
 });
 
+test("Cozy Sticker Ville utilise son propre texte, même pour un numéro partagé", async t => {
+  const mock = t.mock.method(globalThis, "fetch", async () => { throw new Error("Aucun appel payant attendu"); });
+  const { env } = setup();
+  const cozyUrl = endpoint.replace("sleeping-gods-fr", "cozy-sticker-ville-fr");
+  const audio = await resolveAudio(new URL(cozyUrl), env);
+  const sleeping = await resolveAudio(new URL(endpoint), env);
+  assert.match(audio.text, /^Ce gouffre/);
+  assert.equal(audio.language, "fr");
+  assert.notEqual(audio.key, sleeping.key);
+  assert.equal((await worker.fetch(request("GET", undefined, cozyUrl), env)).status, 404);
+  assert.match((await resolveAudio(new URL(cozyUrl.replace("9.2", "36.2")), env)).text, /^Félicitations/);
+  assert.equal(mock.mock.callCount(), 0);
+});
+
+test("les entrées de choix sont lues seules et ont un cache distinct", async () => {
+  const { env } = setup();
+  const url = new URL(endpoint.replace("sleeping-gods-fr", "cozy-sticker-ville-fr").replace("9.2", "14.4"));
+  const initial = await resolveAudio(url, env);
+  assert.ok(!initial.text.includes("injection est faite"));
+  assert.ok(!initial.text.includes("testerai sur mon mari"));
+  url.searchParams.set("passage", "14.4OUI");
+  const yes = await resolveAudio(url, env);
+  assert.ok(yes.text.includes("injection est faite"));
+  assert.ok(!yes.text.includes("testerai sur mon mari"));
+  url.searchParams.set("passage", "14.4NON");
+  const no = await resolveAudio(url, env);
+  assert.ok(no.text.includes("testerai sur mon mari"));
+  assert.ok(!no.text.includes("injection est faite"));
+  assert.equal(new Set([initial.key, yes.key, no.key]).size, 3);
+  url.searchParams.set("passage", "14.4INCONNU");
+  assert.equal(await resolveAudio(url, env), null);
+});
+
 test("pas de génération sans code, pas de texte libre ou de voix arbitraire", async t => {
   t.mock.method(globalThis, "fetch", async () => { throw new Error("Aucun appel réseau attendu"); });
   const { env } = setup();

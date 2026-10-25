@@ -4,7 +4,7 @@ export function normalizeId(value) {
 }
 
 export function isValidId(id) {
-  return /^(?:\d+(?:\.\d+)?|F\d+|D\d+\.\d+|D\.I\.\d+)$/.test(id);
+  return /^(?:\d+(?:\.\d+)?(?:[A-Z][A-Z0-9]*)?|F\d+|D\d+\.\d+|D\.I\.\d+)$/.test(id);
 }
 
 export function prepareLibrary(data) {
@@ -32,11 +32,11 @@ export function prepareLibrary(data) {
       throw new Error("Les variantes de numérotation de cette bibliothèque sont incohérentes.");
     }
   }
-  return { gameId: data.game_id, language: typeof data.language === "string" ? data.language.trim() : "", passages, lookup, aliases };
+  return { gameId: data.game_id, language: typeof data.language === "string" ? data.language.trim() : "", partial: data.partial === true, passages, lookup, aliases };
 }
 
 export function libraryLabel(library) {
-  const name = library.gameId === "sleeping-gods" ? "Sleeping Gods" : library.gameId;
+  const name = { "sleeping-gods": "Sleeping Gods", "cozy-sticker-ville": "Cozy Sticker Ville" }[library.gameId] ?? library.gameId;
   if (!library.language) return name;
   let language = library.language;
   try {
@@ -76,8 +76,8 @@ export function passageParts(passage, { reflow = false } = {}) {
   const offsets = [0];
   for (const char of passage.text) offsets.push(offsets[offsets.length - 1] + char.length);
   const references = (Array.isArray(passage.references) ? passage.references : [])
-    .filter(ref => ref && ref.detection === "explicit" && typeof ref.raw_id === "string" &&
-      isValidId(ref.raw_id) && Number.isInteger(ref.text_offset) && ref.text_offset >= 0 &&
+    .filter(ref => ref && ref.detection === "explicit" && typeof ref.raw_id === "string" && ref.raw_id.length > 0 &&
+      isValidId(ref.target_id ?? ref.raw_id) && Number.isInteger(ref.text_offset) && ref.text_offset >= 0 &&
       ref.text_offset < offsets.length)
     .map(ref => ({ ...ref, start: offsets[ref.text_offset] }))
     .filter(ref => passage.text.slice(ref.start, ref.start + ref.raw_id.length) === ref.raw_id)
@@ -87,7 +87,7 @@ export function passageParts(passage, { reflow = false } = {}) {
   for (const ref of references) {
     if (ref.start < cursor) continue;
     parts.push({ text: text.slice(cursor, ref.start) });
-    parts.push({ text: ref.raw_id, target: ref.raw_id });
+    parts.push({ text: ref.raw_id, target: ref.target_id ?? ref.raw_id });
     cursor = ref.start + ref.raw_id.length;
   }
   parts.push({ text: text.slice(cursor) });

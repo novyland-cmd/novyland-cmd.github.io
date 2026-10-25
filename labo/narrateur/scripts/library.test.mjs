@@ -25,6 +25,103 @@ test("le libellé suit la langue sélectionnée sans supposer le français", () 
   assert.equal(libraryLabel(prepareLibrary({ ...source, language: "en" })), "Sleeping Gods · Anglais");
   assert.equal(libraryLabel(prepareLibrary({ ...source, language: "fr" })), "Sleeping Gods · Français");
   assert.equal(libraryLabel(prepareLibrary(source)), "Sleeping Gods");
+  assert.equal(libraryLabel(prepareLibrary({ ...source, game_id: "cozy-sticker-ville", language: "fr" })), "Cozy Sticker Ville · Français");
+});
+
+const cozy = JSON.parse(await readFile(new URL("../libraries/cozy-sticker-ville-fr.json", import.meta.url), "utf8"));
+const cozyLibrary = prepareLibrary(cozy);
+const cozyPassage = id => findPassage(cozyLibrary, id).passage;
+
+test("Cozy Sticker Ville : 236 entrées principales et 293 résultats autonomes", () => {
+  assert.equal(cozyLibrary.partial, false);
+  assert.equal(cozyLibrary.passages.size, 529);
+  const roots = cozy.passages.filter(p => !p.parent_id);
+  const results = cozy.passages.filter(p => p.parent_id);
+  assert.equal(roots.length, 236);
+  assert.equal(results.length, 293);
+  assert.equal(cozy.source.pdf_page_count, 31);
+  for (const p of cozy.passages) {
+    assert.equal(p.choices, undefined);
+    assert.equal(p.choice_references, undefined);
+    assert.ok(p.text.trim());
+    if (p.parent_id) {
+      assert.ok(cozyPassage(p.parent_id));
+      assert.ok(!/^([A-D]\. |• )/.test(p.text), p.id);
+    }
+    const page = Number((p.parent_id ?? p.id).split(".")[0]);
+    assert.deepEqual(p.source_pages, (p.parent_id ?? p.id) === "18.7" ? [13, 14] : [page - 5]);
+  }
+});
+
+test("un résultat ne répète ni la question ni les autres résultats", () => {
+  const parent = cozyPassage("12.2");
+  const a = cozyPassage("12.2A");
+  const b = cozyPassage("12.2B");
+  assert.match(parent.text, /Lors du mariage/);
+  assert.ok(!parent.text.includes("embrasser la mariée"));
+  assert.ok(!parent.text.includes("Alex est dévasté"));
+  assert.match(a.text, /^« Vous pouvez maintenant embrasser/);
+  assert.ok(!a.text.includes("Lors du mariage"));
+  assert.ok(!a.text.includes("Alex est dévasté"));
+  assert.match(b.text, /^Denise se jette/);
+  assert.ok(!b.text.includes("Lors du mariage"));
+  assert.deepEqual(passageParts(parent).filter(p => p.target), [
+    { text: "A", target: "12.2A" }, { text: "B", target: "12.2B" },
+  ]);
+  assert.equal(findPassage(cozyLibrary, "12,2a").passage, a);
+  assert.equal(findPassage(cozyLibrary, "15.10").status, "found");
+  assert.notEqual(cozyPassage("15.1").text, cozyPassage("15.10").text);
+});
+
+test("tous les renvois utilisent la même mécanique, sans destination absente", () => {
+  let links = 0;
+  for (const passage of cozy.passages) {
+    const parts = passageParts(passage, { reflow: true });
+    assert.equal(parts.map(p => p.text).join(""), reflowText(passage.text), passage.id);
+    assert.equal(parts.filter(p => p.target).length, passage.references.length, passage.id);
+    for (const ref of passage.references) {
+      links++;
+      assert.equal(findPassage(cozyLibrary, ref.target_id).status, "found", ref.target_id);
+      assert.equal(ref.status, "resolved");
+    }
+  }
+  assert.equal(links, 355);
+  assert.deepEqual(passageParts(cozyPassage("16.7")).filter(p => p.target).map(p => p.target), ["9.9A", "9.9B", "9.9C", "9.9"]);
+  assert.match(cozyPassage("18.7B").text, /vieux Bosco/);
+  assert.ok(!cozyPassage("18.7B").text.includes("Sauveur d’animaux"));
+  assert.deepEqual(passageParts(cozyPassage("8.6B")).filter(p => p.target).map(p => p.target), ["8.6A"]);
+});
+
+test("les groupes de la Loge et les choix Oui/Non ont des identifiants distincts", () => {
+  const lodge = passageParts(cozyPassage("7.2")).filter(p => p.target).map(p => p.target);
+  assert.deepEqual(lodge, ["7.2G1C", "7.2G1D", "7.2G2A", "7.2G2B", "7.2G4A", "7.2G4B"]);
+  assert.match(cozyPassage("7.2G2A").text, /ouvrir votre esprit/);
+  assert.ok(!cozyPassage("7.2G2A").text.includes("poignée de main"));
+  assert.deepEqual(passageParts(cozyPassage("14.4")).filter(p => p.target), [
+    { text: "Oui", target: "14.4OUI" }, { text: "Non", target: "14.4NON" },
+  ]);
+  assert.match(cozyPassage("14.4OUI").text, /injection est faite/);
+  assert.ok(!cozyPassage("14.4OUI").text.includes("testerai sur mon mari"));
+});
+
+test("les quantités et plages de dés ouvrent leur seul résultat", () => {
+  for (const id of ["13.2", "13.4"]) {
+    const parent = cozyPassage(id);
+    assert.deepEqual(passageParts(parent).filter(p => p.target).map(p => p.target), [0, 1, 2, 3].map(n => `${id}N${n}`));
+    assert.ok(!parent.text.includes("Recevez"));
+    for (let n = 0; n <= 3; n++) {
+      const result = cozyPassage(`${id}N${n}`);
+      assert.ok(!result.text.includes("Combien pouvons"));
+      const reward = [null, "2 pièces d’or", "3 pièces d’or", "5 pièces d’or"][n];
+      if (reward) assert.ok(result.text.includes(`Recevez ${reward}`));
+      else assert.match(result.text, /Effectuez une autre action/);
+    }
+  }
+  assert.ok(!cozyPassage("26.6").text.includes("brownies"));
+  assert.match(cozyPassage("26.6R1A3").text, /brownies/);
+  assert.match(cozyPassage("35.1").text, /Dé 6 : 1 nourriture → Raie pastenague/);
+  assert.match(cozyPassage("36.1").text, /Dé 6 : 1 nourriture → Poisson-zèbre/);
+  assert.match(cozyPassage("31.1").text, /Au moins 3 icônes Hache/);
 });
 
 test("virgule, espaces autour du séparateur et identifiants textuels", () => {

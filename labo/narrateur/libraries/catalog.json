@@ -8,5 +8,10 @@
     "id": "sleeping-gods-en",
     "label": "Sleeping Gods · Anglais",
     "file": "sleeping-gods-en.json"
+  },
+  {
+    "id": "cozy-sticker-ville-fr",
+    "label": "Cozy Sticker Ville · Français",
+    "file": "cozy-sticker-ville-fr.json"
   }
 ]
