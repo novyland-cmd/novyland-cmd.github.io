@@ -199,3 +199,21 @@ test("bibliothèque complète : aucun contenu perdu dans le rendu des renvois", 
     assert.deepEqual(flowing.filter(part => part.target), parts.filter(part => part.target), p.id);
   }
 });
+
+test("Novyland Quête 1 : l’introduction et les 300 cases et leurs renvois sont accessibles", async () => {
+  const source = JSON.parse(await readFile(new URL("../libraries/novyland-quete1-fr.json", import.meta.url), "utf8"));
+  const library = prepareLibrary(source);
+  assert.equal(library.passages.size, 301);
+  assert.equal(findPassage(library, "0").passage.id, "0");
+  assert.equal(libraryLabel(library), "Novyland · Français");
+  assert.equal(findPassage(library, " 1 ").passage.id, "1");
+  assert.equal(findPassage(library, "300").passage.id, "300");
+  for (const passage of source.passages) {
+    assert.equal(findPassage(library, passage.id).status, "found");
+    const links = passageParts(passage).filter(part => part.target);
+    assert.equal(links.length, passage.references.length, passage.id);
+    for (const link of links) {
+      assert.equal(findPassage(library, link.target).status, "found", `${passage.id} → ${link.target}`);
+    }
+  }
+});

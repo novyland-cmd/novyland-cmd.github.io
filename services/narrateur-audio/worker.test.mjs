@@ -22,6 +22,27 @@ const request = (method = "GET", token, url = endpoint) => new Request(url, {
   method, headers: { Origin: "https://novyland.ca", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
 });
 
+test("l’atelier vérifie le même code sans stockage audio, budget ni appel ElevenLabs", async t => {
+  const mock = t.mock.method(globalThis, "fetch", async () => { throw new Error("Aucun appel payant attendu"); });
+  const { env, values, objects } = setup();
+  env.AUDIO.get = () => { throw new Error("Pas d’accès audio pour une autorisation"); };
+  const url = "https://audio.example/authorize";
+  assert.equal((await worker.fetch(request("POST", undefined, url), env)).status, 401);
+  assert.equal((await worker.fetch(request("POST", "incorrect", url), env)).status, 401);
+  const response = await worker.fetch(request("POST", TOKEN, url), env);
+  assert.equal(response.status, 200);
+  assert.equal((await response.json()).code, "authorized");
+  assert.equal(response.headers.get("Cache-Control"), "no-store");
+  assert.equal(response.headers.get("Access-Control-Allow-Origin"), "https://novyland.ca");
+  assert.equal((await worker.fetch(request("GET", TOKEN, url), env)).status, 405);
+  assert.equal((await worker.fetch(request("OPTIONS", undefined, url), env)).status, 204);
+  const denied = new Request(url, { method: "POST", headers: { Origin: "https://other.example", Authorization: `Bearer ${TOKEN}` } });
+  assert.equal((await worker.fetch(denied, env)).status, 403);
+  assert.equal(values.size, 0);
+  assert.equal(objects.size, 0);
+  assert.equal(mock.mock.callCount(), 0);
+});
+
 test("Cozy Sticker Ville utilise son propre texte, même pour un numéro partagé", async t => {
   const mock = t.mock.method(globalThis, "fetch", async () => { throw new Error("Aucun appel payant attendu"); });
   const { env } = setup();
@@ -133,4 +154,15 @@ test("une bibliothèque différente sur le site ne lit pas un ancien récit", as
   assert.equal(response.status, 409);
   assert.equal((await response.json()).code, "text_mismatch");
   assert.equal(mock.mock.callCount(), 0);
+});
+
+
+test("Novyland Quête 1 est disponible avec Patrick et Anna", async () => {
+  const { env } = setup();
+  for (const voice of ["patrick", "anna"]) {
+    const url = new URL(`https://audio.example/audio?library=novyland-quete1-fr&passage=2&voice=${voice}`);
+    const audio = await resolveAudio(url, env);
+    assert.match(audio.text, /^Passage 2/);
+    assert.equal(audio.language, "fr");
+  }
 });

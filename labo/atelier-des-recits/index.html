@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#223d35"><meta name="robots" content="noindex, nofollow"><title>Atelier des récits | Labo NovyLand</title><link rel="stylesheet" href="styles.css?v=20261027-2"></head>
+<body><section id="atelier-gate" class="access-panel" aria-labelledby="access-title">
+  <a href="../index.html">← Le labo</a><p class="introline">ATELIER DES RÉCITS</p>
+  <h1 id="access-title">Votre espace d’écriture</h1>
+  <p>Créez, éditez et reliez vos récits. Vos brouillons restent dans ce navigateur, sur cet appareil.</p>
+  <p>Utilisez le même code privé que pour les voix ElevenLabs. La vérification ne consomme aucun crédit.</p>
+  <form id="access-form"><label>Code d’autorisation<input id="access-code" type="password" minlength="24" required autocomplete="off"></label>
+  <label class="remember-access"><input id="remember-access" type="checkbox"> Conserver l’autorisation sur cet appareil</label>
+  <button id="unlock-access" class="primary">Ouvrir l’atelier</button></form>
+  <p id="access-status" role="status" aria-live="polite"></p>
+</section><div id="atelier-app" hidden><aside class="sidebar"><a class="brand" href="#">✦ <span>Atelier<br><strong>des récits</strong></span></a><p class="eyebrow">VOTRE ESPACE D’ÉCRITURE</p><button id="home" class="nav active">▤ &nbsp; Mes bibliothèques</button><div class="sidelabel">BIBLIOTHÈQUES <button id="newSide" title="Créer une bibliothèque">+</button></div><nav id="libnav"></nav><div class="sidefoot"><span class="dot"></span> Enregistré sur cet appareil<p>Brouillons de l’atelier.<br>Exportez-les pour les conserver.</p><button id="backup">↓ Tout sauvegarder</button><button id="help">? Guide rapide</button></div></aside>
+<main><header><div class="breadcrumb" id="crumb">Mon atelier / Bibliothèques</div><div class="actions"><span id="session-status" class="status" role="status"></span><a href="../index.html" class="labo-link">← Le labo</a><button id="lock-access">Verrouiller</button><button id="forget-access">Effacer l’autorisation</button></div></header><div id="app"></div></main><input id="file" type="file" accept=".txt,.json" hidden><dialog id="modal"></dialog><div id="toast" role="status"></div></div><script type="module" src="access.mjs?v=20261027-2"></script></body></html>

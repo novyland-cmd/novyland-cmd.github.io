@@ -9,8 +9,8 @@
   <link rel="icon" href="../../favicon.ico" />
   <link rel="stylesheet" href="../../assets/css/theme.css?v=20260905-select" />
   <link rel="stylesheet" href="../../assets/css/navigation.css" />
-  <link rel="stylesheet" href="styles.css?v=20261025-5" />
-  <script type="module" src="script.js?v=20261025-5"></script>
+  <link rel="stylesheet" href="styles.css?v=20261027-2" />
+  <script type="module" src="script.js?v=20261027-2"></script>
 </head>
 <body>
   <a class="skip-link" href="#reader">Aller au lecteur</a>
@@ -96,6 +96,8 @@
         <p class="speech-help" id="speech-mode-help">La narration seule n’est pas encore disponible pour ces livrets.</p>
         <p class="speech-help">Les voix proposées dépendent de votre appareil et de votre navigateur.</p>
         <p class="speech-help" id="elevenlabs-note">Les voix Patrick et Anna seront disponibles après l’activation du service ElevenLabs.</p>
+        <p class="speech-help" id="audio-access-status" role="status"></p>
+        <button id="audio-forget-access" type="button" class="button--quiet" hidden>Effacer l’autorisation sur cet appareil</button>
       </section>
       <div class="reading-placeholder" id="reading-placeholder">
         <span class="placeholder-mark" aria-hidden="true">§</span>
@@ -119,9 +121,10 @@
     <form method="dialog">
       <h2 id="audio-access-title">Créer cet enregistrement</h2>
       <p id="audio-access-description">Ce passage n’a pas encore été enregistré avec cette voix. La génération utilise le compte ElevenLabs du propriétaire du site. Saisissez votre code privé pour la lancer.</p>
-      <label for="audio-access-code">Code de génération</label>
+      <label for="audio-access-code">Code d’autorisation</label>
       <input id="audio-access-code" type="password" minlength="24" required autocomplete="off" style="width:100%;padding:.7rem;margin-top:.4rem" />
-      <p>Ce code reste uniquement en mémoire jusqu’à la fermeture de cette page. Ce n’est pas la clé API ElevenLabs.</p>
+      <label class="remember-access" for="audio-remember-access"><input id="audio-remember-access" type="checkbox" aria-describedby="audio-remember-help" /> Conserver l’autorisation sur cet appareil</label>
+      <p id="audio-remember-help">Si vous cochez cette case, le code privé sera enregistré dans ce navigateur pour les prochaines visites. Sinon, il sera oublié à la fermeture de la page. Ce n’est pas la clé API ElevenLabs. Vous pourrez effacer l’autorisation depuis le lecteur.</p>
       <div class="dialog-actions">
         <button class="button--quiet" value="cancel" formnovalidate>Annuler</button>
         <button class="button--primary" value="generate">Générer et lire</button>

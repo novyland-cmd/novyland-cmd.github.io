@@ -13,5 +13,10 @@
     "id": "cozy-sticker-ville-fr",
     "label": "Cozy Sticker Ville · Français",
     "file": "cozy-sticker-ville-fr.json"
+  },
+  {
+    "id": "novyland-quete1-fr",
+    "label": "Novyland · Quête 1 · Français",
+    "file": "novyland-quete1-fr.json"
   }
 ]

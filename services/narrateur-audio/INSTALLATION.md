@@ -9,7 +9,7 @@ Cette configuration est préparée mais pas encore déployée. Elle utilise votr
 3. Sinon, le lecteur demande votre **code de génération**. Il autorise le service à créer l'audio avec votre compte ElevenLabs.
 4. Le MP3 est sauvegardé avant d'être renvoyé au lecteur. Les prochaines écoutes réutilisent ce fichier.
 
-Les visiteurs sans code peuvent écouter les enregistrements existants. Ils ne peuvent pas en créer de nouveaux à vos frais. Le code reste en mémoire dans la page ouverte ; il n'est enregistré ni sur le disque, ni dans le stockage du navigateur. La clé ElevenLabs reste exclusivement dans les secrets du service Cloudflare.
+Les visiteurs sans code peuvent écouter les enregistrements existants. Ils ne peuvent pas en créer de nouveaux à vos frais. Par défaut, le code reste en mémoire dans la page ouverte. La case « Conserver l’autorisation sur cet appareil » permet de l’enregistrer dans le stockage local de ce navigateur pour les prochaines visites. Le bouton « Effacer l’autorisation sur cet appareil » supprime le code mémorisé et l’autorisation de la session. Un code refusé par le service est automatiquement oublié. L’autorisation mémorisée est propre à l’adresse du service audio. La clé ElevenLabs reste exclusivement dans les secrets du service Cloudflare.
 
 Voix configurées, en français et en anglais :
 
@@ -121,3 +121,10 @@ node --test services/narrateur-audio/worker.test.mjs labo/narrateur/scripts/libr
 Les tests simulent ElevenLabs et le stockage. Ils couvrent notamment les codes invalides, les voix et passages autorisés, le cache, les demandes simultanées, le budget, les erreurs du fournisseur et l'arrêt pendant le téléchargement. Le premier appel réel reste à faire après configuration de votre compte.
 
 Références : [ElevenLabs TTS](https://elevenlabs.io/docs/api-reference/text-to-speech/convert), [secrets Cloudflare](https://developers.cloudflare.com/workers/configuration/secrets/), [stockage R2 depuis un Worker](https://developers.cloudflare.com/r2/api/workers/workers-api-reference/).
+
+
+## Autorisation de l’atelier d’édition
+
+L’application indépendante **Atelier des récits**, dans `/labo/atelier-des-recits/`, utilise aussi le code `GENERATION_TOKEN`. Elle vérifie directement son autorisation auprès de ce Worker, sans passer par le lecteur. La route **POST `/authorize`** reçoit le code dans l’en-tête `Authorization: Bearer …` et renvoie `{ "code": "authorized" }` lorsque le code est valide. Elle applique les mêmes origines autorisées et ne génère aucun audio, ne lit aucun objet R2 et ne réserve aucun budget. Les requêtes sans code ou avec un code invalide reçoivent une réponse 401. Aucun nouveau secret n’est nécessaire.
+
+Redéployez ce Worker pour activer la nouvelle route avant de publier l’atelier indépendant. Les brouillons et leurs exports restent sur l’appareil ; le Worker ne reçoit aucun texte édité. Les voix ElevenLabs restent réservées aux livrets publiés. La même option de mémorisation du code dans le navigateur s’applique aux voix et à l’atelier.

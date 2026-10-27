@@ -1,9 +1,11 @@
 import french from "../../labo/narrateur/libraries/sleeping-gods-fr.json" with { type: "json" };
 import english from "../../labo/narrateur/libraries/sleeping-gods-en.json" with { type: "json" };
 import cozy from "../../labo/narrateur/libraries/cozy-sticker-ville-fr.json" with { type: "json" };
+import novyland from "../../labo/narrateur/libraries/novyland-quete1-fr.json" with { type: "json" };
 import { prepareLibrary, findPassage, reflowText } from "../../labo/narrateur/library.mjs";
 
 const libraries = new Map([
+  ["novyland-quete1-fr", prepareLibrary(novyland)],
   ["sleeping-gods-fr", prepareLibrary(french)],
   ["sleeping-gods-en", prepareLibrary(english)],
   ["cozy-sticker-ville-fr", prepareLibrary(cozy)],
@@ -56,8 +58,14 @@ export default {
     let response;
     try {
       const url = new URL(request.url);
-      if (url.pathname !== "/audio") response = json(404, "route", "Adresse inconnue.");
+      if (!["/audio", "/authorize"].includes(url.pathname)) response = json(404, "route", "Adresse inconnue.");
       else if (request.method === "OPTIONS") response = new Response(null, { status: 204 });
+      else if (url.pathname === "/authorize") {
+        if (request.method !== "POST") response = json(405, "method", "Méthode non autorisée.");
+        else response = authorized(request, env)
+          ? json(200, "authorized", "Autorisation confirmée.")
+          : json(401, "access", "Le code d’autorisation est incorrect ou absent.");
+      }
       else if (!["GET", "POST"].includes(request.method)) response = json(405, "method", "Méthode non autorisée.");
       else {
         const audio = await resolveAudio(url, env);

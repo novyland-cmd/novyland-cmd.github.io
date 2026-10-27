@@ -262,7 +262,7 @@ function updateSpeechControls() {
        ready: "L’audio est prêt. Appuyez sur Lire pour l’écouter.",
        playing: "Lecture en cours…", paused: "Lecture en pause.", finished: "Lecture terminée.",
        error: speech === remoteSpeech ? remoteSpeech.message : "La lecture a été interrompue par l’appareil. Réessayez ou choisissez une autre voix." })[speech.state] || "Prêt à lire le passage affiché.";
-  if (remoteSpeech.accessDenied) { generationCode = ""; remoteSpeech.accessDenied = false; }
+  if (remoteSpeech.accessDenied) { forgetGenerationCode(); remoteSpeech.accessDenied = false; }
 }
 
 function refreshVoices() {
@@ -323,21 +323,59 @@ function selectSpeechEngine() {
   updateSpeechControls();
 }
 
+function generationCodeKey() {
+  return `narrateur-generation-code:${audioEndpoint(remoteSpeech.endpoint)}`;
+}
+
+function forgetGenerationCode() {
+  generationCode = "";
+  try { localStorage.removeItem(generationCodeKey()); } catch { /* Stockage indisponible. */ }
+  $("audio-forget-access").hidden = true;
+  $("audio-access-status").textContent = "Autorisation effacée. Le code sera demandé à la prochaine génération.";
+}
+
+$("audio-forget-access").addEventListener("click", forgetGenerationCode);
+
+function restoreGenerationCode() {
+  try { generationCode = localStorage.getItem(generationCodeKey()) || ""; }
+  catch { /* Le code peut toujours être saisi pour cette session. */ }
+  $("audio-forget-access").hidden = !generationCode;
+  if (generationCode) $("audio-access-status").textContent = "Autorisation conservée sur cet appareil, dans ce navigateur.";
+}
+
 function requestGenerationCode(signal) {
   if (signal.aborted) return Promise.resolve(null);
+  if (!generationCode) restoreGenerationCode();
   if (generationCode) return Promise.resolve(generationCode);
   const access = $("audio-access-dialog");
   const code = $("audio-access-code");
+  if (access.open) return Promise.resolve(null);
   return new Promise(resolve => {
     const cancel = () => { if (access.open) access.close("cancel"); };
     access.addEventListener("close", () => {
       signal.removeEventListener("abort", cancel);
       const result = access.returnValue === "generate" && !signal.aborted ? code.value.trim() : "";
       code.value = "";
-      if (result) generationCode = result;
+      if (result) {
+        generationCode = result;
+        let remembered = false;
+        try {
+          if ($("audio-remember-access").checked) {
+            localStorage.setItem(generationCodeKey(), result);
+            remembered = true;
+          } else localStorage.removeItem(generationCodeKey());
+        } catch { /* La génération reste possible sans stockage. */ }
+        $("audio-forget-access").hidden = false;
+        $("audio-access-status").textContent = remembered
+          ? "Autorisation conservée sur cet appareil, dans ce navigateur."
+          : $("audio-remember-access").checked
+            ? "Le navigateur ne permet pas de conserver l’autorisation. Elle reste active pour cette session."
+            : "Autorisation active pour cette session uniquement.";
+      }
       resolve(result || null);
     }, { once: true });
     code.value = "";
+    $("audio-remember-access").checked = false;
     access.returnValue = "";
     signal.addEventListener("abort", cancel, { once: true });
     access.showModal();
@@ -349,9 +387,18 @@ fetch("./audio-config.json", { cache: "no-store" })
   .then(response => { if (!response.ok) throw new Error("configuration"); return response.json(); })
   .then(config => {
     remoteSpeech.endpoint = audioEndpoint(config.endpoint);
+    if (remoteSpeech.endpoint) restoreGenerationCode();
     if (remoteSpeech.supported) {
       $("elevenlabs-note").textContent = "Patrick et Anna : les enregistrements existants sont réutilisés. Un code privé autorise les nouvelles générations.";
       refreshVoices();
     }
   })
   .catch(() => { /* Les voix de l'appareil restent utilisables. */ });
+
+window.addEventListener("storage", event => {
+  if (event.key === generationCodeKey() || event.key === null) {
+    generationCode = "";
+    restoreGenerationCode();
+    if (!generationCode) $("audio-access-status").textContent = "Autorisation effacée dans un autre onglet.";
+  }
+});

@@ -4,7 +4,7 @@ export function normalizeId(value) {
 }
 
 export function isValidId(id) {
-  return /^(?:\d+(?:\.\d+)?(?:[A-Z][A-Z0-9]*)?|F\d+|D\d+\.\d+|D\.I\.\d+)$/.test(id);
+  return /^(?:\d+(?:\.\d+)?(?:[A-Z][A-Z0-9]*)?|[A-Z]\d+|D\d+\.\d+|D\.I\.\d+)$/.test(id);
 }
 
 export function prepareLibrary(data) {
@@ -36,7 +36,7 @@ export function prepareLibrary(data) {
 }
 
 export function libraryLabel(library) {
-  const name = { "sleeping-gods": "Sleeping Gods", "cozy-sticker-ville": "Cozy Sticker Ville" }[library.gameId] ?? library.gameId;
+  const name = { "novyland": "Novyland", "sleeping-gods": "Sleeping Gods", "cozy-sticker-ville": "Cozy Sticker Ville" }[library.gameId] ?? library.gameId;
   if (!library.language) return name;
   let language = library.language;
   try {

@@ -4,9 +4,13 @@ Première version du lecteur dans `/labo/narrateur/`, accessible depuis la carte
 
 ## Utiliser le lecteur
 
-Ouvrir la page depuis le site ou un serveur local. Choisir **Sleeping Gods · Français** ou **Sleeping Gods · Anglais** dans le menu **Bibliothèques disponibles**, saisir un identifiant (`9.2` ou `9,2`) et appuyer sur **Afficher** ou sur Entrée. Aucun passage n'est affiché au chargement du livret ; seul le réglage de taille du texte est mémorisé sur l'appareil.
+Ouvrir la page depuis le site ou un serveur local. Choisir **Sleeping Gods · Français** ou **Sleeping Gods · Anglais** dans le menu **Bibliothèques disponibles**, saisir un identifiant (`9.2` ou `9,2`) et appuyer sur **Afficher** ou sur Entrée. Aucun passage n'est affiché au chargement du livret ; le réglage de taille du texte est mémorisé sur l’appareil. L’autorisation ElevenLabs peut aussi y être conservée.
 
 Les bibliothèques destinées au site sont incluses dans `libraries/` et listées dans `libraries/catalog.json`. Elles contiennent les passages, leurs pages sources et leurs renvois, sans les données d'audit détaillées. Le livret choisi est téléchargé à la demande. Ajouter un livret au menu consiste à déposer un fichier compatible dans `libraries/` et à ajouter son identifiant, son libellé et son nom de fichier au catalogue.
+
+### Novyland · Quête 1
+
+`libraries/novyland-quete1-fr.json` contient l’introduction `0` et les 300 passages français fournis, de `1` à `300`. Choisir **Novyland · Quête 1 · Français**, puis saisir un passage (par exemple `2`). Les renvois entre cases sont cliquables avec confirmation. Le fichier fourni est conservé intégralement. Redéployer le Worker pour rendre cette bibliothèque disponible avec Patrick et Anna.
 
 ### Cozy Sticker Ville
 
@@ -106,3 +110,10 @@ L'extraction vérifie la couverture des caractères de chaque page, la répartit
 `automated_checks_only` signifie contrôles structurels réussis, pas relecture humaine intégrale. `review_required` indique une ambiguïté ou un renvoi introuvable. Les trous de numérotation signalent une particularité de la source ; ils ne prouvent pas, à eux seuls, une erreur d'extraction. Les passages concernés restent disponibles avec leurs signalements.
 
 Dans 13.2 et 13.4, « Dépensez 0 à 3 nourritures » est présenté comme quatre liens : 0 nourriture, 1 nourriture, 2 nourritures et 3 nourritures. La sélection révèle uniquement l’effet de la quantité choisie.
+
+
+## Atelier des récits indépendant
+
+L’édition se trouve dans l’application indépendante `/labo/atelier-des-recits/`, accessible depuis sa propre carte dans le Labo. Le Narrateur reste consacré à la lecture des livrets publiés : il ne contient ni éditeur intégré, ni iframe, ni catalogue de brouillons. L’atelier conserve les exports compatibles avec le format des bibliothèques du Narrateur.
+
+Les deux applications utilisent le même code privé, vérifié par la route `/authorize` du service audio pour l’atelier. La mémorisation facultative utilise la même clé de stockage, associée à l’adresse du service. Effacer une autorisation mémorisée dans une application la retire aussi de l’autre.
