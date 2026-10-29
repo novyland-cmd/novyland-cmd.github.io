@@ -3,6 +3,7 @@
 Éditeur de cartes autonome, intégré au Labo : `/labo/atlas/`.
 
 - Grille 15 × 15, territoires et lieux superposés.
+- Lieux de pêche (🎣), utilisables comme points de ravitaillement. Les anciens lieux spéciaux portant une mention `[PÊCHE …]` dans leurs notes sont reconnus automatiquement au chargement et à l’importation.
 - Noms et notes par case, gomme et annulation.
 - Sauvegarde locale dans le navigateur, import/export JSON et impression.
 

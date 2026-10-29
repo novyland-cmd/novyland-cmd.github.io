@@ -389,7 +389,7 @@
       "key": "8",
       "title": "8 — Le Lac des Roseaux",
       "map_coordinate": "C11",
-      "text": "Passage 8 — Le Lac des Roseaux.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 35).",
+      "text": "Passage 8 — Le Lac des Roseaux.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 35).",
       "source_pages": [],
       "references": [
         {
@@ -400,8 +400,8 @@
             "35"
           ],
           "detection": "explicit",
-          "text_offset": 296,
-          "source_line": 8,
+          "text_offset": 883,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 35)."
         }
       ]
@@ -411,7 +411,7 @@
       "key": "9",
       "title": "9 — Le Grand Fleuve",
       "map_coordinate": "A13",
-      "text": "Passage 9 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 36).",
+      "text": "Passage 9 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 36).",
       "source_pages": [],
       "references": [
         {
@@ -422,8 +422,8 @@
             "36"
           ],
           "detection": "explicit",
-          "text_offset": 397,
-          "source_line": 10,
+          "text_offset": 984,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 36)."
         }
       ]
@@ -813,7 +813,7 @@
       "key": "18",
       "title": "18 — Le Grand Fleuve",
       "map_coordinate": "H6",
-      "text": "Passage 18 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 127).",
+      "text": "Passage 18 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 127).",
       "source_pages": [],
       "references": [
         {
@@ -824,8 +824,8 @@
             "127"
           ],
           "detection": "explicit",
-          "text_offset": 293,
-          "source_line": 8,
+          "text_offset": 880,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 127)."
         }
       ]
@@ -1677,7 +1677,7 @@
       "key": "36",
       "title": "36 — La Grande Savane",
       "map_coordinate": "A12",
-      "text": "Passage 36 — La Grande Savane.\n\nCampement — Les Grandes Herbes. Des abris bas forment un cercle autour du foyer. Les guetteurs surveillent les pistes ouvertes de la savane.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nAu sud se trouve le Grand Fleuve. Vous pouvez en rejoindre le bord, mais sans pont, il faudra revenir sur vos pas.\n\nDéplacements possibles :\n• Aller vers le nord : La Grande Savane. (passage 69).\n• Aller vers l'est : La Grande Savane. (passage 150).\n• Aller vers le sud : Le Grand Fleuve. (passage 9).",
+      "text": "Passage 36 — La Grande Savane.\n\nCampement — Les Grandes Herbes.\nDes abris bas forment un cercle autour du foyer. Les guetteurs surveillent les pistes ouvertes de la savane.\n\nRavitaillement\n\nLes provisions du campement sont mises à votre disposition.\n\nDépensez 1 action pour prendre jusqu’à 3 nourritures dans sa réserve, sans dépasser votre limite de 12 nourritures.\n\nLa réserve du campement contient initialement 6 nourritures.\n\nPour vous ravitailler de nouveau ici, vous devez quitter le campement, puis y revenir.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nAu sud se trouve le Grand Fleuve. Vous pouvez en rejoindre le bord, mais sans pont, il faudra revenir sur vos pas.\n\nDéplacements possibles :\n• Aller vers le nord : La Grande Savane. (passage 69).\n• Aller vers l'est : La Grande Savane. (passage 150).\n• Aller vers le sud : Le Grand Fleuve. (passage 9).",
       "source_pages": [],
       "references": [
         {
@@ -1688,8 +1688,8 @@
             "69"
           ],
           "detection": "explicit",
-          "text_offset": 470,
-          "source_line": 10,
+          "text_offset": 814,
+          "source_line": 21,
           "context": "• Aller vers le nord : La Grande Savane. (passage 69)."
         },
         {
@@ -1700,8 +1700,8 @@
             "150"
           ],
           "detection": "explicit",
-          "text_offset": 523,
-          "source_line": 11,
+          "text_offset": 867,
+          "source_line": 22,
           "context": "• Aller vers l'est : La Grande Savane. (passage 150)."
         },
         {
@@ -1712,8 +1712,8 @@
             "9"
           ],
           "detection": "explicit",
-          "text_offset": 577,
-          "source_line": 12,
+          "text_offset": 921,
+          "source_line": 23,
           "context": "• Aller vers le sud : Le Grand Fleuve. (passage 9)."
         }
       ]
@@ -1955,7 +1955,7 @@
       "key": "41",
       "title": "41 — Le Grand Fleuve",
       "map_coordinate": "G3",
-      "text": "Passage 41 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 38).",
+      "text": "Passage 41 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 38).",
       "source_pages": [],
       "references": [
         {
@@ -1966,8 +1966,8 @@
             "38"
           ],
           "detection": "explicit",
-          "text_offset": 293,
-          "source_line": 8,
+          "text_offset": 880,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 38)."
         }
       ]
@@ -2160,7 +2160,7 @@
       "key": "46",
       "title": "46 — Le Grand Fleuve",
       "map_coordinate": "H4",
-      "text": "Passage 46 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 52).",
+      "text": "Passage 46 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 52).",
       "source_pages": [],
       "references": [
         {
@@ -2171,8 +2171,8 @@
             "52"
           ],
           "detection": "explicit",
-          "text_offset": 293,
-          "source_line": 8,
+          "text_offset": 880,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 52)."
         }
       ]
@@ -2576,7 +2576,7 @@
       "key": "54",
       "title": "54 — Les Bois du Souffle Ancien",
       "map_coordinate": "I1",
-      "text": "Passage 54 — Les Bois du Souffle Ancien.\n\nCampement — Les Branches Protectrices. Sous les grands arbres, six emplacements abrités accueillent les voyageurs autour d’un feu discret.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nDéplacements possibles :\n• Aller vers l'est : Les Bois du Souffle Ancien. (passage 211).\n• Aller vers le sud : Les Bois du Souffle Ancien. (passage 142).\n• Aller vers l'ouest : Les Bois du Souffle Ancien. (passage 210).",
+      "text": "Passage 54 — Les Bois du Souffle Ancien.\n\nCampement — Les Branches Protectrices.\nSous les grands arbres, six emplacements abrités accueillent les voyageurs autour d’un feu discret.\n\nRavitaillement\n\nLes provisions du campement sont mises à votre disposition.\n\nDépensez 1 action pour prendre jusqu’à 3 nourritures dans sa réserve, sans dépasser votre limite de 12 nourritures.\n\nLa réserve du campement contient initialement 6 nourritures.\n\nPour vous ravitailler de nouveau ici, vous devez quitter le campement, puis y revenir.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nDéplacements possibles :\n• Aller vers l'est : Les Bois du Souffle Ancien. (passage 211).\n• Aller vers le sud : Les Bois du Souffle Ancien. (passage 142).\n• Aller vers l'ouest : Les Bois du Souffle Ancien. (passage 210).",
       "source_pages": [],
       "references": [
         {
@@ -2587,8 +2587,8 @@
             "211"
           ],
           "detection": "explicit",
-          "text_offset": 368,
-          "source_line": 8,
+          "text_offset": 712,
+          "source_line": 19,
           "context": "• Aller vers l'est : Les Bois du Souffle Ancien. (passage 211)."
         },
         {
@@ -2599,8 +2599,8 @@
             "142"
           ],
           "detection": "explicit",
-          "text_offset": 433,
-          "source_line": 9,
+          "text_offset": 777,
+          "source_line": 20,
           "context": "• Aller vers le sud : Les Bois du Souffle Ancien. (passage 142)."
         },
         {
@@ -2611,8 +2611,8 @@
             "210"
           ],
           "detection": "explicit",
-          "text_offset": 499,
-          "source_line": 10,
+          "text_offset": 843,
+          "source_line": 21,
           "context": "• Aller vers l'ouest : Les Bois du Souffle Ancien. (passage 210)."
         }
       ]
@@ -3858,7 +3858,7 @@
       "key": "79",
       "title": "79 — Les Bois des Ancêtres",
       "map_coordinate": "A7",
-      "text": "Passage 79 — Les Bois des Ancêtres.\n\nCampement — Le Cercle des Racines. Les abris se blottissent entre les troncs anciens. Un foyer central réunit les marcheurs à la tombée du jour.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nDéplacements possibles :\n• Aller vers le nord : Les Bois des Ancêtres. (passage 166).\n• Aller vers l'est : Les Bois des Ancêtres. (passage 47).\n• Aller vers le sud : Les Bois des Ancêtres. (passage 12).",
+      "text": "Passage 79 — Les Bois des Ancêtres.\n\nCampement — Le Cercle des Racines.\nLes abris se blottissent entre les troncs anciens. Un foyer central réunit les marcheurs à la tombée du jour.\n\nRavitaillement\n\nLes provisions du campement sont mises à votre disposition.\n\nDépensez 1 action pour prendre jusqu’à 3 nourritures dans sa réserve, sans dépasser votre limite de 12 nourritures.\n\nLa réserve du campement contient initialement 6 nourritures.\n\nPour vous ravitailler de nouveau ici, vous devez quitter le campement, puis y revenir.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nDéplacements possibles :\n• Aller vers le nord : Les Bois des Ancêtres. (passage 166).\n• Aller vers l'est : Les Bois des Ancêtres. (passage 47).\n• Aller vers le sud : Les Bois des Ancêtres. (passage 12).",
       "source_pages": [],
       "references": [
         {
@@ -3869,8 +3869,8 @@
             "166"
           ],
           "detection": "explicit",
-          "text_offset": 368,
-          "source_line": 8,
+          "text_offset": 712,
+          "source_line": 19,
           "context": "• Aller vers le nord : Les Bois des Ancêtres. (passage 166)."
         },
         {
@@ -3881,8 +3881,8 @@
             "47"
           ],
           "detection": "explicit",
-          "text_offset": 427,
-          "source_line": 9,
+          "text_offset": 771,
+          "source_line": 20,
           "context": "• Aller vers l'est : Les Bois des Ancêtres. (passage 47)."
         },
         {
@@ -3893,8 +3893,8 @@
             "12"
           ],
           "detection": "explicit",
-          "text_offset": 486,
-          "source_line": 10,
+          "text_offset": 830,
+          "source_line": 21,
           "context": "• Aller vers le sud : Les Bois des Ancêtres. (passage 12)."
         }
       ]
@@ -4296,7 +4296,7 @@
       "key": "88",
       "title": "88 — Le Grand Lac des Reflets",
       "map_coordinate": "L10",
-      "text": "Passage 88 — Le Grand Lac des Reflets.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 208).",
+      "text": "Passage 88 — Le Grand Lac des Reflets.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 208).",
       "source_pages": [],
       "references": [
         {
@@ -4307,8 +4307,8 @@
             "208"
           ],
           "detection": "explicit",
-          "text_offset": 303,
-          "source_line": 8,
+          "text_offset": 890,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 208)."
         }
       ]
@@ -4639,7 +4639,7 @@
       "key": "96",
       "title": "96 — La Rivière des Deux Rives",
       "map_coordinate": "F8",
-      "text": "Passage 96 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 202).",
+      "text": "Passage 96 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 202).",
       "source_pages": [],
       "references": [
         {
@@ -4650,8 +4650,8 @@
             "202"
           ],
           "detection": "explicit",
-          "text_offset": 292,
-          "source_line": 8,
+          "text_offset": 879,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 202)."
         }
       ]
@@ -5019,7 +5019,7 @@
       "key": "104",
       "title": "104 — La Rivière des Brumes",
       "map_coordinate": "J15",
-      "text": "Passage 104 — La Rivière des Brumes.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nAu sud s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 101).",
+      "text": "Passage 104 — La Rivière des Brumes.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nAu sud s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 101).",
       "source_pages": [],
       "references": [
         {
@@ -5030,8 +5030,8 @@
             "101"
           ],
           "detection": "explicit",
-          "text_offset": 391,
-          "source_line": 10,
+          "text_offset": 978,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 101)."
         }
       ]
@@ -5041,7 +5041,7 @@
       "key": "105",
       "title": "105 — Le Grand Fleuve",
       "map_coordinate": "F1",
-      "text": "Passage 105 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 62).",
+      "text": "Passage 105 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 62).",
       "source_pages": [],
       "references": [
         {
@@ -5052,8 +5052,8 @@
             "62"
           ],
           "detection": "explicit",
-          "text_offset": 397,
-          "source_line": 10,
+          "text_offset": 984,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 62)."
         }
       ]
@@ -5247,7 +5247,7 @@
       "key": "110",
       "title": "110 — La Savane des Premiers Soleils",
       "map_coordinate": "D1",
-      "text": "Passage 110 — La Savane des Premiers Soleils.\n\nCampement — Le Feu de l’Aube. Des abris de peaux entourent un foyer de pierres, à l’orée des hautes herbes. Les tribus s’y reposent avant la marche.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nDéplacements possibles :\n• Aller vers l'est : La Savane des Premiers Soleils. (passage 161).\n• Aller vers le sud : La Savane des Premiers Soleils. (passage 30).\n• Aller vers l'ouest : La Savane des Premiers Soleils. (passage 97).",
+      "text": "Passage 110 — La Savane des Premiers Soleils.\n\nCampement — Le Feu de l’Aube.\nDes abris de peaux entourent un foyer de pierres, à l’orée des hautes herbes. Les tribus s’y reposent avant la marche.\n\nRavitaillement\n\nLes provisions du campement sont mises à votre disposition.\n\nDépensez 1 action pour prendre jusqu’à 3 nourritures dans sa réserve, sans dépasser votre limite de 12 nourritures.\n\nLa réserve du campement contient initialement 6 nourritures.\n\nPour vous ravitailler de nouveau ici, vous devez quitter le campement, puis y revenir.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nDéplacements possibles :\n• Aller vers l'est : La Savane des Premiers Soleils. (passage 161).\n• Aller vers le sud : La Savane des Premiers Soleils. (passage 30).\n• Aller vers l'ouest : La Savane des Premiers Soleils. (passage 97).",
       "source_pages": [],
       "references": [
         {
@@ -5258,8 +5258,8 @@
             "161"
           ],
           "detection": "explicit",
-          "text_offset": 387,
-          "source_line": 8,
+          "text_offset": 731,
+          "source_line": 19,
           "context": "• Aller vers l'est : La Savane des Premiers Soleils. (passage 161)."
         },
         {
@@ -5270,8 +5270,8 @@
             "30"
           ],
           "detection": "explicit",
-          "text_offset": 456,
-          "source_line": 9,
+          "text_offset": 800,
+          "source_line": 20,
           "context": "• Aller vers le sud : La Savane des Premiers Soleils. (passage 30)."
         },
         {
@@ -5282,8 +5282,8 @@
             "97"
           ],
           "detection": "explicit",
-          "text_offset": 525,
-          "source_line": 10,
+          "text_offset": 869,
+          "source_line": 21,
           "context": "• Aller vers l'ouest : La Savane des Premiers Soleils. (passage 97)."
         }
       ]
@@ -5351,7 +5351,7 @@
       "key": "112",
       "title": "112 — La Rivière du Matin",
       "map_coordinate": "K1",
-      "text": "Passage 112 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 152).",
+      "text": "Passage 112 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 152).",
       "source_pages": [],
       "references": [
         {
@@ -5362,8 +5362,8 @@
             "152"
           ],
           "detection": "explicit",
-          "text_offset": 390,
-          "source_line": 10,
+          "text_offset": 977,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 152)."
         }
       ]
@@ -6021,7 +6021,7 @@
       "key": "125",
       "title": "125 — Le Grand Fleuve",
       "map_coordinate": "G12",
-      "text": "Passage 125 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 145).",
+      "text": "Passage 125 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 145).",
       "source_pages": [],
       "references": [
         {
@@ -6032,8 +6032,8 @@
             "145"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 145)."
         }
       ]
@@ -6735,7 +6735,7 @@
       "key": "140",
       "title": "140 — La Rivière des Deux Rives",
       "map_coordinate": "A10",
-      "text": "Passage 140 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 197).",
+      "text": "Passage 140 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 197).",
       "source_pages": [],
       "references": [
         {
@@ -6746,8 +6746,8 @@
             "197"
           ],
           "detection": "explicit",
-          "text_offset": 398,
-          "source_line": 10,
+          "text_offset": 985,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 197)."
         }
       ]
@@ -6757,7 +6757,7 @@
       "key": "141",
       "title": "141 — Les Montagnes du Dernier Feu",
       "map_coordinate": "L15",
-      "text": "Passage 141 — Les Montagnes du Dernier Feu.\n\nCampement — Le Repos des Cimes. Des abris de pierre protègent les voyageurs du froid. Le feu reste blotti derrière un muret, face aux dernières lueurs du ciel.\n\nAu sud s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nDéplacements possibles :\n• Aller vers le nord : Les Montagnes du Dernier Feu. (passage 13).\n• Aller vers l'est : Les Montagnes du Dernier Feu. (passage 26).\n• Aller vers l'ouest : Les Montagnes du Dernier Feu. (passage 101).",
+      "text": "Passage 141 — Les Montagnes du Dernier Feu.\n\nCampement — Le Repos des Cimes.\nDes abris de pierre protègent les voyageurs du froid. Le feu reste blotti derrière un muret, face aux dernières lueurs du ciel.\n\nRavitaillement\n\nLes provisions du campement sont mises à votre disposition.\n\nDépensez 1 action pour prendre jusqu’à 3 nourritures dans sa réserve, sans dépasser votre limite de 12 nourritures.\n\nLa réserve du campement contient initialement 6 nourritures.\n\nPour vous ravitailler de nouveau ici, vous devez quitter le campement, puis y revenir.\n\nAu sud s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nDéplacements possibles :\n• Aller vers le nord : Les Montagnes du Dernier Feu. (passage 13).\n• Aller vers l'est : Les Montagnes du Dernier Feu. (passage 26).\n• Aller vers l'ouest : Les Montagnes du Dernier Feu. (passage 101).",
       "source_pages": [],
       "references": [
         {
@@ -6768,8 +6768,8 @@
             "13"
           ],
           "detection": "explicit",
-          "text_offset": 395,
-          "source_line": 8,
+          "text_offset": 739,
+          "source_line": 19,
           "context": "• Aller vers le nord : Les Montagnes du Dernier Feu. (passage 13)."
         },
         {
@@ -6780,8 +6780,8 @@
             "26"
           ],
           "detection": "explicit",
-          "text_offset": 460,
-          "source_line": 9,
+          "text_offset": 804,
+          "source_line": 20,
           "context": "• Aller vers l'est : Les Montagnes du Dernier Feu. (passage 26)."
         },
         {
@@ -6792,8 +6792,8 @@
             "101"
           ],
           "detection": "explicit",
-          "text_offset": 527,
-          "source_line": 10,
+          "text_offset": 871,
+          "source_line": 21,
           "context": "• Aller vers l'ouest : Les Montagnes du Dernier Feu. (passage 101)."
         }
       ]
@@ -7451,7 +7451,7 @@
       "key": "154",
       "title": "154 — Le Grand Fleuve",
       "map_coordinate": "I7",
-      "text": "Passage 154 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 127).",
+      "text": "Passage 154 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 127).",
       "source_pages": [],
       "references": [
         {
@@ -7462,8 +7462,8 @@
             "127"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 127)."
         }
       ]
@@ -8047,7 +8047,7 @@
       "key": "168",
       "title": "168 — Le Grand Fleuve",
       "map_coordinate": "B15",
-      "text": "Passage 168 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nAu sud s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 217).",
+      "text": "Passage 168 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nAu sud s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 217).",
       "source_pages": [],
       "references": [
         {
@@ -8058,8 +8058,8 @@
             "217"
           ],
           "detection": "explicit",
-          "text_offset": 396,
-          "source_line": 10,
+          "text_offset": 983,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 217)."
         }
       ]
@@ -8069,7 +8069,7 @@
       "key": "169",
       "title": "169 — La Rivière du Matin",
       "map_coordinate": "I3",
-      "text": "Passage 169 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 142).",
+      "text": "Passage 169 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 142).",
       "source_pages": [],
       "references": [
         {
@@ -8080,8 +8080,8 @@
             "142"
           ],
           "detection": "explicit",
-          "text_offset": 287,
-          "source_line": 8,
+          "text_offset": 874,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 142)."
         }
       ]
@@ -8519,7 +8519,7 @@
       "key": "178",
       "title": "178 — La Savane des Vents du Sud",
       "map_coordinate": "I15",
-      "text": "Passage 178 — La Savane des Vents du Sud.\n\nLes hautes herbes ondulent sous le vent. Vous avancez dans la savane, à l’écoute des bruits qui vous entourent.\n\nAu sud s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nÀ l'est se trouve la Rivière des Brumes. Vous pouvez en rejoindre le bord, mais sans pont, il faudra revenir sur vos pas.\n\nDéplacements possibles :\n• Aller vers le nord : La Savane des Vents du Sud. (passage 95).\n• Aller vers l'est : La Rivière des Brumes. (passage 251).\n• Aller vers l'ouest : La Savane des Vents du Sud. (passage 29).",
+      "text": "Passage 178 — La Savane des Vents du Sud.\n\nLes hautes herbes ondulent sous le vent. Vous avancez dans la savane, à l’écoute des bruits qui vous entourent.\n\nRavitaillement\n\nLes provisions du campement sont mises à votre disposition.\n\nDépensez 1 action pour prendre jusqu’à 3 nourritures dans sa réserve, sans dépasser votre limite de 12 nourritures.\n\nLa réserve du campement contient initialement 6 nourritures.\n\nPour vous ravitailler de nouveau ici, vous devez quitter le campement, puis y revenir.\n\nAu sud s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nÀ l'est se trouve la Rivière des Brumes. Vous pouvez en rejoindre le bord, mais sans pont, il faudra revenir sur vos pas.\n\nDéplacements possibles :\n• Aller vers le nord : La Savane des Vents du Sud. (passage 95).\n• Aller vers l'est : La Rivière des Brumes. (passage 251).\n• Aller vers l'ouest : La Savane des Vents du Sud. (passage 29).",
       "source_pages": [],
       "references": [
         {
@@ -8530,8 +8530,8 @@
             "95"
           ],
           "detection": "explicit",
-          "text_offset": 466,
-          "source_line": 10,
+          "text_offset": 810,
+          "source_line": 20,
           "context": "• Aller vers le nord : La Savane des Vents du Sud. (passage 95)."
         },
         {
@@ -8542,8 +8542,8 @@
             "251"
           ],
           "detection": "explicit",
-          "text_offset": 524,
-          "source_line": 11,
+          "text_offset": 868,
+          "source_line": 21,
           "context": "• Aller vers l'est : La Rivière des Brumes. (passage 251)."
         },
         {
@@ -8554,8 +8554,8 @@
             "29"
           ],
           "detection": "explicit",
-          "text_offset": 590,
-          "source_line": 12,
+          "text_offset": 934,
+          "source_line": 22,
           "context": "• Aller vers l'ouest : La Savane des Vents du Sud. (passage 29)."
         }
       ]
@@ -9943,7 +9943,7 @@
       "key": "204",
       "title": "204 — Le Grand Lac des Reflets",
       "map_coordinate": "O12",
-      "text": "Passage 204 — Le Grand Lac des Reflets.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nÀ l'est s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 225).",
+      "text": "Passage 204 — Le Grand Lac des Reflets.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nÀ l'est s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 225).",
       "source_pages": [],
       "references": [
         {
@@ -9954,8 +9954,8 @@
             "225"
           ],
           "detection": "explicit",
-          "text_offset": 407,
-          "source_line": 10,
+          "text_offset": 994,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 225)."
         }
       ]
@@ -10611,7 +10611,7 @@
       "key": "218",
       "title": "218 — La Rivière des Deux Rives",
       "map_coordinate": "C9",
-      "text": "Passage 218 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 103).",
+      "text": "Passage 218 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 103).",
       "source_pages": [],
       "references": [
         {
@@ -10622,8 +10622,8 @@
             "103"
           ],
           "detection": "explicit",
-          "text_offset": 293,
-          "source_line": 8,
+          "text_offset": 880,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 103)."
         }
       ]
@@ -10633,7 +10633,7 @@
       "key": "219",
       "title": "219 — Le Lac du Ciel",
       "map_coordinate": "E10",
-      "text": "Passage 219 — Le Lac du Ciel.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 63).",
+      "text": "Passage 219 — Le Lac du Ciel.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 63).",
       "source_pages": [],
       "references": [
         {
@@ -10644,8 +10644,8 @@
             "63"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 63)."
         }
       ]
@@ -10991,7 +10991,7 @@
       "key": "226",
       "title": "226 — Le Grand Fleuve",
       "map_coordinate": "I7",
-      "text": "Passage 226 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 172).",
+      "text": "Passage 226 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 172).",
       "source_pages": [],
       "references": [
         {
@@ -11002,8 +11002,8 @@
             "172"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 172)."
         }
       ]
@@ -11035,7 +11035,7 @@
       "key": "228",
       "title": "228 — La Rivière des Deux Rives",
       "map_coordinate": "F8",
-      "text": "Passage 228 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 203).",
+      "text": "Passage 228 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 203).",
       "source_pages": [],
       "references": [
         {
@@ -11046,8 +11046,8 @@
             "203"
           ],
           "detection": "explicit",
-          "text_offset": 293,
-          "source_line": 8,
+          "text_offset": 880,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 203)."
         }
       ]
@@ -11145,7 +11145,7 @@
       "key": "233",
       "title": "233 — Le Lac des Roseaux",
       "map_coordinate": "C11",
-      "text": "Passage 233 — Le Lac des Roseaux.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 82).",
+      "text": "Passage 233 — Le Lac des Roseaux.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 82).",
       "source_pages": [],
       "references": [
         {
@@ -11156,8 +11156,8 @@
             "82"
           ],
           "detection": "explicit",
-          "text_offset": 298,
-          "source_line": 8,
+          "text_offset": 885,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 82)."
         }
       ]
@@ -11167,7 +11167,7 @@
       "key": "234",
       "title": "234 — Le Grand Fleuve",
       "map_coordinate": "G12",
-      "text": "Passage 234 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 118).",
+      "text": "Passage 234 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 118).",
       "source_pages": [],
       "references": [
         {
@@ -11178,8 +11178,8 @@
             "118"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 118)."
         }
       ]
@@ -11189,7 +11189,7 @@
       "key": "235",
       "title": "235 — La Rivière du Matin",
       "map_coordinate": "I3",
-      "text": "Passage 235 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 52).",
+      "text": "Passage 235 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 52).",
       "source_pages": [],
       "references": [
         {
@@ -11200,8 +11200,8 @@
             "52"
           ],
           "detection": "explicit",
-          "text_offset": 287,
-          "source_line": 8,
+          "text_offset": 874,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 52)."
         }
       ]
@@ -11299,7 +11299,7 @@
       "key": "240",
       "title": "240 — Le Grand Fleuve",
       "map_coordinate": "H6",
-      "text": "Passage 240 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 174).",
+      "text": "Passage 240 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 174).",
       "source_pages": [],
       "references": [
         {
@@ -11310,8 +11310,8 @@
             "174"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 174)."
         }
       ]
@@ -11321,7 +11321,7 @@
       "key": "241",
       "title": "241 — La Rivière du Matin",
       "map_coordinate": "I3",
-      "text": "Passage 241 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 173).",
+      "text": "Passage 241 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 173).",
       "source_pages": [],
       "references": [
         {
@@ -11332,8 +11332,8 @@
             "173"
           ],
           "detection": "explicit",
-          "text_offset": 287,
-          "source_line": 8,
+          "text_offset": 874,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 173)."
         }
       ]
@@ -11343,7 +11343,7 @@
       "key": "242",
       "title": "242 — La Rivière des Deux Rives",
       "map_coordinate": "C9",
-      "text": "Passage 242 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 35).",
+      "text": "Passage 242 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 35).",
       "source_pages": [],
       "references": [
         {
@@ -11354,8 +11354,8 @@
             "35"
           ],
           "detection": "explicit",
-          "text_offset": 293,
-          "source_line": 8,
+          "text_offset": 880,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 35)."
         }
       ]
@@ -11365,7 +11365,7 @@
       "key": "243",
       "title": "243 — La Rivière du Matin",
       "map_coordinate": "K1",
-      "text": "Passage 243 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 25).",
+      "text": "Passage 243 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 25).",
       "source_pages": [],
       "references": [
         {
@@ -11376,8 +11376,8 @@
             "25"
           ],
           "detection": "explicit",
-          "text_offset": 390,
-          "source_line": 10,
+          "text_offset": 977,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 25)."
         }
       ]
@@ -11387,7 +11387,7 @@
       "key": "244",
       "title": "244 — Le Grand Fleuve",
       "map_coordinate": "F1",
-      "text": "Passage 244 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 135).",
+      "text": "Passage 244 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 135).",
       "source_pages": [],
       "references": [
         {
@@ -11398,8 +11398,8 @@
             "135"
           ],
           "detection": "explicit",
-          "text_offset": 397,
-          "source_line": 10,
+          "text_offset": 984,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 135)."
         }
       ]
@@ -11409,7 +11409,7 @@
       "key": "245",
       "title": "245 — Le Lac du Ciel",
       "map_coordinate": "E10",
-      "text": "Passage 245 — Le Lac du Ciel.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 130).",
+      "text": "Passage 245 — Le Lac du Ciel.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 130).",
       "source_pages": [],
       "references": [
         {
@@ -11420,8 +11420,8 @@
             "130"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 130)."
         }
       ]
@@ -11431,7 +11431,7 @@
       "key": "246",
       "title": "246 — Le Lac des Roseaux",
       "map_coordinate": "C11",
-      "text": "Passage 246 — Le Lac des Roseaux.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 42).",
+      "text": "Passage 246 — Le Lac des Roseaux.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 42).",
       "source_pages": [],
       "references": [
         {
@@ -11442,8 +11442,8 @@
             "42"
           ],
           "detection": "explicit",
-          "text_offset": 298,
-          "source_line": 8,
+          "text_offset": 885,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 42)."
         }
       ]
@@ -11453,7 +11453,7 @@
       "key": "247",
       "title": "247 — Le Grand Fleuve",
       "map_coordinate": "G3",
-      "text": "Passage 247 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 15).",
+      "text": "Passage 247 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 15).",
       "source_pages": [],
       "references": [
         {
@@ -11464,8 +11464,8 @@
             "15"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 15)."
         }
       ]
@@ -11475,7 +11475,7 @@
       "key": "248",
       "title": "248 — Le Grand Fleuve",
       "map_coordinate": "G12",
-      "text": "Passage 248 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 216).",
+      "text": "Passage 248 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 216).",
       "source_pages": [],
       "references": [
         {
@@ -11486,8 +11486,8 @@
             "216"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 216)."
         }
       ]
@@ -11497,7 +11497,7 @@
       "key": "249",
       "title": "249 — Le Grand Fleuve",
       "map_coordinate": "A13",
-      "text": "Passage 249 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 57).",
+      "text": "Passage 249 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 57).",
       "source_pages": [],
       "references": [
         {
@@ -11508,8 +11508,8 @@
             "57"
           ],
           "detection": "explicit",
-          "text_offset": 399,
-          "source_line": 10,
+          "text_offset": 986,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 57)."
         }
       ]
@@ -11541,7 +11541,7 @@
       "key": "251",
       "title": "251 — La Rivière des Brumes",
       "map_coordinate": "J15",
-      "text": "Passage 251 — La Rivière des Brumes.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nAu sud s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 178).",
+      "text": "Passage 251 — La Rivière des Brumes.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nAu sud s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 178).",
       "source_pages": [],
       "references": [
         {
@@ -11552,8 +11552,8 @@
             "178"
           ],
           "detection": "explicit",
-          "text_offset": 391,
-          "source_line": 10,
+          "text_offset": 978,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 178)."
         }
       ]
@@ -11563,7 +11563,7 @@
       "key": "252",
       "title": "252 — La Rivière des Deux Rives",
       "map_coordinate": "F8",
-      "text": "Passage 252 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 207).",
+      "text": "Passage 252 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 207).",
       "source_pages": [],
       "references": [
         {
@@ -11574,8 +11574,8 @@
             "207"
           ],
           "detection": "explicit",
-          "text_offset": 293,
-          "source_line": 8,
+          "text_offset": 880,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 207)."
         }
       ]
@@ -11629,7 +11629,7 @@
       "key": "255",
       "title": "255 — Le Grand Fleuve",
       "map_coordinate": "G3",
-      "text": "Passage 255 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 52).",
+      "text": "Passage 255 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 52).",
       "source_pages": [],
       "references": [
         {
@@ -11640,8 +11640,8 @@
             "52"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 52)."
         }
       ]
@@ -11651,7 +11651,7 @@
       "key": "256",
       "title": "256 — La Rivière des Deux Rives",
       "map_coordinate": "F8",
-      "text": "Passage 256 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 196).",
+      "text": "Passage 256 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 196).",
       "source_pages": [],
       "references": [
         {
@@ -11662,8 +11662,8 @@
             "196"
           ],
           "detection": "explicit",
-          "text_offset": 293,
-          "source_line": 8,
+          "text_offset": 880,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 196)."
         }
       ]
@@ -11673,7 +11673,7 @@
       "key": "257",
       "title": "257 — Le Grand Fleuve",
       "map_coordinate": "H4",
-      "text": "Passage 257 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 48).",
+      "text": "Passage 257 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 48).",
       "source_pages": [],
       "references": [
         {
@@ -11684,8 +11684,8 @@
             "48"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 48)."
         }
       ]
@@ -11717,7 +11717,7 @@
       "key": "259",
       "title": "259 — Le Grand Lac des Reflets",
       "map_coordinate": "L10",
-      "text": "Passage 259 — Le Grand Lac des Reflets.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 64).",
+      "text": "Passage 259 — Le Grand Lac des Reflets.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 64).",
       "source_pages": [],
       "references": [
         {
@@ -11728,8 +11728,8 @@
             "64"
           ],
           "detection": "explicit",
-          "text_offset": 304,
-          "source_line": 8,
+          "text_offset": 891,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 64)."
         }
       ]
@@ -11739,7 +11739,7 @@
       "key": "260",
       "title": "260 — Le Grand Fleuve",
       "map_coordinate": "I7",
-      "text": "Passage 260 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 183).",
+      "text": "Passage 260 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 183).",
       "source_pages": [],
       "references": [
         {
@@ -11750,8 +11750,8 @@
             "183"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 183)."
         }
       ]
@@ -11805,7 +11805,7 @@
       "key": "263",
       "title": "263 — Le Lac des Roseaux",
       "map_coordinate": "C11",
-      "text": "Passage 263 — Le Lac des Roseaux.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 190).",
+      "text": "Passage 263 — Le Lac des Roseaux.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 190).",
       "source_pages": [],
       "references": [
         {
@@ -11816,8 +11816,8 @@
             "190"
           ],
           "detection": "explicit",
-          "text_offset": 298,
-          "source_line": 8,
+          "text_offset": 885,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 190)."
         }
       ]
@@ -11937,7 +11937,7 @@
       "key": "269",
       "title": "269 — Le Grand Fleuve",
       "map_coordinate": "I7",
-      "text": "Passage 269 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 180).",
+      "text": "Passage 269 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 180).",
       "source_pages": [],
       "references": [
         {
@@ -11948,8 +11948,8 @@
             "180"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 180)."
         }
       ]
@@ -11959,7 +11959,7 @@
       "key": "270",
       "title": "270 — La Rivière du Matin",
       "map_coordinate": "K1",
-      "text": "Passage 270 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 211).",
+      "text": "Passage 270 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 211).",
       "source_pages": [],
       "references": [
         {
@@ -11970,8 +11970,8 @@
             "211"
           ],
           "detection": "explicit",
-          "text_offset": 390,
-          "source_line": 10,
+          "text_offset": 977,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 211)."
         }
       ]
@@ -11981,7 +11981,7 @@
       "key": "271",
       "title": "271 — La Rivière des Deux Rives",
       "map_coordinate": "C9",
-      "text": "Passage 271 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 124).",
+      "text": "Passage 271 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 124).",
       "source_pages": [],
       "references": [
         {
@@ -11992,8 +11992,8 @@
             "124"
           ],
           "detection": "explicit",
-          "text_offset": 293,
-          "source_line": 8,
+          "text_offset": 880,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 124)."
         }
       ]
@@ -12025,7 +12025,7 @@
       "key": "273",
       "title": "273 — Le Lac du Ciel",
       "map_coordinate": "E10",
-      "text": "Passage 273 — Le Lac du Ciel.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 133).",
+      "text": "Passage 273 — Le Lac du Ciel.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 133).",
       "source_pages": [],
       "references": [
         {
@@ -12036,8 +12036,8 @@
             "133"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 133)."
         }
       ]
@@ -12091,7 +12091,7 @@
       "key": "276",
       "title": "276 — Le Grand Fleuve",
       "map_coordinate": "H4",
-      "text": "Passage 276 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 173).",
+      "text": "Passage 276 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 173).",
       "source_pages": [],
       "references": [
         {
@@ -12102,8 +12102,8 @@
             "173"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 173)."
         }
       ]
@@ -12311,7 +12311,7 @@
       "key": "286",
       "title": "286 — Le Grand Fleuve",
       "map_coordinate": "H6",
-      "text": "Passage 286 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 180).",
+      "text": "Passage 286 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 180).",
       "source_pages": [],
       "references": [
         {
@@ -12322,8 +12322,8 @@
             "180"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 180)."
         }
       ]
@@ -12355,7 +12355,7 @@
       "key": "288",
       "title": "288 — La Rivière des Deux Rives",
       "map_coordinate": "A10",
-      "text": "Passage 288 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 69).",
+      "text": "Passage 288 — La Rivière des Deux Rives.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nÀ l'ouest s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 69).",
       "source_pages": [],
       "references": [
         {
@@ -12366,8 +12366,8 @@
             "69"
           ],
           "detection": "explicit",
-          "text_offset": 398,
-          "source_line": 10,
+          "text_offset": 985,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 69)."
         }
       ]
@@ -12421,7 +12421,7 @@
       "key": "291",
       "title": "291 — Le Grand Fleuve",
       "map_coordinate": "F1",
-      "text": "Passage 291 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 161).",
+      "text": "Passage 291 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nAu nord s’étend l’océan qui entoure le continent. Vous ne pouvez pas poursuivre dans cette direction.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 161).",
       "source_pages": [],
       "references": [
         {
@@ -12432,8 +12432,8 @@
             "161"
           ],
           "detection": "explicit",
-          "text_offset": 397,
-          "source_line": 10,
+          "text_offset": 984,
+          "source_line": 25,
           "context": "• Revenir sur vos pas. (passage 161)."
         }
       ]
@@ -12509,7 +12509,7 @@
       "key": "295",
       "title": "295 — Le Grand Lac des Reflets",
       "map_coordinate": "L10",
-      "text": "Passage 295 — Le Grand Lac des Reflets.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 4).",
+      "text": "Passage 295 — Le Grand Lac des Reflets.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 4).",
       "source_pages": [],
       "references": [
         {
@@ -12520,8 +12520,8 @@
             "4"
           ],
           "detection": "explicit",
-          "text_offset": 304,
-          "source_line": 8,
+          "text_offset": 891,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 4)."
         }
       ]
@@ -12531,7 +12531,7 @@
       "key": "296",
       "title": "296 — Le Grand Fleuve",
       "map_coordinate": "G3",
-      "text": "Passage 296 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 48).",
+      "text": "Passage 296 — Le Grand Fleuve.\n\nLe fleuve barre le passage. Le bruit de l’eau accompagne votre halte sur la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 48).",
       "source_pages": [],
       "references": [
         {
@@ -12542,8 +12542,8 @@
             "48"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 48)."
         }
       ]
@@ -12553,7 +12553,7 @@
       "key": "297",
       "title": "297 — La Rivière du Matin",
       "map_coordinate": "I3",
-      "text": "Passage 297 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 77).",
+      "text": "Passage 297 — La Rivière du Matin.\n\nLe courant coupe votre route. Vous observez la rivière depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 77).",
       "source_pages": [],
       "references": [
         {
@@ -12564,8 +12564,8 @@
             "77"
           ],
           "detection": "explicit",
-          "text_offset": 287,
-          "source_line": 8,
+          "text_offset": 874,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 77)."
         }
       ]
@@ -12575,7 +12575,7 @@
       "key": "298",
       "title": "298 — Le Lac du Ciel",
       "map_coordinate": "E10",
-      "text": "Passage 298 — Le Lac du Ciel.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau. Sans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 68).",
+      "text": "Passage 298 — Le Lac du Ciel.\n\nLes eaux du lac s’étendent devant vous. Vous observez leur surface depuis la rive.\n\nVous atteignez le bord de l’eau.\n\nEmplacement de pêche — point de ravitaillement\n\nVous pouvez vous installer sur la rive pour pêcher. Cette tentative coûte 1 action.\n\nLancez un dé à 6 faces :\n\n- De 1 à 5 : vous gagnez autant de nourritures que le résultat du dé.\n- Sur 6 : vous ne gagnez aucune nourriture.\n\nVous ne pouvez pêcher qu’une seule fois lors de votre visite, même si vous ne gagnez rien. Vous devez quitter cet emplacement avant de pouvoir effectuer une nouvelle action de pêche.\n\nVotre tribu peut conserver un maximum de 12 nourritures. Ajoutez vos gains sans dépasser cette limite. Tout surplus est perdu.\n\nSans pont, vous ne pouvez pas poursuivre ni traverser : vous devez revenir sur vos pas.\n\nDéplacements possibles :\n• Revenir sur vos pas. (passage 68).",
       "source_pages": [],
       "references": [
         {
@@ -12586,8 +12586,8 @@
             "68"
           ],
           "detection": "explicit",
-          "text_offset": 294,
-          "source_line": 8,
+          "text_offset": 881,
+          "source_line": 23,
           "context": "• Revenir sur vos pas. (passage 68)."
         }
       ]
