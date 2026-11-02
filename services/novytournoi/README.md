@@ -2,9 +2,16 @@
 
 Worker Cloudflare distinct du Narrateur, avec un Durable Object SQLite par tournoi. Il réutilise la connexion Wrangler du compte existant, sans toucher au Worker ni au stockage audio.
 
-## État de cette livraison
+## État du déploiement
 
-Préparation et tests locaux uniquement. Aucun Worker n’a été publié et aucun stockage distant n’a été créé. `cloud-config.json` conserve une adresse vide pour ne pas annoncer un partage actif avant déploiement. La vérification du 1er novembre 2026 a constaté que la session Wrangler du compte existant a expiré ; il faudra reconnecter le compte avant une activation distante.
+Service déployé et vérifié le 1er novembre 2026 :
+
+- URL : https://novyland-tournoi.novyland.workers.dev
+- Version Cloudflare : `753a27b3-d3bb-46af-a4ea-9a301bc7a420`
+- Stockage : Durable Objects SQLite, binding `TOURNAMENTS`.
+- Adresse renseignée dans le fichier local `labo/novytournoi/cloud-config.json`.
+
+Le site GitHub Pages doit également recevoir ce fichier de configuration actualisé pour activer le bouton de partage. Aucun commit ni push GitHub n’a été effectué lors du déploiement du service.
 
 ## Utilisation
 
@@ -22,11 +29,11 @@ Un export JSON ordinaire ne donne pas le droit de modifier le tournoi partagé. 
 2. Remplacer temporairement `labo/novytournoi/cloud-config.json` par le contenu de `cloud-config.local.example.json`.
 3. Servir la racine du dépôt à `http://127.0.0.1:8765` et ouvrir `/labo/novytournoi/`.
 4. Créer un tournoi, activer le partage, puis ouvrir son lien dans un autre onglet pour consulter les résultats. Le stockage du Worker est local dans `.wrangler/` ; ce code local n’est pas consultable depuis Internet.
-5. Restaurer l’adresse vide avant de préparer une publication.
+5. Restaurer l’adresse publique du service déployé après les essais locaux.
 
 Vérifications : `npm test` pour le modèle ; `node integration.test.mjs http://127.0.0.1:8788` pour les routes et le stockage du Worker local démarré.
 
-## Activation ultérieure, après autorisation de déployer
+## Mise à jour ultérieure du service
 
 1. Reconnecter le compte avec `npx wrangler login`, puis le vérifier avec `npx wrangler whoami`.
 2. Vérifier les domaines dans `ALLOWED_ORIGINS` de `wrangler.jsonc`.
