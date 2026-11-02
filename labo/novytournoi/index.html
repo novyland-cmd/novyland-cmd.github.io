@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#163e38">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Créez un tournoi à 2, 4, 8 ou 16 joueurs, ou suivez les résultats avec le code de votre tournoi.">
+  <link rel="icon" href="../../favicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <title>NovyTournoi | Créer ou suivre un tournoi</title>
+</head>
+<body>
+  <header>
+    <a class="back-link" href="../">← Retour au labo</a>
+    <h1>🏆 NovyTournoi</h1>
+    <p>Un tournoi, un code, tous les résultats.</p>
+  </header>
+  <main>
+    <section id="homePanel" aria-labelledby="homeTitle">
+      <div class="hero-home">
+        <p class="eyebrow">Le tournoi commence ici</p>
+        <h2 id="homeTitle">À vous de jouer.</h2>
+        <p>Organisez la compétition ou retrouvez votre tableau pour suivre chaque victoire.</p>
+      </div>
+      <div class="home-grid">
+        <section class="panel" aria-labelledby="createTitle">
+          <span class="badge">Organisateur</span>
+          <h2 id="createTitle">Créer un tournoi</h2>
+          <p>Réunissez 2, 4, 8 ou 16 joueurs. Tout le monde joue dès le premier tour, puis les gagnants avancent jusqu’à la finale.</p>
+          <button id="createTournament">Créer un tournoi</button>
+        </section>
+        <section class="panel" aria-labelledby="joinTitle">
+          <span class="badge">Joueurs et spectateurs</span>
+          <h2 id="joinTitle">Suivre les résultats</h2>
+          <p>Entrez le code transmis par l’organisateur. Les résultats s’actualisent automatiquement pendant la compétition.</p>
+          <form id="joinForm">
+            <label for="joinCode">Code du tournoi</label>
+            <input id="joinCode" name="code" placeholder="ABCD-EFGH-JKLM" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" required aria-describedby="joinStatus">
+            <button id="joinTournament" type="submit">Voir les résultats</button>
+            <p id="joinStatus" class="small status-box" role="status"></p>
+          </form>
+        </section>
+      </div>
+      <section id="resumePanel" class="panel hidden" aria-labelledby="resumeTitle">
+        <h2 id="resumeTitle">Reprendre sur cet appareil</h2>
+        <ul id="resumeList" class="local-list"></ul>
+      </section>
+      <p id="serviceStatus" class="muted small" role="status">Vérification du service de résultats…</p>
+    </section>
+
+    <div id="workspace" class="hidden">
+      <nav class="home-nav" aria-label="Navigation du tournoi"><button class="link-button" id="goHome">← Accueil NovyTournoi</button></nav>
+      <section class="panel hidden" id="setupPanel" aria-labelledby="setupTitle">
+        <div class="row between"><h2 id="setupTitle">Créer un tournoi</h2><span class="muted small">2, 4, 8 ou 16 participants</span></div>
+        <div class="grid">
+          <div><label for="tournamentName">Nom du tournoi</label><input id="tournamentName" maxlength="80" placeholder="Ex. Tournoi NovyLand"></div>
+          <div><label for="playerName">Nom d’un participant</label><div class="row" style="flex-wrap:nowrap"><input id="playerName" maxlength="60" placeholder="Nom ou pseudonyme"><button id="addPlayer">Ajouter</button></div></div>
+        </div>
+        <strong id="playerCount">0 / 16 participants</strong>
+        <ul id="participantList" class="participants"></ul>
+        <p class="muted small">Tous jouent dès le premier tour, sans exemption. Les adversaires sont tirés au sort au lancement.</p>
+        <p class="muted small">Pour le partage, utilisez des pseudonymes : les noms et résultats seront visibles par toute personne possédant le code du tournoi.</p>
+        <div class="row setup-actions"><button id="startTournament">Démarrer le tournoi</button><span id="setupMessage" class="muted small" role="status"></span></div>
+      </section>
+
+      <section id="tournamentPanel" class="hidden" aria-labelledby="activeTitle">
+        <div class="panel">
+          <div class="row between"><div><h2 id="activeTitle"></h2><p class="muted small" id="activeSubtitle"></p></div><span class="badge" id="accessMode"></span></div>
+          <div id="viewerNote" class="readonly-note hidden">Consultation des résultats · Seul l’organisateur peut désigner les gagnants.</div>
+          <div id="stats" class="grid"></div>
+          <div id="shareBox" class="share-box hidden">
+            <p class="eyebrow">Code du tournoi</p><div id="publicCode" class="code-display"></div>
+            <p id="shareDescription" class="small"></p>
+            <div class="row"><button id="copyCode" class="secondary">Copier le code</button><button id="copyLink" class="secondary">Copier le lien</button></div>
+          </div>
+          <div id="ownerActions" class="row setup-actions">
+            <button id="publishTournament">Activer le partage des résultats</button>
+            <button id="retrySync" class="secondary hidden">Réessayer l’enregistrement</button>
+            <button id="reloadRemote" class="secondary hidden">Recharger la version du serveur</button>
+          </div>
+          <p id="syncStatus" class="small status-box" role="status"></p>
+          <div id="viewerActions" class="row hidden"><button id="refreshResults" class="secondary">Actualiser les résultats</button></div>
+          <div id="localActions" class="row"><button id="backToSetup" class="secondary">Nouvelle configuration</button><button id="resetTournament" class="danger">Effacer ce tournoi local</button></div>
+        </div>
+        <div class="panel">
+          <div class="row between"><h2>Suivi du tournoi</h2><div class="tabs" role="tablist" aria-label="Mode d’affichage"><button id="tabRounds" role="tab" aria-controls="roundView" aria-selected="true">Ronde par ronde</button><button id="tabBracket" role="tab" aria-controls="bracketView" aria-selected="false" tabindex="-1">Tableau complet</button></div></div>
+          <div id="roundView" role="tabpanel" aria-labelledby="tabRounds"><div class="row between" style="margin-bottom:14px"><button id="prevRound" class="secondary">← Précédente</button><strong id="roundHeading"></strong><button id="nextRound" class="secondary">Suivante →</button></div><div id="roundMatches" class="round-matches"></div></div>
+          <div id="bracketView" role="tabpanel" aria-labelledby="tabBracket" class="hidden"><p class="muted small">Faites défiler horizontalement pour voir les tours suivants.</p><div id="bracket" class="bracket"></div></div>
+        </div>
+        <section id="championPanel" class="panel hidden" aria-label="Champion du tournoi"></section>
+      </section>
+
+      <section id="backupPanel" class="panel" aria-labelledby="backupTitle">
+        <h2 id="backupTitle">Sauvegarde et transfert</h2>
+        <p id="backupDescription" class="muted small">Votre configuration reste sur cet appareil. Exportez un fichier pour en conserver une copie.</p>
+        <div class="row mobile-stack"><button id="exportData" class="secondary">Exporter JSON</button><label id="importLabel" class="file-label" for="importFile">Importer JSON<input id="importFile" type="file" accept=".json,application/json"></label><button id="exportResults" class="secondary">Exporter les résultats CSV</button><button id="exportOwner" class="secondary hidden">Sauvegarder mon accès organisateur</button></div>
+        <p id="storageStatus" class="muted small" role="status"></p>
+      </section>
+    </div>
+  </main>
+  <footer class="footer">NovyTournoi · Élimination directe · Sans compte</footer>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>
