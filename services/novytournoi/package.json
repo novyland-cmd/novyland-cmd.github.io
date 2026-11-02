@@ -2,6 +2,6 @@
   "name": "novyland-tournoi",
   "private": true,
   "type": "module",
-  "scripts": { "dev": "wrangler dev --local --port 8788", "deploy": "wrangler deploy", "test": "node --test model.test.mjs" },
+  "scripts": { "dev": "wrangler dev --local --port 8788", "deploy": "wrangler deploy", "test": "node --test model.test.mjs formats.test.mjs" },
   "devDependencies": { "wrangler": "4.152.0" }
 }

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#163e38">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Créez un tournoi à 2, 4, 8 ou 16 joueurs, ou suivez les résultats avec le code de votre tournoi.">
+  <meta name="description" content="Créez un tournoi de 2 à 16 joueurs : élimination directe, double élimination, tous contre tous ou suisse avec départage. Suivez les résultats par code.">
   <link rel="icon" href="../../favicon.ico">
   <link rel="stylesheet" href="styles.css">
   <title>NovyTournoi | Créer ou suivre un tournoi</title>
@@ -27,7 +27,7 @@
         <section class="panel" aria-labelledby="createTitle">
           <span class="badge">Organisateur</span>
           <h2 id="createTitle">Créer un tournoi</h2>
-          <p>Réunissez 2, 4, 8 ou 16 joueurs. Tout le monde joue dès le premier tour, puis les gagnants avancent jusqu’à la finale.</p>
+          <p>Réunissez de 2 à 16 joueurs. Choisissez parmi les formats adaptés à votre groupe : élimination directe, double élimination, tous contre tous ou suisse.</p>
           <button id="createTournament">Créer un tournoi</button>
         </section>
         <section class="panel" aria-labelledby="joinTitle">
@@ -46,20 +46,21 @@
         <h2 id="resumeTitle">Reprendre sur cet appareil</h2>
         <ul id="resumeList" class="local-list"></ul>
       </section>
+      <p id="localRemovalStatus" class="muted small" role="status"></p>
       <p id="serviceStatus" class="muted small" role="status">Vérification du service de résultats…</p>
     </section>
 
     <div id="workspace" class="hidden">
       <nav class="home-nav" aria-label="Navigation du tournoi"><button class="link-button" id="goHome">← Accueil NovyTournoi</button></nav>
       <section class="panel hidden" id="setupPanel" aria-labelledby="setupTitle">
-        <div class="row between"><h2 id="setupTitle">Créer un tournoi</h2><span class="muted small">2, 4, 8 ou 16 participants</span></div>
+        <div class="row between"><h2 id="setupTitle">Créer un tournoi</h2><span class="muted small">2 à 16 participants</span></div>
         <div class="grid">
           <div><label for="tournamentName">Nom du tournoi</label><input id="tournamentName" maxlength="80" placeholder="Ex. Tournoi NovyLand"></div>
           <div><label for="playerName">Nom d’un participant</label><div class="row" style="flex-wrap:nowrap"><input id="playerName" maxlength="60" placeholder="Nom ou pseudonyme"><button id="addPlayer">Ajouter</button></div></div>
         </div>
         <strong id="playerCount">0 / 16 participants</strong>
         <ul id="participantList" class="participants"></ul>
-        <p class="muted small">Tous jouent dès le premier tour, sans exemption. Les adversaires sont tirés au sort au lancement.</p>
+        <div class="mode-choice"><label for="tournamentMode">Mode du tournoi</label><select id="tournamentMode" aria-describedby="modeDescription"></select><p id="modeDescription" class="muted small"></p></div>
         <p class="muted small">Pour le partage, utilisez des pseudonymes : les noms et résultats seront visibles par toute personne possédant le code du tournoi.</p>
         <div class="row setup-actions"><button id="startTournament">Démarrer le tournoi</button><span id="setupMessage" class="muted small" role="status"></span></div>
       </section>
@@ -88,6 +89,7 @@
           <div id="roundView" role="tabpanel" aria-labelledby="tabRounds"><div class="row between" style="margin-bottom:14px"><button id="prevRound" class="secondary">← Précédente</button><strong id="roundHeading"></strong><button id="nextRound" class="secondary">Suivante →</button></div><div id="roundMatches" class="round-matches"></div></div>
           <div id="bracketView" role="tabpanel" aria-labelledby="tabBracket" class="hidden"><p class="muted small">Faites défiler horizontalement pour voir les tours suivants.</p><div id="bracket" class="bracket"></div></div>
         </div>
+        <section id="standingsPanel" class="panel hidden"><h2 id="standingsTitle">Classement</h2><p id="phaseNotice" class="muted small" role="status"></p><div class="standings-scroll"><table class="standings-table"><thead><tr><th scope="col">Rang</th><th scope="col">Joueur</th><th scope="col">V</th><th scope="col">D</th><th scope="col">Repos / exemptions</th><th scope="col">Points</th></tr></thead><tbody id="standingsBody"></tbody></table></div></section>
         <section id="championPanel" class="panel hidden" aria-label="Champion du tournoi"></section>
       </section>
 
@@ -99,7 +101,7 @@
       </section>
     </div>
   </main>
-  <footer class="footer">NovyTournoi · Élimination directe · Sans compte</footer>
+  <footer class="footer">NovyTournoi · De 2 à 16 joueurs · Sans compte</footer>
   <script type="module" src="app.mjs"></script>
 </body>
 </html>

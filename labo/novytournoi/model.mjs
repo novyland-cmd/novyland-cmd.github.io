@@ -1,3 +1,4 @@
+import { availableModes, cleanFormatState, chooseFormatWinner } from './formats.mjs';
 export const ALLOWED_COUNTS = [2, 4, 8, 16];
 export const canStart = count => ALLOWED_COUNTS.includes(count);
 export const emptyState = () => ({ name: '', players: [], rounds: [], started: false, view: 'rounds', currentRound: 0 });
@@ -34,6 +35,7 @@ export function propagate(state) {
   }));
 }
 export function chooseWinner(state, matchId, playerId) {
+  if (state.engineVersion === 2) return chooseFormatWinner(state, matchId, playerId);
   const r = state.rounds.findIndex(round => round.some(m => m.id === matchId));
   if (r < 0) return false;
   const index = state.rounds[r].findIndex(m => m.id === matchId);
@@ -51,7 +53,7 @@ export function roundLabel(i, total) {
   return ({ 2: 'Finale', 4: 'Demi-finales', 8: 'Quarts de finale', 16: 'Huitièmes de finale' })[2 ** (total - i)] || `Tour ${i + 1}`;
 }
 // Return a fresh, whitelisted object. Public storage never accepts credentials or arbitrary fields.
-export function cleanState(input, { allowByes = false, requireStarted = false } = {}) {
+function cleanLegacyState(input, { allowByes = false, requireStarted = false } = {}) {
   const fail = () => { throw Error('Les données du tournoi sont invalides.'); };
   const text = (s, max) => typeof s === 'string' && s.length > 0 && s.length <= max;
   if (!input || typeof input !== 'object' || typeof input.name !== 'string' || input.name.length > 80 ||
@@ -66,7 +68,7 @@ export function cleanState(input, { allowByes = false, requireStarted = false } 
   });
   state.view = input.view === 'bracket' ? 'bracket' : 'rounds';
   state.currentRound = Number.isInteger(input.currentRound) ? input.currentRound : 0;
-  if (!state.started) { if (input.rounds.length) fail(); return state; }
+  if (!state.started) { if (input.rounds.length) fail(); state.mode = availableModes(state.players.length).includes(input.mode) ? input.mode : availableModes(state.players.length)[0] || ''; return state; }
   const n = state.players.length;
   if (!text(state.name.trim(), 80) || n < 2 || (!allowByes && !canStart(n))) fail();
   const size = 2 ** Math.ceil(Math.log2(n)), seenMatches = new Set(), firstPlayers = [];
@@ -96,4 +98,13 @@ export function cleanState(input, { allowByes = false, requireStarted = false } 
   }));
   state.currentRound = Math.max(0, Math.min(state.rounds.length - 1, state.currentRound));
   return state;
+}
+export function cleanState(input, options = {}) {
+  if (input?.engineVersion === 2) {
+    if (typeof input.name !== 'string' || !input.name.trim()) throw Error('Les données du tournoi sont invalides.');
+    const base = cleanLegacyState({ ...input, started: false, rounds: [] });
+    return cleanFormatState(input, base);
+  }
+  if (input?.engineVersion !== undefined) throw Error('Les données du tournoi sont invalides.');
+  return cleanLegacyState(input, options);
 }

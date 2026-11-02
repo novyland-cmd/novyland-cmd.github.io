@@ -33,7 +33,7 @@ export default {
     try {
       const url = new URL(request.url);
       if (request.method === 'OPTIONS') response = new Response(null, { status: 204 });
-      else if (url.pathname === '/api/health' && request.method === 'GET') response = json({ ok: true, service: 'NovyTournoi' });
+      else if (url.pathname === '/api/health' && request.method === 'GET') response = json({ ok: true, service: 'NovyTournoi', engineVersion: 2, modes: ['single', 'double', 'roundRobin', 'swiss'] });
       else if (url.pathname === '/api/tournaments' && request.method === 'POST') {
         const body = await readBody(request);
         if (!validCode(body.code) || !validToken(body.editorToken)) response = error('Code ou autorisation invalide.', 400);

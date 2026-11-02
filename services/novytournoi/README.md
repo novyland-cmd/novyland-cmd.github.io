@@ -4,10 +4,10 @@ Worker Cloudflare distinct du Narrateur, avec un Durable Object SQLite par tourn
 
 ## État du déploiement
 
-Service déployé et vérifié le 1er novembre 2026 :
+Service mis à jour et vérifié le 2 novembre 2026 :
 
 - URL : https://novyland-tournoi.novyland.workers.dev
-- Version Cloudflare : `753a27b3-d3bb-46af-a4ea-9a301bc7a420`
+- Version Cloudflare : `5fb91e72-99c7-4b39-862d-ac0d90bb6eb3`
 - Stockage : Durable Objects SQLite, binding `TOURNAMENTS`.
 - Adresse renseignée dans le fichier local `labo/novytournoi/cloud-config.json`.
 
@@ -31,7 +31,7 @@ Un export JSON ordinaire ne donne pas le droit de modifier le tournoi partagé. 
 4. Créer un tournoi, activer le partage, puis ouvrir son lien dans un autre onglet pour consulter les résultats. Le stockage du Worker est local dans `.wrangler/` ; ce code local n’est pas consultable depuis Internet.
 5. Restaurer l’adresse publique du service déployé après les essais locaux.
 
-Vérifications : `npm test` pour le modèle ; `node integration.test.mjs http://127.0.0.1:8788` pour les routes et le stockage du Worker local démarré.
+Vérifications : `npm test` pour le modèle et les nouveaux formats ; `node integration.test.mjs http://127.0.0.1:8788` pour les routes et le stockage du Worker local démarré.
 
 ## Mise à jour ultérieure du service
 
@@ -44,3 +44,9 @@ Vérifications : `npm test` pour le modèle ; `node integration.test.mjs http://
 Les données sont conservées sans expiration automatique ni suppression distante dans cette version. Les personnes qui connaissent le code peuvent consulter les pseudonymes et les résultats. Les créations sont ouvertes sans compte : avant une ouverture à grande échelle, décider d’une politique de création et de rétention adaptée au site.
 
 Références : [Durable Objects SQLite](https://developers.cloudflare.com/durable-objects/api/sqlite-storage-api/) et [configuration des bindings](https://developers.cloudflare.com/durable-objects/get-started/).
+
+## Formats du moteur version 2
+
+Le Worker accepte les anciens tableaux et les quatre modes décrits dans le README de `labo/novytournoi/`. Le moteur est partagé entre navigateur et serveur ; le serveur valide le tirage, le mode autorisé pour l’effectif, chaque adversaire et chaque gagnant. Il recalcule les rondes, les repos et les champions plutôt que de faire confiance aux champs dérivés.
+
+`node formats.integration.mjs http://127.0.0.1:8788` vérifie la création, les mises à jour jusqu’au titre et la consultation publique pour les nouveaux modes. Utiliser le runtime local pour ces tests de série, qui créent des tournois fictifs.

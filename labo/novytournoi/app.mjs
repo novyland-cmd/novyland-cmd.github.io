@@ -1,4 +1,6 @@
-import { emptyState, canStart, ALLOWED_COUNTS, createRounds, chooseWinner, cleanState, roundLabel, normalizeCode, validCode, displayCode, randomCode, randomToken } from './model.mjs';
+import { emptyState, canStart, chooseWinner, cleanState, roundLabel, normalizeCode, validCode, displayCode, randomCode, randomToken } from './model.mjs';
+import { availableModes, MODE_INFO, startFormat, roundTitle, standings, champions } from './formats.mjs';
+const titleOfRound = (state, index) => state.engineVersion === 2 ? roundTitle(state, index) : roundLabel(index, state.rounds.length);
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -53,37 +55,75 @@ function openLocal() {
 }
 function renderHome() {
   const items = [];
-  if (draft.players.length || draft.name || draft.started) items.push('<li><button class="secondary" data-resume="local">' + esc(draft.name || 'Configuration en cours') + ' · Sur cet appareil</button></li>');
-  for (const [c, entry] of Object.entries(owners)) items.push(`<li><button class="secondary" data-resume="${c}">${esc(entry.state.name)} · ${displayCode(c)}${entry.pending || entry.creating ? ' · Enregistrement à terminer' : ''}</button></li>`);
+  const item = (id, title, detail) => `<li><button class="secondary resume-button" data-resume="${id}">${esc(title)} · ${detail}</button><button class="danger tiny forget-button" data-forget="${id}" aria-label="Retirer ${esc(title)} de cet appareil">Retirer de cet appareil</button></li>`;
+  if (draft.players.length || draft.name || draft.started) items.push(item('local', draft.name || 'Configuration en cours', 'Sur cet appareil'));
+  for (const [c, entry] of Object.entries(owners)) items.push(item(c, entry.state.name, `${displayCode(c)}${entry.pending || entry.creating ? ' · Enregistrement à terminer' : ''}`));
   $('resumeList').innerHTML = items.join(''); hide('resumePanel', !items.length);
 }
+function forgetTournament(id) {
+  if (page !== 'home' || busy) return;
+  const entry = id === 'local' ? null : owners[id];
+  if (id !== 'local' && !entry) return;
+  const title = id === 'local' ? draft.name || 'Configuration en cours' : entry.state.name;
+  const message = id === 'local'
+    ? `Retirer « ${title} » de cet appareil ? La copie locale sera effacée. Exportez-la d’abord si vous souhaitez la conserver.`
+    : `Retirer « ${title} » de cet appareil ? La copie locale et l’accès organisateur seront effacés. Sauvegardez d’abord votre accès organisateur pour pouvoir gérer ce tournoi à nouveau. Les résultats déjà partagés sur Cloudflare resteront disponibles avec le code du tournoi.${entry.pending || entry.creating ? ' Attention : les résultats en attente d’enregistrement sur cet appareil seront perdus.' : ''}`;
+  if (!confirm(message)) return;
+  const status = $('localRemovalStatus');
+  try {
+    if (id === 'local') {
+      localStorage.removeItem(LOCAL_KEY);
+      draft = emptyState(); state = draft;
+    } else {
+      // Read the current registry so removing one entry preserves the others.
+      const latest = JSON.parse(localStorage.getItem(OWNER_KEY) || '{}');
+      delete latest[id];
+      if (Object.keys(latest).length) localStorage.setItem(OWNER_KEY, JSON.stringify(latest));
+      else localStorage.removeItem(OWNER_KEY);
+      delete owners[id];
+    }
+    savedMessage = '';
+    render();
+    status.textContent = `« ${title} » a été retiré de cet appareil.`;
+    status.classList.remove('error');
+  } catch {
+    status.textContent = 'Impossible de retirer ce tournoi. Vérifiez que le stockage du navigateur est accessible, puis réessayez.';
+    status.classList.add('error');
+  }
+}
 function renderSetup() {
+  if (state.started) { hide('setupPanel', true); return; }
   const count = state.players.length;
   hide('setupPanel', state.started || mode !== 'local');
   $('tournamentName').value = state.name;
   $('playerCount').textContent = `${count} / 16 participants`;
   $('participantList').innerHTML = state.players.map((p, i) => `<li><span>${i + 1}. ${esc(p.name)}</span><button class="secondary tiny" data-edit="${esc(p.id)}" aria-label="Modifier ${esc(p.name)}">Modifier</button><button class="danger tiny" data-remove="${esc(p.id)}" aria-label="Retirer ${esc(p.name)}">×</button></li>`).join('');
-  $('startTournament').disabled = !canStart(count);
-  const next = ALLOWED_COUNTS.find(n => n > count);
-  $('setupMessage').textContent = canStart(count) ? 'Tous joueront le premier tour.' : `Ajoutez ${next - count} participant${next - count > 1 ? 's' : ''} pour atteindre ${next} joueurs, ou ajustez la liste à 2, 4, 8 ou 16.`;
+  const choices = availableModes(count);
+  if (!choices.includes(state.mode)) state.mode = choices[0] || '';
+  $('tournamentMode').innerHTML = choices.length ? choices.map(value => `<option value="${value}">${MODE_INFO[value].title}</option>`).join('') : '<option value="">Ajoutez au moins 2 joueurs</option>';
+  $('tournamentMode').value = state.mode; $('tournamentMode').disabled = !choices.length;
+  $('modeDescription').textContent = MODE_INFO[state.mode]?.description || 'Les formats disponibles apparaîtront selon le nombre de participants.';
+  $('startTournament').disabled = !choices.includes(state.mode);
+  $('setupMessage').textContent = choices.length ? `${choices.length} mode${choices.length > 1 ? 's' : ''} disponible${choices.length > 1 ? 's' : ''}.` : 'Ajoutez au moins 2 participants.';
 }
 function matchHTML(match, i) {
   const name = id => state.players.find(p => p.id === id)?.name || 'À déterminer';
-  const known = match.slots.every(Boolean);
+  if (match.empty) return '';
+  const known = match.slots.every(Boolean) && (state.engineVersion !== 2 || match.ready);
   const sides = match.slots.map(id => `<div class="side ${!id ? 'empty' : ''} ${id && match.winner === id ? 'winner' : ''}"><span>${esc(id ? name(id) : 'À déterminer')}</span>${id && match.winner === id ? '✓' : ''}</div>`).join('');
-  const actions = mode === 'viewer' ? '' : `<div class="match-actions">${known ? match.slots.map(id => `<button class="tiny ${match.winner === id ? '' : 'secondary'}" data-win="${esc(match.id)}" data-player="${esc(id)}" ${match.winner === id || controlsLocked() ? 'disabled' : ''}>${match.winner === id ? 'Gagnant' : 'Gagne : ' + esc(name(id))}</button>`).join('') : `<span class="muted small">${match.auto ? 'Qualifié automatiquement (ancien tournoi)' : 'En attente des adversaires'}</span>`}</div>`;
-  return `<article class="match ${match.winner ? 'done' : ''}"><div class="meta">Match ${i + 1}${match.auto ? ' · Ancienne exemption' : ''}</div>${sides}${actions}</article>`;
+  const actions = mode === 'viewer' ? '' : `<div class="match-actions">${known ? match.slots.map(id => `<button class="tiny ${match.winner === id ? '' : 'secondary'}" data-win="${esc(match.id)}" data-player="${esc(id)}" ${match.winner === id || controlsLocked() ? 'disabled' : ''}>${match.winner === id ? 'Gagnant' : 'Gagne : ' + esc(name(id))}</button>`).join('') : `<span class="muted small">${match.auto ? (match.phase === 'swiss' ? 'Repos · 1 point' : match.phase === 'roundRobin' ? 'Repos · aucun point attribué' : 'Exemption · qualification automatique') : 'En attente des adversaires'}</span>`}</div>`;
+  return `<article class="match ${match.winner ? 'done' : ''}"><div class="meta">Match ${i + 1}${match.auto ? (match.phase === 'swiss' ? ' · Repos : 1 point' : match.phase === 'roundRobin' ? ' · Repos' : ' · Exemption') : ''}</div>${sides}${actions}</article>`;
 }
 function renderTournament() {
   hide('tournamentPanel', !state.started); if (!state.started) return;
-  const total = state.rounds.length, final = state.rounds.at(-1)[0];
+  const total = state.rounds.length, winners = champions(state), finished = winners.length > 0;
   $('activeTitle').textContent = state.name;
-  $('activeSubtitle').textContent = `${state.players.length} participants · ${total} tour${total > 1 ? 's' : ''}${canStart(state.players.length) ? '' : ' · Ancien tournoi avec exemptions'}`;
+  $('activeSubtitle').textContent = `${state.players.length} participants · ${MODE_INFO[state.mode || 'single'].title}${state.mode === 'swiss' ? ' · 3 rondes puis départage des premiers si nécessaire' : ''}${state.engineVersion !== 2 && !canStart(state.players.length) ? ' · Ancien tournoi avec exemptions' : ''}`;
   $('accessMode').textContent = mode === 'viewer' ? 'Spectateur' : 'Organisateur';
-  $('stats').innerHTML = `<div class="stat"><strong>${state.rounds.flat().filter(m => m.winner && !m.auto).length} / ${state.rounds.flat().filter(m => !m.auto).length}</strong>Matchs décidés</div><div class="stat"><strong>${total}</strong>Tours</div><div class="stat"><strong>${final.winner ? 'Terminé' : 'En cours'}</strong>Statut</div>`;
+  $('stats').innerHTML = `<div class="stat"><strong>${state.rounds.flat().filter(m => m.winner && !m.auto).length}</strong>Matchs décidés</div><div class="stat"><strong>${state.mode === 'swiss' ? 3 : total}</strong>${state.mode === 'swiss' ? 'Rondes suisses' : 'Tours'}</div><div class="stat"><strong>${finished ? 'Terminé' : 'En cours'}</strong>Statut</div>`;
   hide('viewerNote', mode !== 'viewer'); hide('viewerActions', mode !== 'viewer');
   hide('ownerActions', mode === 'viewer'); hide('localActions', mode !== 'local');
-  hide('publishTournament', mode !== 'local'); $('publishTournament').disabled = !endpoint || busy || !canStart(state.players.length);
+  hide('publishTournament', mode !== 'local'); $('publishTournament').disabled = !endpoint || busy || (state.engineVersion !== 2 && !canStart(state.players.length));
   hide('shareBox', !code);
   $('publicCode').textContent = displayCode(code);
   $('shareDescription').textContent = owner()?.creating ? 'Partage en attente : ne transmettez ce code qu’après confirmation de l’enregistrement.' : 'Partagez ce code ou ce lien pour consulter les résultats. Ils ne permettent pas de les modifier.';
@@ -95,12 +135,21 @@ function renderTournament() {
   }
   hide('roundView', state.view !== 'rounds'); hide('bracketView', state.view !== 'bracket');
   state.currentRound = Math.max(0, Math.min(total - 1, state.currentRound));
-  $('roundHeading').textContent = roundLabel(state.currentRound, total);
+  $('roundHeading').textContent = titleOfRound(state, state.currentRound);
   $('prevRound').disabled = state.currentRound === 0; $('nextRound').disabled = state.currentRound === total - 1;
   $('roundMatches').innerHTML = state.rounds[state.currentRound].map(matchHTML).join('');
-  $('bracket').innerHTML = state.rounds.map((round, r) => `<div class="bracket-col"><h3>${roundLabel(r, total)}</h3>${round.map(matchHTML).join('')}</div>`).join('');
-  hide('championPanel', !final.winner);
-  $('championPanel').innerHTML = final.winner ? `<div class="champion"><div class="cup">🏆</div><h2>Champion du tournoi</h2><h2>${esc(state.players.find(p => p.id === final.winner).name)}</h2><p>Félicitations ! Le tournoi est terminé.</p></div>` : '';
+  $('bracket').innerHTML = state.rounds.map((round, r) => `<div class="bracket-col"><h3>${esc(titleOfRound(state, r))}</h3>${round.map(matchHTML).join('')}</div>`).join('');
+  hide('championPanel', !finished);
+  $('championPanel').innerHTML = finished ? `<div class="champion"><div class="cup">🏆</div><h2>${winners.length > 1 ? 'Première place ex æquo' : 'Champion du tournoi'}</h2><h2>${winners.map(id => esc(state.players.find(p => p.id === id).name)).join(' · ')}</h2><p>Le tournoi est terminé.</p></div>` : '';
+  const ranking = ['roundRobin', 'swiss'].includes(state.mode) ? standings(state) : [];
+  hide('standingsPanel', !ranking.length);
+  $('standingsTitle').textContent = state.mode === 'swiss' ? 'Classement des 3 rondes suisses' : state.mode === 'roundRobin' ? 'Classement' : 'Bilan des rencontres';
+  $('standingsBody').innerHTML = ranking.map(row => {
+    const rank = 1 + ranking.filter(other => other.points > row.points || (other.points === row.points && (other.headToHead || 0) > (row.headToHead || 0))).length;
+    return `<tr><td>${rank}</td><th scope="row">${esc(row.name)}</th><td>${row.wins}</td><td>${row.losses}</td><td>${row.byes}</td><td>${row.points}</td></tr>`;
+  }).join('');
+  $('phaseNotice').textContent = state.mode === 'swiss' ? (state.rounds.some(r => r[0]?.phase !== 'swiss') ? 'Les 3 rondes sont terminées. Les joueurs à égalité en tête se départagent en double élimination, en repartant à zéro défaite.' : finished ? 'Un joueur termine seul en tête et remporte le tournoi.' : 'La ronde suivante est générée après tous les résultats de la ronde en cours. Un repos vaut 1 point.') : '';
+
 }
 function render() {
   hide('homePanel', page !== 'home'); hide('workspace', page === 'home'); $('goHome').disabled = busy;
@@ -180,7 +229,7 @@ async function publishTournament() {
   if (!endpoint) { notice('Le partage Cloudflare n’est pas encore activé. Votre tournoi reste sauvegardé sur cet appareil.', true); return; }
   let clean;
   try { clean = cleanState(state, { requireStarted: true }); }
-  catch (err) { notice('Ce tournoi ne peut pas être partagé : seuls les formats sans exemption sont acceptés.', true); return; }
+  catch (err) { notice('Ce tournoi ne peut pas être partagé : son format ou ses résultats sont invalides.', true); return; }
   if (!confirm('Activer le partage ? Les pseudonymes et les résultats seront consultables par toute personne possédant le code.')) return;
   code = randomCode();
   owners[code] = { token: randomToken(), endpoint, state: clean, revision: 0, creating: true, pending: null };
@@ -222,7 +271,12 @@ $('createTournament').onclick = () => {
 };
 $('goHome').onclick = goHome;
 $('joinForm').onsubmit = event => { event.preventDefault(); openViewer($('joinCode').value); };
-$('resumeList').onclick = event => { const button = event.target.closest('[data-resume]'); if (button) button.dataset.resume === 'local' ? openLocal() : resumeOwner(button.dataset.resume); };
+$('resumeList').onclick = event => {
+  const remove = event.target.closest('[data-forget]');
+  if (remove) { forgetTournament(remove.dataset.forget); return; }
+  const button = event.target.closest('[data-resume]');
+  if (button) button.dataset.resume === 'local' ? openLocal() : resumeOwner(button.dataset.resume);
+};
 $('addPlayer').onclick = addPlayer;
 $('playerName').onkeydown = event => { if (event.key === 'Enter') { event.preventDefault(); addPlayer(); } };
 $('tournamentName').oninput = event => { if (mode === 'local' && !state.started) { state.name = event.target.value; persistCurrent(); renderStatus(); } };
@@ -238,14 +292,15 @@ $('participantList').onclick = event => {
   } else if (remove) state.players = state.players.filter(p => p.id !== remove.dataset.remove); else return;
   persistCurrent(); render();
 };
+$('tournamentMode').onchange = event => { if (mode === 'local' && !state.started) { state.mode = event.target.value; persistCurrent(); render(); } };
 $('startTournament').onclick = () => {
-  if (mode !== 'local' || state.started || !canStart(state.players.length)) return;
-  state.name = state.name.trim() || 'Tournoi sans nom'; state.rounds = createRounds(state.players); state.started = true; state.currentRound = 0;
+  if (mode !== 'local' || state.started || !availableModes(state.players.length).includes(state.mode)) return;
+  state.name = state.name.trim() || 'Tournoi sans nom'; state = startFormat(state, state.mode);
   persistCurrent(); notice(endpoint ? 'Tournoi prêt. Activez le partage pour obtenir un code de consultation.' : 'Tournoi conservé sur cet appareil. Le partage sera disponible après activation du service Cloudflare.'); render();
 };
 $('backToSetup').onclick = () => {
   if (mode !== 'local' || !confirm('Revenir à la configuration effacera le tableau et les résultats de ce tournoi local. Continuer ?')) return;
-  state.started = false; state.rounds = []; state.currentRound = 0; persistCurrent(); render();
+  state = { ...emptyState(), name: state.name, players: state.players, mode: state.mode }; persistCurrent(); render();
 };
 $('resetTournament').onclick = () => {
   if (mode !== 'local' || !confirm('Effacer ce tournoi local ? Exportez une copie pour le conserver.')) return;
@@ -264,6 +319,10 @@ document.addEventListener('click', async event => {
   if (!match || match.winner === button.dataset.player) return;
   if (match.winner && !confirm('Changer le gagnant effacera les résultats des matchs qui en dépendent. Continuer ?')) return;
   if (!chooseWinner(state, button.dataset.win, button.dataset.player)) return;
+  if (state.engineVersion === 2 && state.rounds[state.currentRound]?.every(m => m.auto || m.winner)) {
+    const next = state.rounds.findIndex(round => round.some(m => m.ready && !m.auto && !m.winner));
+    if (next >= 0) state.currentRound = next;
+  }
   if (mode === 'owner') owner().pending = { mutationId: crypto.randomUUID(), revision: owner().revision, state: structuredClone(state) };
   persistCurrent(); render();
   if (mode === 'owner') await syncOwner();
@@ -307,8 +366,8 @@ $('importFile').onchange = async event => {
 $('exportResults').onclick = () => {
   if (!state.started) return;
   const name = id => state.players.find(p => p.id === id)?.name || '';
-  const rows = [['Tour', 'Match', 'Joueur 1', 'Joueur 2', 'Gagnant']];
-  state.rounds.forEach((round, r) => round.forEach((m, i) => rows.push([roundLabel(r, state.rounds.length), i + 1, ...m.slots.map(name), name(m.winner)])));
+  const rows = [['Tour', 'Match', 'Joueur 1', 'Joueur 2', 'Gagnant', 'Type']];
+  state.rounds.forEach((round, r) => round.filter(m => !m.empty).forEach((m, i) => rows.push([titleOfRound(state, r), i + 1, ...m.slots.map(name), m.auto ? '' : name(m.winner), m.auto ? (m.phase === 'swiss' ? 'Repos : 1 point' : m.phase === 'roundRobin' ? 'Repos : 0 point' : 'Exemption') : 'Match'])));
   // Prefix formula-leading cells when opened in a spreadsheet.
   const csv = '\ufeff' + rows.map(row => row.map(v => '"' + (/^[=+@\-\t\r]/.test(String(v)) ? "'" : '') + String(v).replace(/"/g, '""') + '"').join(';')).join('\r\n');
   download('novytournoi-resultats.csv', csv, 'text/csv;charset=utf-8');
