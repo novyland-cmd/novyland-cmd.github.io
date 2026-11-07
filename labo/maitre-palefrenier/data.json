@@ -1,0 +1,565 @@
+{
+  "horses": [
+    {
+      "id": 1,
+      "name": "Plume",
+      "value": 2,
+      "size": "petit",
+      "color": "brun",
+      "origin": "europe",
+      "needs": [
+        "nourrir",
+        "brosser"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Malinou",
+      "value": 2,
+      "size": "petit",
+      "color": "blanc",
+      "origin": "europe",
+      "needs": [
+        "nourrir",
+        "promener"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Grisou",
+      "value": 1,
+      "size": "moyen",
+      "color": "blanc",
+      "origin": "europe",
+      "needs": [
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Esiuol",
+      "value": 1,
+      "size": "petit",
+      "color": "brun",
+      "origin": "europe",
+      "needs": [
+        "promener"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Nuage",
+      "value": 2,
+      "size": "moyen",
+      "color": "gris",
+      "origin": "europe",
+      "needs": [
+        "brosser",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Éclair",
+      "value": 2,
+      "size": "moyen",
+      "color": "brun",
+      "origin": "amerique",
+      "needs": [
+        "promener",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Massin",
+      "value": 2,
+      "size": "moyen",
+      "color": "brun",
+      "origin": "afrique",
+      "needs": [
+        "nourrir",
+        "nourrir"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Altan",
+      "value": 2,
+      "size": "petit",
+      "color": "brun",
+      "origin": "asie",
+      "needs": [
+        "brosser",
+        "brosser"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Adanac",
+      "value": 3,
+      "size": "moyen",
+      "color": "beige",
+      "origin": "europe",
+      "needs": [
+        "nourrir",
+        "brosser",
+        "promener"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Tonnerre",
+      "value": 3,
+      "size": "moyen",
+      "color": "brun",
+      "origin": "amerique",
+      "needs": [
+        "nourrir",
+        "brosser",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Bijou",
+      "value": 3,
+      "size": "petit",
+      "color": "tachete",
+      "origin": "amerique",
+      "needs": [
+        "nourrir",
+        "promener",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Bambou",
+      "value": 3,
+      "size": "moyen",
+      "color": "noir",
+      "origin": "europe",
+      "needs": [
+        "brosser",
+        "promener",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Quartz",
+      "value": 3,
+      "size": "grand",
+      "color": "brun",
+      "origin": "europe",
+      "needs": [
+        "nourrir",
+        "nourrir",
+        "brosser"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Trèfle",
+      "value": 3,
+      "size": "moyen",
+      "color": "tachete",
+      "origin": "europe",
+      "needs": [
+        "nourrir",
+        "nourrir",
+        "promener"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Flamme",
+      "value": 3,
+      "size": "moyen",
+      "color": "brun",
+      "origin": "oceanie",
+      "needs": [
+        "nourrir",
+        "nourrir",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 16,
+      "name": "Glacier",
+      "value": 3,
+      "size": "petit",
+      "color": "beige",
+      "origin": "europe",
+      "needs": [
+        "brosser",
+        "brosser",
+        "promener"
+      ]
+    },
+    {
+      "id": 17,
+      "name": "Atlas",
+      "value": 3,
+      "size": "grand",
+      "color": "gris",
+      "origin": "europe",
+      "needs": [
+        "brosser",
+        "brosser",
+        "nourrir"
+      ]
+    },
+    {
+      "id": 18,
+      "name": "Goliath",
+      "value": 3,
+      "size": "grand",
+      "color": "brun",
+      "origin": "europe",
+      "needs": [
+        "brosser",
+        "brosser",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Colosse",
+      "value": 4,
+      "size": "grand",
+      "color": "tachete",
+      "origin": "europe",
+      "needs": [
+        "nourrir",
+        "brosser",
+        "promener",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 20,
+      "name": "Zéphyr",
+      "value": 4,
+      "size": "grand",
+      "color": "gris",
+      "origin": "europe",
+      "needs": [
+        "nourrir",
+        "nourrir",
+        "brosser",
+        "promener"
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Soleil",
+      "value": 4,
+      "size": "grand",
+      "color": "gris",
+      "origin": "europe",
+      "needs": [
+        "nourrir",
+        "nourrir",
+        "brosser",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Fidèle",
+      "value": 4,
+      "size": "grand",
+      "color": "noir",
+      "origin": "amerique",
+      "needs": [
+        "nourrir",
+        "nourrir",
+        "promener",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 23,
+      "name": "Mirza",
+      "value": 4,
+      "size": "moyen",
+      "color": "brun",
+      "origin": "asie",
+      "needs": [
+        "nourrir",
+        "nourrir",
+        "brosser",
+        "brosser"
+      ]
+    },
+    {
+      "id": 24,
+      "name": "Panache",
+      "value": 4,
+      "size": "moyen",
+      "color": "tachete",
+      "origin": "amerique",
+      "needs": [
+        "brosser",
+        "brosser",
+        "promener",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 25,
+      "name": "Étoile",
+      "value": 4,
+      "size": "moyen",
+      "color": "blanc",
+      "origin": "europe",
+      "needs": [
+        "brosser",
+        "brosser",
+        "nourrir",
+        "promener"
+      ]
+    },
+    {
+      "id": 26,
+      "name": "Simbé",
+      "value": 4,
+      "size": "petit",
+      "color": "brun",
+      "origin": "afrique",
+      "needs": [
+        "nourrir",
+        "brosser",
+        "promener",
+        "promener"
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Mirage",
+      "value": 4,
+      "size": "moyen",
+      "color": "tachete",
+      "origin": "amerique",
+      "needs": [
+        "brosser",
+        "brosser",
+        "nourrir",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Tempête",
+      "value": 5,
+      "size": "grand",
+      "color": "brun",
+      "origin": "europe",
+      "needs": [
+        "nourrir",
+        "nourrir",
+        "brosser",
+        "promener",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 29,
+      "name": "Shahvago",
+      "value": 5,
+      "size": "moyen",
+      "color": "brun",
+      "origin": "asie",
+      "needs": [
+        "brosser",
+        "brosser",
+        "nourrir",
+        "promener",
+        "soins_de_sante"
+      ]
+    },
+    {
+      "id": 30,
+      "name": "Nerono",
+      "value": 5,
+      "size": "moyen",
+      "color": "noir",
+      "origin": "europe",
+      "needs": [
+        "nourrir",
+        "brosser",
+        "promener",
+        "promener",
+        "soins_de_sante"
+      ]
+    }
+  ],
+  "inspections": [
+    {
+      "id": 1,
+      "text": "Soignez 2 chevaux blancs.",
+      "value": 2
+    },
+    {
+      "id": 2,
+      "text": "Soignez 1 cheval de chaque taille : petit, moyen et grand.",
+      "value": 2
+    },
+    {
+      "id": 3,
+      "text": "Soignez 4 chevaux de valeur 4 ou 5.",
+      "value": 2
+    },
+    {
+      "id": 4,
+      "text": "Soignez un total de 4 chevaux dont la somme des valeurs est exactement 12.",
+      "value": 2
+    },
+    {
+      "id": 5,
+      "text": "Soignez 4 chevaux ayant au moins un besoin de Soins de santé.",
+      "value": 2
+    },
+    {
+      "id": 6,
+      "text": "Soignez 5 chevaux ayant au moins un besoin de type Nourrir.",
+      "value": 3
+    },
+    {
+      "id": 7,
+      "text": "Soignez 4 chevaux avec au moins 2 besoins de type Brosser.",
+      "value": 2
+    },
+    {
+      "id": 8,
+      "text": "Soignez 1 cheval ayant 3 besoins, en n’utilisant que des soins de base ou soins universels.",
+      "value": 2
+    },
+    {
+      "id": 9,
+      "text": "Soignez 1 cheval ayant 4 besoins différents",
+      "value": 2
+    },
+    {
+      "id": 10,
+      "text": "Soignez des chevaux dont la somme des valeurs est d’au moins 20.",
+      "value": 3
+    },
+    {
+      "id": 11,
+      "text": "Soignez 5 chevaux de valeur 2.",
+      "value": 3
+    },
+    {
+      "id": 12,
+      "text": "Soignez 5 chevaux originaires d’Europe.",
+      "value": 3
+    },
+    {
+      "id": 13,
+      "text": "Soignez 6 chevaux au total",
+      "value": 3
+    },
+    {
+      "id": 14,
+      "text": "Soignez 2 chevaux bruns et 3 chevaux de grande taille.",
+      "value": 3
+    },
+    {
+      "id": 15,
+      "text": "Soignez 2 chevaux originaires d’Amérique, 1 cheval noir, et 2 chevaux de taille moyenne.",
+      "value": 3
+    }
+  ],
+  "tasks": [
+    {
+      "id": "soins_de_base",
+      "nom": "Soins de base",
+      "quantite": 2,
+      "actions_au_choix": [
+        "nourrir",
+        "brosser",
+        "promener"
+      ],
+      "unites": 1
+    },
+    {
+      "id": "nourrir",
+      "nom": "Nourrir",
+      "quantite": 8,
+      "actions_au_choix": [
+        "nourrir"
+      ],
+      "unites": 1
+    },
+    {
+      "id": "nourrir_x2",
+      "nom": "Nourrir",
+      "quantite": 2,
+      "actions_au_choix": [
+        "nourrir"
+      ],
+      "unites": 2
+    },
+    {
+      "id": "brosser",
+      "nom": "Brosser",
+      "quantite": 8,
+      "actions_au_choix": [
+        "brosser"
+      ],
+      "unites": 1
+    },
+    {
+      "id": "brosser_x2",
+      "nom": "Brosser",
+      "quantite": 1,
+      "actions_au_choix": [
+        "brosser"
+      ],
+      "unites": 2
+    },
+    {
+      "id": "promener",
+      "nom": "Promener",
+      "quantite": 7,
+      "actions_au_choix": [
+        "promener"
+      ],
+      "unites": 1
+    },
+    {
+      "id": "soins_de_sante",
+      "nom": "Soins de santé",
+      "quantite": 6,
+      "actions_au_choix": [
+        "soins_de_sante"
+      ],
+      "unites": 1
+    },
+    {
+      "id": "nettoyer",
+      "nom": "Nettoyer",
+      "quantite": 9,
+      "actions_au_choix": [
+        "nettoyer"
+      ],
+      "unites": 1
+    },
+    {
+      "id": "soins_universels",
+      "nom": "Soins universels",
+      "quantite": 2,
+      "actions_au_choix": [
+        "nourrir",
+        "brosser",
+        "promener",
+        "soins_de_sante",
+        "nettoyer"
+      ],
+      "unites": 1
+    }
+  ]
+}
