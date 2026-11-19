@@ -1,0 +1,108 @@
+.catalogue-grid,
+.catalogue-card-details {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.catalogue-grid:not([hidden]) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.catalogue-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-small);
+  overflow-wrap: anywhere;
+}
+
+.catalogue-card-cover {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--radius-small);
+  background: var(--color-surface-soft);
+  text-align: center;
+}
+
+.catalogue-cover-image {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.catalogue-cover-placeholder {
+  padding: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.catalogue-card-title {
+  margin: .2rem 0 0;
+  color: var(--color-primary-dark);
+  font-size: 1.2rem;
+  line-height: 1.3;
+}
+
+.catalogue-card-description {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.catalogue-card-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: auto;
+  padding-top: .35rem;
+}
+
+.catalogue-card-detail {
+  padding: .2rem .65rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-soft);
+  color: var(--color-primary-dark);
+  font-size: .875rem;
+  font-weight: 600;
+}
+
+.catalogue-status {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.catalogue-status:empty {
+  display: none;
+}
+
+.catalogue-retry {
+  padding: .25rem .75rem;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-small);
+  background: var(--color-surface);
+  color: var(--color-primary-dark);
+  cursor: pointer;
+}
+
+@media (max-width: 56rem) {
+  .catalogue-grid:not([hidden]) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 35rem) {
+  .catalogue-grid:not([hidden]) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
