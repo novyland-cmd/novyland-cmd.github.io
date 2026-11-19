@@ -95,6 +95,89 @@
   cursor: pointer;
 }
 
+.catalogue-card-link {
+  margin-top: var(--space-2);
+}
+
+.catalogue-back {
+  display: inline-block;
+  margin-bottom: var(--space-3);
+  font-weight: 700;
+}
+
+.catalogue-game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.25rem, 4vw, 3rem);
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-small);
+  overflow-wrap: anywhere;
+}
+
+.catalogue-game-sidebar,
+.catalogue-game-content {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.catalogue-game-title {
+  margin: 0;
+  color: var(--color-primary-dark);
+  font-size: clamp(1.75rem, 4vw, 2.65rem);
+  line-height: 1.15;
+}
+
+.catalogue-game-version,
+.catalogue-game-credits,
+.catalogue-game-credits dd,
+.catalogue-game-section p {
+  margin: 0;
+}
+
+.catalogue-game-credits dt {
+  color: var(--color-text-muted);
+  font-size: .875rem;
+}
+
+.catalogue-game-credits dd {
+  margin-bottom: var(--space-2);
+  font-weight: 700;
+}
+
+.catalogue-game-hooks {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.catalogue-game-hooks li {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  background: var(--color-surface-soft);
+}
+
+.catalogue-game-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.catalogue-game-section h2 {
+  margin: 0 0 var(--space-1);
+  font-size: 1.15rem;
+}
+
+.catalogue-game-section p {
+  white-space: pre-line;
+}
+
 @media (max-width: 56rem) {
   .catalogue-grid:not([hidden]) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -102,7 +185,21 @@
 }
 
 @media (max-width: 35rem) {
-  .catalogue-grid:not([hidden]) {
+  .catalogue-grid:not([hidden]),
+  .catalogue-game-layout {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .catalogue-game-sidebar {
+    display: contents;
+  }
+
+  .catalogue-game-sidebar .catalogue-card-cover {
+    width: min(100%, 14rem);
+    justify-self: center;
+  }
+
+  .catalogue-game-content {
+    grid-row: 2;
   }
 }
